@@ -1,0 +1,1121 @@
+[
+  {
+    "slug": "bakpao-isi-coklat",
+    "name": "Bakpao Isi Coklat",
+    "category": "Kue Basah",
+    "description": "Bakpao lembut isi coklat lumer, cocok untuk snack box dan acara keluarga.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bakpao-isi-coklat.jpg",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, ragi, coklat, gula.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "bakwan-udang",
+    "name": "Bakwan Udang",
+    "category": "Kue Basah",
+    "description": "Bakwan renyah dengan udang segar, favorit untuk camilan gurih.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bakwan-udang.jpg",
+    "occasions": [
+      "Arisan",
+      "Rapat Kantor",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Gurih"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, udang, wortel, daun bawang.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "bolu-gulung-pelangi",
+    "name": "Bolu Gulung Pelangi",
+    "category": "Kue Basah",
+    "description": "Bolu gulung lapisan warna-warni dengan isi selai nanas manis.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-gulung-pelangi.png",
+    "occasions": [
+      "Ulang Tahun",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, telur, gula, selai nanas.",
+    "portion": "1 potong"
+  },
+  {
+    "slug": "bolu-karamel",
+    "name": "Bolu Karamel",
+    "category": "Kue Basah",
+    "description": "Bolu lembut dengan topping karamel gurih-manis.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-karamel.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, telur, gula, karamel.",
+    "portion": "1 potong"
+  },
+  {
+    "slug": "bolu-kukus-coklat",
+    "name": "Bolu Kukus Coklat",
+    "category": "Kue Basah",
+    "description": "Bolu kukus coklat lembut, cocok untuk snack box.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-kukus-coklat.png",
+    "occasions": [
+      "Ulang Tahun",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, coklat, telur, gula.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "bolu-kukus-gula-aren",
+    "name": "Bolu Kukus Gula Aren",
+    "category": "Kue Basah",
+    "description": "Bolu kukus harum gula aren, manis alami dan lembut.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-kukus-gula-aren.png",
+    "occasions": [
+      "Arisan",
+      "Pengajian"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, gula aren, telur, santan.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "bolu-kukus-strawbery",
+    "name": "Bolu Kukus Strawbery",
+    "category": "Kue Basah",
+    "description": "Bolu kukus rasa stroberi segar, warna cerah dan lembut.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-kukus-strawbery.png",
+    "occasions": [
+      "Ulang Tahun",
+      "Arisan"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, stroberi, telur, gula.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "bolu-pelangi",
+    "name": "Bolu Pelangi",
+    "category": "Kue Basah",
+    "description": "Bolu pelangi lembut dengan lapisan warna ceria.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-pelangi.png",
+    "occasions": [
+      "Ulang Tahun",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, telur, gula, pewarna alami.",
+    "portion": "1 potong"
+  },
+  {
+    "slug": "bolu-pisang",
+    "name": "Bolu Pisang",
+    "category": "Kue Basah",
+    "description": "Bolu pisang harum dengan tekstur lembut dan manis alami.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-pisang.jpg",
+    "occasions": [
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Pisang, tepung, telur, gula.",
+    "portion": "1 potong"
+  },
+  {
+    "slug": "bolu-tape",
+    "name": "Bolu Tape",
+    "category": "Kue Basah",
+    "description": "Bolu tape khas Indonesia dengan aroma fermentasi yang khas.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/bolu-tape.jpg",
+    "occasions": [
+      "Kumpul Keluarga",
+      "Hari Raya"
+    ],
+    "tags": [
+      "Tradisional"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tape singkong, tepung, telur, gula.",
+    "portion": "1 potong"
+  },
+  {
+    "slug": "cantik-manis",
+    "name": "Cantik Manis",
+    "category": "Kue Basah",
+    "description": "Kue cantik manis berlapis santan dan gula merah.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/cantik-manis.jpeg",
+    "occasions": [
+      "Arisan",
+      "Pengajian",
+      "Hari Raya"
+    ],
+    "tags": [
+      "Tradisional"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung beras, santan, gula merah.",
+    "portion": "1 potong"
+  },
+  {
+    "slug": "dadar-gulung",
+    "name": "Dadar Gulung",
+    "category": "Kue Basah",
+    "description": "Kulit pandan lembut dengan unti kelapa gula aren.",
+    "price": 5000,
+    "minOrder": 25,
+    "image": "/makanan/dadar-gulung.png",
+    "occasions": [
+      "Arisan",
+      "Pengajian",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Manis",
+      "Pandan"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Tepung, pandan, kelapa parut, gula aren.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "donat-gula-halus",
+    "name": "Donat Gula Halus",
+    "category": "Kue Basah",
+    "description": "Donat lembut taburan gula halus, cocok untuk camilan manis.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/donat-gula-halus.jpg",
+    "occasions": [
+      "Ulang Tahun",
+      "Arisan"
+    ],
+    "tags": [
+      "Manis"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, telur, gula, mentega.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "gabin-tape",
+    "name": "Gabin Tape",
+    "category": "Kue Basah",
+    "description": "Crispy gabin isi tape manis, renyah di luar lembut di dalam.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/gabin-tape.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Tradisional"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, tape, telur, gula.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "ketan-serundeng",
+    "name": "Ketan Serundeng",
+    "category": "Kue Basah",
+    "description": "Ketan putih gurih tabur serundeng kelapa, praktis untuk acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/ketan-serundeng.png",
+    "occasions": [
+      "Pengajian",
+      "Arisan"
+    ],
+    "tags": [
+      "Gurih"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Beras ketan, kelapa, bumbu serundeng.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kroket-isi-daging",
+    "name": "Kroket Isi Daging",
+    "category": "Kue Basah",
+    "description": "Kroket renyah isi daging sapi, cocok untuk snack box gurih.",
+    "price": 5500,
+    "minOrder": 20,
+    "image": "/makanan/kroket-isi-daging.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan"
+    ],
+    "tags": [
+      "Gurih"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung, daging sapi, kentang, bumbu.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kue-angku",
+    "name": "Kue Angku",
+    "category": "Kue Basah",
+    "description": "Kue angku khas tradisional berbentuk ikan, lembut dan manis.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/kue-angku.png",
+    "occasions": [
+      "Hari Raya",
+      "Pengajian"
+    ],
+    "tags": [
+      "Tradisional"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Tepung ketan, kacang hijau, gula.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kue-bugis-pandan",
+    "name": "Kue Bugis Pandan",
+    "category": "Kue Basah",
+    "description": "Kue Bugis Pandan buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/kue-bugis-pandan.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kue-lapis",
+    "name": "Kue Lapis",
+    "category": "Kue Basah",
+    "description": "Kue Lapis buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/kue-lapis.png",
+    "occasions": [
+      "Hari Raya",
+      "Hampers",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kue-lapis-legit",
+    "name": "Kue Lapis Legit",
+    "category": "Kue Basah",
+    "description": "Lapis legit premium berlapis tipis, kaya rasa mentega dan rempah.",
+    "price": 12000,
+    "minOrder": 10,
+    "image": "/makanan/kue-lapis-legit.png",
+    "occasions": [
+      "Hari Raya",
+      "Hampers",
+      "Pernikahan"
+    ],
+    "tags": [
+      "Premium"
+    ],
+    "bestSeller": true,
+    "readySoon": false,
+    "ingredients": "Telur, mentega, tepung, rempah.",
+    "portion": "1 potong"
+  },
+  {
+    "slug": "kue-lumpur",
+    "name": "Kue Lumpur",
+    "category": "Kue Basah",
+    "description": "Kue Lumpur buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/kue-lumpur.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kue-lumpur-pandan",
+    "name": "Kue Lumpur Pandan",
+    "category": "Kue Basah",
+    "description": "Kue Lumpur Pandan buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/kue-lumpur-pandan.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kue-mochi",
+    "name": "Kue Mochi",
+    "category": "Kue Basah",
+    "description": "Kue Mochi buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/kue-mochi.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "kue-soes",
+    "name": "Kue Soes",
+    "category": "Kue Basah",
+    "description": "Kue Soes buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/kue-soes.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "tampah-keluarga",
+    "name": "Kue Tampah Keluarga",
+    "category": "Kue Tampah",
+    "description": "Tampah assorted kue untuk meja keluarga dan tamu rumah.",
+    "price": 245000,
+    "minOrder": 1,
+    "image": "https://images.unsplash.com/photo-1543353071-10c8ba85a904?auto=format&fit=crop&w=1400&q=80",
+    "occasions": [
+      "Kumpul Keluarga",
+      "Arisan"
+    ],
+    "tags": [
+      "Tampah"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Kombinasi kue basah manis dan gurih.",
+    "portion": "35-45 pcs"
+  },
+  {
+    "slug": "lapis-legit-pandan",
+    "name": "Lapis Legit Pandan",
+    "category": "Kue Basah",
+    "description": "Lapis Legit Pandan buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 12000,
+    "minOrder": 20,
+    "image": "/makanan/lapis-legit-pandan.png",
+    "occasions": [
+      "Hari Raya",
+      "Hampers",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "lemper-isi-ayam",
+    "name": "Lemper Isi Ayam",
+    "category": "Kue Basah",
+    "description": "Ketan gurih isi ayam suwir, dibungkus rapi untuk acara pagi.",
+    "price": 5500,
+    "minOrder": 20,
+    "image": "/makanan/lemper-isi-ayam.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Pengajian",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Gurih",
+      "Favorit"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Beras ketan, santan, ayam suwir, bumbu rempah.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "lontong-isi-ayam",
+    "name": "Lontong Isi Ayam",
+    "category": "Kue Basah",
+    "description": "Lontong Isi Ayam buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5500,
+    "minOrder": 20,
+    "image": "/makanan/lontong-isi-ayam.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "lontong-isi-sayuran",
+    "name": "Lontong Isi Sayuran",
+    "category": "Kue Basah",
+    "description": "Lontong Isi Sayuran buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5500,
+    "minOrder": 20,
+    "image": "/makanan/lontong-isi-sayuran.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "lumpia-goreng",
+    "name": "Lumpia Goreng",
+    "category": "Kue Basah",
+    "description": "Lumpia Goreng buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/lumpia-goreng.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "muffin-chocolate",
+    "name": "Muffin Chocolate",
+    "category": "Kue Kering",
+    "description": "Muffin Chocolate buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/muffin-chocolate.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "nagasari",
+    "name": "Nagasari",
+    "category": "Kue Basah",
+    "description": "Nagasari buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/nagasari.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "nasi-bakar-ayam-suwir",
+    "name": "Nasi Bakar Ayam Suwir",
+    "category": "Makanan Berat",
+    "description": "Nasi bakar bumbu rempah dengan ayam suwir, porsi mengenyangkan.",
+    "price": 28000,
+    "minOrder": 10,
+    "image": "/makanan/nasi-bakar-ayam-suwir.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Gurih"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Nasi, ayam suwir, bumbu bakar, sambal.",
+    "portion": "1 porsi"
+  },
+  {
+    "slug": "nasi-bakar-cumi",
+    "name": "Nasi Bakar Cumi",
+    "category": "Makanan Berat",
+    "description": "Nasi Bakar Cumi buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 28000,
+    "minOrder": 10,
+    "image": "/makanan/nasi-bakar-cumi.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Gurih"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 porsi"
+  },
+  {
+    "slug": "nasi-bakar-teri-pete",
+    "name": "Nasi Bakar Teri Pete",
+    "category": "Makanan Berat",
+    "description": "Nasi Bakar Teri Pete buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 28000,
+    "minOrder": 10,
+    "image": "/makanan/nasi-bakar-teri-pete.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Gurih"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 porsi"
+  },
+  {
+    "slug": "nastar",
+    "name": "Nastar Nanas",
+    "category": "Kue Kering",
+    "description": "Nastar lembut isi nanas, klasik untuk momen hari raya.",
+    "price": 92000,
+    "minOrder": 1,
+    "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=80",
+    "occasions": [
+      "Hari Raya",
+      "Hampers",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Toples"
+    ],
+    "bestSeller": true,
+    "readySoon": false,
+    "ingredients": "Butter, tepung, telur, selai nanas.",
+    "portion": "Toples 500 gram"
+  },
+  {
+    "slug": "onde-onde",
+    "name": "Onde-Onde",
+    "category": "Kue Basah",
+    "description": "Onde-Onde buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/onde-onde.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "pastel",
+    "name": "Pastel",
+    "category": "Kue Basah",
+    "description": "Pastel buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 6500,
+    "minOrder": 20,
+    "image": "/makanan/pastel.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "pie-buah",
+    "name": "Pie Buah",
+    "category": "Kue Basah",
+    "description": "Pie Buah buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 7000,
+    "minOrder": 20,
+    "image": "/makanan/pie-buah.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "pie-coklat",
+    "name": "Pie Coklat",
+    "category": "Kue Basah",
+    "description": "Pie Coklat buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 7000,
+    "minOrder": 20,
+    "image": "/makanan/pie-coklat.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "pie-keranjang",
+    "name": "Pie Keranjang",
+    "category": "Kue Kering",
+    "description": "Pie Keranjang buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 7000,
+    "minOrder": 20,
+    "image": "/makanan/pie-keranjang.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "pie-susu",
+    "name": "Pie Susu",
+    "category": "Kue Basah",
+    "description": "Pie Susu buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 7000,
+    "minOrder": 20,
+    "image": "/makanan/pie-susu.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "putri-ayu",
+    "name": "Putri Ayu",
+    "category": "Kue Basah",
+    "description": "Putri Ayu buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/putri-ayu.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "risol-mayones",
+    "name": "Risol Mayones",
+    "category": "Kue Basah",
+    "description": "Risol Mayones buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 6500,
+    "minOrder": 20,
+    "image": "/makanan/risol-mayones.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "risol-rogut",
+    "name": "Risol Rogut",
+    "category": "Kue Basah",
+    "description": "Risoles lembut dengan ragout sayur dan ayam, cocok untuk snack box.",
+    "price": 6500,
+    "minOrder": 20,
+    "image": "/makanan/risol-rogut.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Gurih",
+      "Snack Box"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Tepung, susu, ayam, wortel, kentang.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "risol-sayur",
+    "name": "Risol Sayur",
+    "category": "Kue Basah",
+    "description": "Risol Sayur buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 6500,
+    "minOrder": 20,
+    "image": "/makanan/risol-sayur.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "risoles-mayones",
+    "name": "Risoles Mayones",
+    "category": "Kue Basah",
+    "description": "Risoles Mayones buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 6500,
+    "minOrder": 20,
+    "image": "/makanan/risoles-mayones.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "serabi-solo",
+    "name": "Serabi Solo",
+    "category": "Kue Basah",
+    "description": "Serabi Solo buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/serabi-solo.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "snack-box-rapat",
+    "name": "Snack Box Rapat Pagi",
+    "category": "Snack Box",
+    "description": "Paket rapi berisi 2 snack dan air mineral untuk rapat kantor.",
+    "price": 21500,
+    "minOrder": 20,
+    "image": "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=1200&q=80",
+    "occasions": [
+      "Rapat Kantor"
+    ],
+    "tags": [
+      "Paket",
+      "Kantor"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Isi dapat dipilih sesuai kebutuhan.",
+    "portion": "1 box per orang"
+  },
+  {
+    "slug": "sosis-solo",
+    "name": "Sosis Solo",
+    "category": "Kue Basah",
+    "description": "Sosis Solo buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 6500,
+    "minOrder": 20,
+    "image": "/makanan/sosis-solo.png",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "talam-pandan",
+    "name": "Talam Pandan",
+    "category": "Kue Basah",
+    "description": "Talam Pandan buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/talam-pandan.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "talam-ubi",
+    "name": "Talam Ubi",
+    "category": "Kue Basah",
+    "description": "Talam Ubi buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/talam-ubi.png",
+    "occasions": [
+      "Arisan",
+      "Kumpul Keluarga",
+      "Pengajian"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "wajik",
+    "name": "Wajik",
+    "category": "Kue Basah",
+    "description": "Wajik buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/wajik.png",
+    "occasions": [
+      "Hari Raya",
+      "Hampers",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  },
+  {
+    "slug": "wingko-babat",
+    "name": "Wingko Babat",
+    "category": "Kue Basah",
+    "description": "Wingko Babat buatan dapur Snack Boz, cocok untuk snack box dan acara.",
+    "price": 5000,
+    "minOrder": 20,
+    "image": "/makanan/wingko-babat.png",
+    "occasions": [
+      "Hari Raya",
+      "Hampers",
+      "Kumpul Keluarga"
+    ],
+    "tags": [
+      "Snack"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Bahan pilihan dapur Snack Boz.",
+    "portion": "1 pcs per porsi"
+  }
+]

@@ -1,0 +1,308 @@
+[
+  {
+    "file": "Bakpao Isi Coklat.jpg",
+    "name": "Bakpao Isi Coklat",
+    "slug": "bakpao-isi-coklat",
+    "image": "/makanan/bakpao-isi-coklat.jpg"
+  },
+  {
+    "file": "Bakwan Udang.jpg",
+    "name": "Bakwan Udang",
+    "slug": "bakwan-udang",
+    "image": "/makanan/bakwan-udang.jpg"
+  },
+  {
+    "file": "Bolu Gulung Pelangi.png",
+    "name": "Bolu Gulung Pelangi",
+    "slug": "bolu-gulung-pelangi",
+    "image": "/makanan/bolu-gulung-pelangi.png"
+  },
+  {
+    "file": "Bolu Karamel.png",
+    "name": "Bolu Karamel",
+    "slug": "bolu-karamel",
+    "image": "/makanan/bolu-karamel.png"
+  },
+  {
+    "file": "Bolu Kukus Coklat.png",
+    "name": "Bolu Kukus Coklat",
+    "slug": "bolu-kukus-coklat",
+    "image": "/makanan/bolu-kukus-coklat.png"
+  },
+  {
+    "file": "Bolu Kukus Gula Aren.png",
+    "name": "Bolu Kukus Gula Aren",
+    "slug": "bolu-kukus-gula-aren",
+    "image": "/makanan/bolu-kukus-gula-aren.png"
+  },
+  {
+    "file": "Bolu Kukus Strawbery.png",
+    "name": "Bolu Kukus Strawbery",
+    "slug": "bolu-kukus-strawbery",
+    "image": "/makanan/bolu-kukus-strawbery.png"
+  },
+  {
+    "file": "Bolu Pelangi.png",
+    "name": "Bolu Pelangi",
+    "slug": "bolu-pelangi",
+    "image": "/makanan/bolu-pelangi.png"
+  },
+  {
+    "file": "Bolu Pisang.jpg",
+    "name": "Bolu Pisang",
+    "slug": "bolu-pisang",
+    "image": "/makanan/bolu-pisang.jpg"
+  },
+  {
+    "file": "Bolu Tape.jpg",
+    "name": "Bolu Tape",
+    "slug": "bolu-tape",
+    "image": "/makanan/bolu-tape.jpg"
+  },
+  {
+    "file": "Cantik Manis.jpeg",
+    "name": "Cantik Manis",
+    "slug": "cantik-manis",
+    "image": "/makanan/cantik-manis.jpeg"
+  },
+  {
+    "file": "Dadar Gulung.png",
+    "name": "Dadar Gulung",
+    "slug": "dadar-gulung",
+    "image": "/makanan/dadar-gulung.png"
+  },
+  {
+    "file": "Donat Gula Halus.jpg",
+    "name": "Donat Gula Halus",
+    "slug": "donat-gula-halus",
+    "image": "/makanan/donat-gula-halus.jpg"
+  },
+  {
+    "file": "Gabin Tape.png",
+    "name": "Gabin Tape",
+    "slug": "gabin-tape",
+    "image": "/makanan/gabin-tape.png"
+  },
+  {
+    "file": "Ketan Serundeng.png",
+    "name": "Ketan Serundeng",
+    "slug": "ketan-serundeng",
+    "image": "/makanan/ketan-serundeng.png"
+  },
+  {
+    "file": "Kroket Isi Daging.png",
+    "name": "Kroket Isi Daging",
+    "slug": "kroket-isi-daging",
+    "image": "/makanan/kroket-isi-daging.png"
+  },
+  {
+    "file": "Kue Angku.png",
+    "name": "Kue Angku",
+    "slug": "kue-angku",
+    "image": "/makanan/kue-angku.png"
+  },
+  {
+    "file": "Kue Bugis Pandan.png",
+    "name": "Kue Bugis Pandan",
+    "slug": "kue-bugis-pandan",
+    "image": "/makanan/kue-bugis-pandan.png"
+  },
+  {
+    "file": "Kue Lapis Legit.png",
+    "name": "Kue Lapis Legit",
+    "slug": "kue-lapis-legit",
+    "image": "/makanan/kue-lapis-legit.png"
+  },
+  {
+    "file": "Kue Lapis.png",
+    "name": "Kue Lapis",
+    "slug": "kue-lapis",
+    "image": "/makanan/kue-lapis.png"
+  },
+  {
+    "file": "Kue Lumpur Pandan.png",
+    "name": "Kue Lumpur Pandan",
+    "slug": "kue-lumpur-pandan",
+    "image": "/makanan/kue-lumpur-pandan.png"
+  },
+  {
+    "file": "Kue Lumpur.png",
+    "name": "Kue Lumpur",
+    "slug": "kue-lumpur",
+    "image": "/makanan/kue-lumpur.png"
+  },
+  {
+    "file": "Kue Mochi.png",
+    "name": "Kue Mochi",
+    "slug": "kue-mochi",
+    "image": "/makanan/kue-mochi.png"
+  },
+  {
+    "file": "Kue Soes.png",
+    "name": "Kue Soes",
+    "slug": "kue-soes",
+    "image": "/makanan/kue-soes.png"
+  },
+  {
+    "file": "Lapis Legit Pandan.png",
+    "name": "Lapis Legit Pandan",
+    "slug": "lapis-legit-pandan",
+    "image": "/makanan/lapis-legit-pandan.png"
+  },
+  {
+    "file": "Lemper Isi Ayam.png",
+    "name": "Lemper Isi Ayam",
+    "slug": "lemper-isi-ayam",
+    "image": "/makanan/lemper-isi-ayam.png"
+  },
+  {
+    "file": "Lontong Isi Ayam.png",
+    "name": "Lontong Isi Ayam",
+    "slug": "lontong-isi-ayam",
+    "image": "/makanan/lontong-isi-ayam.png"
+  },
+  {
+    "file": "Lontong Isi Sayuran.png",
+    "name": "Lontong Isi Sayuran",
+    "slug": "lontong-isi-sayuran",
+    "image": "/makanan/lontong-isi-sayuran.png"
+  },
+  {
+    "file": "Lumpia Goreng.png",
+    "name": "Lumpia Goreng",
+    "slug": "lumpia-goreng",
+    "image": "/makanan/lumpia-goreng.png"
+  },
+  {
+    "file": "Muffin Chocolate.png",
+    "name": "Muffin Chocolate",
+    "slug": "muffin-chocolate",
+    "image": "/makanan/muffin-chocolate.png"
+  },
+  {
+    "file": "Nagasari.png",
+    "name": "Nagasari",
+    "slug": "nagasari",
+    "image": "/makanan/nagasari.png"
+  },
+  {
+    "file": "Nasi Bakar Ayam Suwir.png",
+    "name": "Nasi Bakar Ayam Suwir",
+    "slug": "nasi-bakar-ayam-suwir",
+    "image": "/makanan/nasi-bakar-ayam-suwir.png"
+  },
+  {
+    "file": "Nasi Bakar Cumi.png",
+    "name": "Nasi Bakar Cumi",
+    "slug": "nasi-bakar-cumi",
+    "image": "/makanan/nasi-bakar-cumi.png"
+  },
+  {
+    "file": "Nasi Bakar Teri Pete.png",
+    "name": "Nasi Bakar Teri Pete",
+    "slug": "nasi-bakar-teri-pete",
+    "image": "/makanan/nasi-bakar-teri-pete.png"
+  },
+  {
+    "file": "Onde-Onde.png",
+    "name": "Onde-Onde",
+    "slug": "onde-onde",
+    "image": "/makanan/onde-onde.png"
+  },
+  {
+    "file": "Pastel.png",
+    "name": "Pastel",
+    "slug": "pastel",
+    "image": "/makanan/pastel.png"
+  },
+  {
+    "file": "Pie Buah.png",
+    "name": "Pie Buah",
+    "slug": "pie-buah",
+    "image": "/makanan/pie-buah.png"
+  },
+  {
+    "file": "Pie Coklat.png",
+    "name": "Pie Coklat",
+    "slug": "pie-coklat",
+    "image": "/makanan/pie-coklat.png"
+  },
+  {
+    "file": "Pie Keranjang.png",
+    "name": "Pie Keranjang",
+    "slug": "pie-keranjang",
+    "image": "/makanan/pie-keranjang.png"
+  },
+  {
+    "file": "Pie Susu.png",
+    "name": "Pie Susu",
+    "slug": "pie-susu",
+    "image": "/makanan/pie-susu.png"
+  },
+  {
+    "file": "Putri Ayu.png",
+    "name": "Putri Ayu",
+    "slug": "putri-ayu",
+    "image": "/makanan/putri-ayu.png"
+  },
+  {
+    "file": "Risol Mayones.png",
+    "name": "Risol Mayones",
+    "slug": "risol-mayones",
+    "image": "/makanan/risol-mayones.png"
+  },
+  {
+    "file": "Risol Rogut.png",
+    "name": "Risol Rogut",
+    "slug": "risol-rogut",
+    "image": "/makanan/risol-rogut.png"
+  },
+  {
+    "file": "Risol Sayur.png",
+    "name": "Risol Sayur",
+    "slug": "risol-sayur",
+    "image": "/makanan/risol-sayur.png"
+  },
+  {
+    "file": "Risoles Mayones.png",
+    "name": "Risoles Mayones",
+    "slug": "risoles-mayones",
+    "image": "/makanan/risoles-mayones.png"
+  },
+  {
+    "file": "Serabi Solo.png",
+    "name": "Serabi Solo",
+    "slug": "serabi-solo",
+    "image": "/makanan/serabi-solo.png"
+  },
+  {
+    "file": "Sosis Solo.png",
+    "name": "Sosis Solo",
+    "slug": "sosis-solo",
+    "image": "/makanan/sosis-solo.png"
+  },
+  {
+    "file": "Talam Pandan.png",
+    "name": "Talam Pandan",
+    "slug": "talam-pandan",
+    "image": "/makanan/talam-pandan.png"
+  },
+  {
+    "file": "Talam Ubi.png",
+    "name": "Talam Ubi",
+    "slug": "talam-ubi",
+    "image": "/makanan/talam-ubi.png"
+  },
+  {
+    "file": "Wajik.png",
+    "name": "Wajik",
+    "slug": "wajik",
+    "image": "/makanan/wajik.png"
+  },
+  {
+    "file": "Wingko Babat.png",
+    "name": "Wingko Babat",
+    "slug": "wingko-babat",
+    "image": "/makanan/wingko-babat.png"
+  }
+]
