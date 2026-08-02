@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
@@ -23,32 +23,19 @@ import { Product, products } from "@/lib/data";
 import { cn, rupiah } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
-import img1 from "../remove_bg/1.png";
-import img2 from "../remove_bg/2.png";
-import img3 from "../remove_bg/3.png";
-import img4 from "../remove_bg/4.png";
-import img5 from "../remove_bg/5.png";
-import img6 from "../remove_bg/6.png";
-import img7 from "../remove_bg/7.png";
-import img8 from "../remove_bg/8.png";
-import img9 from "../remove_bg/9.png";
-import img10 from "../remove_bg/10.png";
-import img11 from "../remove_bg/11.png";
-import img12 from "../remove_bg/12.png";
-
-const SLIDE_CONFIG: { slug: string; image: StaticImageData }[] = [
-  { slug: "dadar-gulung", image: img3 },
-  { slug: "risol-rogut", image: img2 },
-  { slug: "lemper-isi-ayam", image: img1 },
-  { slug: "kue-lapis-legit", image: img4 },
-  { slug: "kroket-isi-daging", image: img5 },
-  { slug: "bolu-gulung-pelangi", image: img6 },
-  { slug: "gabin-tape", image: img7 },
-  { slug: "ketan-serundeng", image: img8 },
-  { slug: "bakwan-udang", image: img9 },
-  { slug: "donat-gula-halus", image: img10 },
-  { slug: "bolu-karamel", image: img11 },
-  { slug: "cantik-manis", image: img12 },
+const SLIDE_CONFIG: { slug: string; image: string }[] = [
+  { slug: "dadar-gulung", image: "/hero/3.png" },
+  { slug: "risol-rogut", image: "/hero/2.png" },
+  { slug: "lemper-isi-ayam", image: "/hero/1.png" },
+  { slug: "kue-lapis-legit", image: "/hero/4.png" },
+  { slug: "kroket-isi-daging", image: "/hero/5.png" },
+  { slug: "bolu-gulung-pelangi", image: "/hero/6.png" },
+  { slug: "gabin-tape", image: "/hero/7.png" },
+  { slug: "ketan-serundeng", image: "/hero/8.png" },
+  { slug: "bakwan-udang", image: "/hero/9.png" },
+  { slug: "donat-gula-halus", image: "/hero/10.png" },
+  { slug: "bolu-karamel", image: "/hero/11.png" },
+  { slug: "cantik-manis", image: "/hero/12.png" },
 ];
 
 const OCCASION_ICONS = {
@@ -80,7 +67,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
       SLIDE_CONFIG.map(({ slug, image }) => {
         const product = products.find((p) => p.slug === slug);
         return product ? { product, image } : null;
-      }).filter((slide): slide is { product: Product; image: StaticImageData } => slide !== null),
+      }).filter((slide): slide is { product: Product; image: string } => slide !== null),
     [],
   );
 
