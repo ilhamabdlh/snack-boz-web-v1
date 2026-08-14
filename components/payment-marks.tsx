@@ -8,7 +8,7 @@ const LOGOS = [
   { id: "bni", title: "BNI", src: "/payment/bni.png", width: 95, height: 28 },
   { id: "cimb", title: "CIMB Niaga", src: "/payment/cimb.png", width: 177, height: 28 },
   { id: "smbc", title: "SMBC", src: "/payment/smbc.png", width: 93, height: 28 },
-  { id: "qris", title: "QRIS", src: "/payment/qris.png", width: 71, height: 28 },
+  { id: "qris", title: "QRIS", src: "/payment/qris.png", width: 70, height: 28 },
 ] as const;
 
 export function PaymentMarks({ className }: { className?: string }) {
