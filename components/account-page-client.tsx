@@ -114,9 +114,9 @@ export function AccountPageClient() {
   }
 
   const nav = [
-    { id: "orders" as const, label: "Riwayat Pesanan", Icon: PackageCheck },
-    { id: "reorder" as const, label: "Pesan Ulang", Icon: RotateCcw },
-    { id: "addresses" as const, label: "Alamat Tersimpan", Icon: MapPin },
+    { id: "orders" as const, label: "Riwayat pesanan", Icon: PackageCheck },
+    { id: "reorder" as const, label: "Pesan ulang", Icon: RotateCcw },
+    { id: "addresses" as const, label: "Alamat tersimpan", Icon: MapPin },
   ];
 
   return (
@@ -134,10 +134,10 @@ export function AccountPageClient() {
               </div>
               <div>
                 <div className="font-semibold text-[var(--palm)]">
-                  {profile.name || "Pembeli Snack Boz"}
+                  {profile.name || "Nama belum diisi"}
                 </div>
                 <div className="text-xs text-[var(--muted)]">
-                  {profile.phone || "Riwayat di perangkat ini"}
+                  {profile.phone || "Nomor WhatsApp belum diisi"}
                 </div>
               </div>
             </button>
@@ -158,9 +158,9 @@ export function AccountPageClient() {
           </aside>
 
           <div>
-            <p className="section-kicker">Akun Saya</p>
+            <p className="section-kicker">Akun</p>
             <h1 className="font-display mt-1 text-3xl font-bold text-[var(--palm)]">
-              Pesanan di perangkat Anda
+              Riwayat pesanan di perangkat ini
             </h1>
             {flash ? (
               <p className="mt-3 rounded-[var(--radius-sm)] bg-[var(--yellow-soft)] px-3 py-2 text-sm text-[var(--black)]">
@@ -185,7 +185,7 @@ export function AccountPageClient() {
               <section className="mt-8 rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
                 <div className="flex items-center justify-between gap-4">
                   <h2 className="font-display text-xl font-bold text-[var(--palm)]">
-                    {tab === "reorder" ? "Pesan ulang" : "Riwayat Pesanan"}
+                    {tab === "reorder" ? "Pesan ulang" : "Riwayat pesanan"}
                   </h2>
                   <Button asChild variant="outline" size="sm">
                     <Link href="/products">Pesan lagi</Link>
@@ -194,7 +194,8 @@ export function AccountPageClient() {
                 <div className="mt-3 grid gap-2">
                   {orders.length === 0 ? (
                     <p className="text-sm text-[var(--muted)]">
-                      Belum ada pesanan. Selesaikan checkout untuk menyimpan riwayat di perangkat ini.
+                      Belum ada pesanan. Riwayatnya muncul di sini setelah checkout
+                      Anda selesai.
                     </p>
                   ) : (
                     orders.map((order) => (
@@ -217,21 +218,28 @@ export function AccountPageClient() {
                             year: "numeric",
                           })}
                         </span>
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => reorder(order)}
-                        >
-                          Pesan ulang - {rupiah(order.total)}
-                        </Button>
+                        <div className="flex flex-wrap gap-2 md:justify-end">
+                          <Button asChild size="sm" variant="outline">
+                            <Link href={`/invoice/${encodeURIComponent(order.id)}`}>
+                              Lihat invoice
+                            </Link>
+                          </Button>
+                          <Button
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            onClick={() => reorder(order)}
+                          >
+                            Pesan lagi — {rupiah(order.total)}
+                          </Button>
+                        </div>
                       </div>
                     ))
                   )}
                 </div>
                 {activeOrders > 0 ? (
                   <p className="mt-3 text-xs text-[var(--muted)]">
-                    {activeOrders} pesanan berstatus Diproses / Siap dikirim.
+                    {activeOrders} pesanan masih diproses / siap dikirim.
                   </p>
                 ) : null}
               </section>
@@ -306,7 +314,7 @@ export function AccountPageClient() {
             ) : null}
 
             <section className="mt-8">
-              <h2 className="font-display text-xl font-bold text-[var(--palm)]">Rekomendasi untuk Anda</h2>
+              <h2 className="font-display text-xl font-bold text-[var(--palm)]">Mau pesan lagi?</h2>
               <div className="product-grid mt-4">
                 {[products.find((p) => p.slug === "tampah-keluarga")!, ...bestSellers.slice(0, 2)].map(
                   (product) => (

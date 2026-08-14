@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { MessageCircle, Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
 import { PageShell } from "@/components/page-shell";
@@ -9,7 +10,72 @@ import { Input } from "@/components/ui/input";
 import { COUPONS, canCheckoutCart, getCartOrderIssues, productPcsTotal } from "@/lib/commerce";
 import { rupiah } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+function QtyEditor({
+  value,
+  min = 1,
+  label,
+  onCommit,
+}: {
+  value: number;
+  min?: number;
+  label: string;
+  onCommit: (qty: number) => void;
+}) {
+  const [draft, setDraft] = useState(String(value));
+
+  useEffect(() => {
+    setDraft(String(value));
+  }, [value]);
+
+  function commit(raw: string) {
+    const parsed = Number.parseInt(raw, 10);
+    if (Number.isNaN(parsed)) {
+      setDraft(String(value));
+      return;
+    }
+    const next = Math.max(min, parsed);
+    setDraft(String(next));
+    onCommit(next);
+  }
+
+  return (
+    <div className="flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-1">
+      <button
+        type="button"
+        className="grid size-7 place-items-center rounded-[var(--radius-sm)] bg-white"
+        aria-label={`Kurangi ${label}`}
+        onClick={() => onCommit(Math.max(min, value - 1))}
+      >
+        <Minus className="size-3" />
+      </button>
+      <input
+        type="number"
+        min={min}
+        inputMode="numeric"
+        aria-label={`Jumlah ${label}`}
+        className="h-7 w-14 rounded-[var(--radius-sm)] border-0 bg-transparent text-center text-sm font-semibold tabular-nums outline-none"
+        value={draft}
+        onChange={(event) => setDraft(event.target.value)}
+        onBlur={() => commit(draft)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            event.currentTarget.blur();
+          }
+        }}
+      />
+      <button
+        type="button"
+        className="grid size-7 place-items-center rounded-[var(--radius-sm)] bg-white"
+        aria-label={`Tambah ${label}`}
+        onClick={() => onCommit(value + 1)}
+      >
+        <Plus className="size-3" />
+      </button>
+    </div>
+  );
+}
 
 export default function CartPage() {
   const {
@@ -29,12 +95,16 @@ export default function CartPage() {
 
   const orderIssues = useMemo(() => getCartOrderIssues(items), [items]);
   const canCheckout = canCheckoutCart(items);
+  const hasTray = useMemo(
+    () => items.some((item) => item.kind === "product" && item.slug === "tampah-keluarga"),
+    [items],
+  );
   const productPcs = useMemo(() => productPcsTotal(items), [items]);
 
   const waMessage = useMemo(() => {
-    if (!items.length) return "Halo Snack Boz, saya butuh bantuan pesanan.";
+    if (!items.length) return "Halo Pasar Senen Kue Subuh, saya mau tanya soal pesanan.";
     const lines = items.map((item) => `- ${item.name} x${item.qty}`);
-    return `Halo Snack Boz, saya butuh bantuan pesanan:\n${lines.join("\n")}\nSubtotal: ${rupiah(subtotal)}`;
+    return `Halo Pasar Senen Kue Subuh, saya mau tanya soal pesanan berikut:\n${lines.join("\n")}\nSubtotal: ${rupiah(subtotal)}`;
   }, [items, subtotal]);
 
   function onApplyCoupon(event: React.FormEvent) {
@@ -50,14 +120,16 @@ export default function CartPage() {
         <div>
           <p className="section-kicker">Keranjang</p>
           <h1 className="font-display mt-1 text-3xl font-bold text-[var(--palm)]">
-            Pesanan untuk acara Anda
+            Periksa pesanan Anda
           </h1>
 
           {!ready ? (
             <p className="mt-6 text-sm text-[var(--muted)]">Memuat keranjang...</p>
           ) : items.length === 0 ? (
             <div className="mt-6 rounded-[var(--radius)] bg-white p-6 shadow-[var(--shadow-sm)]">
-              <p className="text-[var(--muted)]">Keranjang masih kosong.</p>
+              <p className="text-[var(--muted)]">
+                Keranjangnya masih kosong. Pilih menunya dulu, ya.
+              </p>
               <Button asChild className="mt-4">
                 <Link href="/products">Lihat menu</Link>
               </Button>
@@ -69,11 +141,16 @@ export default function CartPage() {
                   key={item.id}
                   className="grid gap-4 rounded-[var(--radius)] bg-white p-4 shadow-[var(--shadow-sm)] md:grid-cols-[100px_1fr_auto]"
                 >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="aspect-square w-full rounded-[var(--radius-sm)] object-cover"
-                  />
+                  <div className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-sm)] bg-[var(--rice)]">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="100px"
+                      quality={65}
+                      className="object-cover"
+                    />
+                  </div>
                   <div>
                     <div className="font-semibold text-[var(--palm)]">{item.name}</div>
                     <p className="mt-0.5 text-sm text-[var(--muted)]">
@@ -97,25 +174,19 @@ export default function CartPage() {
                     <div className="font-semibold text-[var(--palm)]">
                       {rupiah(item.unitPrice * item.qty)}
                     </div>
-                    <div className="flex items-center gap-2 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-1">
-                      <button
-                        type="button"
-                        className="grid size-7 place-items-center rounded-[var(--radius-sm)] bg-white"
-                        aria-label={`Kurangi ${item.name}`}
-                        onClick={() => setQty(item.id, item.qty - 1)}
-                      >
-                        <Minus className="size-3" />
-                      </button>
-                      <strong className="min-w-[2ch] text-center text-sm">{item.qty}</strong>
-                      <button
-                        type="button"
-                        className="grid size-7 place-items-center rounded-[var(--radius-sm)] bg-white"
-                        aria-label={`Tambah ${item.name}`}
-                        onClick={() => setQty(item.id, item.qty + 1)}
-                      >
-                        <Plus className="size-3" />
-                      </button>
-                    </div>
+                    <QtyEditor
+                      value={item.qty}
+                      min={
+                        item.kind === "snack-box" ||
+                        (item.kind === "product" &&
+                          item.meta?.exemptFromMixedMin &&
+                          item.minOrder > 1)
+                          ? item.minOrder
+                          : 1
+                      }
+                      label={item.name}
+                      onCommit={(qty) => setQty(item.id, qty)}
+                    />
                     <button
                       type="button"
                       className="text-[var(--green)]"
@@ -182,7 +253,9 @@ export default function CartPage() {
 
             {productPcs > 0 ? (
               <p className="mt-3 text-xs text-[var(--muted)]">
-                Total kue di keranjang: {productPcs} pcs (min. 20 pcs, bisa mix).
+                {hasTray
+                  ? "Ada kue tampah di keranjang: kue lain tidak kena minimal 20 pcs."
+                  : `Total kue di keranjang: ${productPcs} pcs. Minimal 20 pcs, boleh campur menu.`}
               </p>
             ) : null}
             {orderIssues.length > 0 ? (
@@ -195,18 +268,18 @@ export default function CartPage() {
 
             {canCheckout ? (
               <Button asChild size="lg" className="mt-3 w-full">
-                <Link href="/checkout">Lanjut Checkout</Link>
+                <Link href="/checkout">Lanjut bayar</Link>
               </Button>
             ) : (
               <Button asChild size="lg" className="mt-3 w-full" variant="outline">
                 <Link href="/products">
-                  {items.length ? "Tambah produk sampai min. terpenuhi" : "Lihat Menu"}
+                  {items.length ? "Tambah menu sampai minimal terpenuhi" : "Lihat menu"}
                 </Link>
               </Button>
             )}
             <Button asChild variant="outline" className="mt-2 w-full">
               <a href={getWhatsAppUrl(waMessage)} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="size-4" /> Bantuan pesanan banyak
+                <MessageCircle className="size-4" /> Tanya lewat WhatsApp
               </a>
             </Button>
           </div>

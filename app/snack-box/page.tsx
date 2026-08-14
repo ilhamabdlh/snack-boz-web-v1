@@ -1,37 +1,55 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CalendarDays, Check, Droplets, MessageCircle, ShoppingBag } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
 import { PageShell } from "@/components/page-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/toast-provider";
 import {
   BOX_PRICE_WITHOUT_WATER,
   BOX_PRICE_WITH_WATER,
   SNACK_BOX_MIN_QTY,
 } from "@/lib/commerce";
-import { products } from "@/lib/data";
+import { products, type Product } from "@/lib/data";
 import { cn, rupiah } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
-const snackItems = products.filter((product) => product.category === "Kue Basah").slice(0, 12);
+const SNACK_BOX_EXCLUDED_CATEGORIES = new Set([
+  "Kue Tampah",
+  "Makanan Berat",
+  "Snack Box",
+]);
+
+function isSnackBoxEligible(product: Product) {
+  if (SNACK_BOX_EXCLUDED_CATEGORIES.has(product.category)) return false;
+  const name = product.name.toLowerCase();
+  if (name.includes("nasi bakar")) return false;
+  if (name.includes("ricebowl") || name.includes("rice bowl")) return false;
+  if (name.includes("ricebox") || name.includes("rice box")) return false;
+  if (name.includes("tampah")) return false;
+  return true;
+}
+
+const snackItems = products.filter(isSnackBoxEligible);
 
 const boxSizes = [
   {
     name: "Reguler",
-    desc: "Maksimal 3 snack per box. Cocok untuk rapat singkat.",
+    desc: "Sampai 3 macam snack. Ukuran paling sering diambil untuk rapat singkat.",
     maxSnacks: 3,
   },
   {
-    name: "Premium",
-    desc: "Maksimal 4 snack per box. Pilihan lebih lengkap.",
+    name: "Lengkap",
+    desc: "Sampai 4 macam snack. Pilihan aman kalau tamunya beragam selera.",
     maxSnacks: 4,
   },
   {
-    name: "Custom Snack",
-    desc: "Maksimal 5 produk per box. Susun sesuai kebutuhan acara.",
+    name: "Bebas pilih",
+    desc: "Sampai 5 macam snack. Untuk acara yang ingin isi boxnya terasa penuh.",
     maxSnacks: 5,
   },
 ];
@@ -39,11 +57,10 @@ const boxSizes = [
 export default function SnackBoxPage() {
   const router = useRouter();
   const { addSnackBox } = useCart();
+  const { toast } = useToast();
   const [boxIndex, setBoxIndex] = useState(1);
   const [withWater, setWithWater] = useState(true);
-  const [selectedSlugs, setSelectedSlugs] = useState<string[]>(() =>
-    snackItems.slice(0, 3).map((item) => item.slug),
-  );
+  const [selectedSlugs, setSelectedSlugs] = useState<string[]>([]);
   const [boxCount, setBoxCount] = useState(30);
   const [eventDate, setEventDate] = useState("");
   const [note, setNote] = useState("");
@@ -80,7 +97,7 @@ export default function SnackBoxPage() {
   function handleAdd() {
     setMessage("");
     if (!minOk) {
-      setMessage(`Minimum order ${SNACK_BOX_MIN_QTY} box.`);
+      setMessage(`Minimal pesanan ${SNACK_BOX_MIN_QTY} box.`);
       return;
     }
     if (!snacksOk) {
@@ -102,6 +119,7 @@ export default function SnackBoxPage() {
       note: [note, waterNote].filter(Boolean).join(" - ") || undefined,
       withWater,
     });
+    toast(`Snack Box ${box.name} berhasil ditambahkan ke keranjang`);
     router.push("/cart");
   }
 
@@ -110,14 +128,15 @@ export default function SnackBoxPage() {
       <section className="border-b border-[rgba(27,67,50,0.08)] bg-[var(--hero-cream)] py-10">
         <div className="container-shell grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <div>
-            <p className="section-kicker">Buat snack box</p>
+            <p className="section-kicker">Snack box</p>
             <h1 className="font-display mt-1 text-3xl font-bold leading-tight text-[var(--palm)] md:text-4xl">
-              Susun isi box sesuai acara
+              Susun sendiri isi boxnya
             </h1>
           </div>
           <p className="section-lead mt-0">
-            Pilih ukuran, isi snack, air mineral, jumlah pesanan, dan catatan khusus.
-            Cocok untuk rapat pagi, pengajian, arisan, dan acara kantor.
+            Pilih ukuran box, isi snacknya, pakai air mineral atau tidak, lalu
+            tentukan jumlah dan jam antar. Minimal 20 box, dan totalnya
+            terhitung otomatis sambil Anda memilih.
           </p>
         </div>
       </section>
@@ -217,7 +236,8 @@ export default function SnackBoxPage() {
               Pilih snack ({snackSlots}/{box.maxSnacks})
             </h2>
             <p className="mt-1 text-xs text-[var(--muted)]">
-              Ketuk kartu untuk memilih atau membatalkan. Tiap snack masuk 1x ke dalam box.
+              Ketuk untuk memilih atau melepas. Satu snack terpilih berarti satu isi
+              di dalam setiap box.
             </p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {snackItems.map((item) => {
@@ -235,11 +255,14 @@ export default function SnackBoxPage() {
                         : "border-[var(--line)] bg-[var(--warm-white)] hover:border-[rgba(27,67,50,0.25)]",
                     )}
                   >
-                    <div className="relative">
-                      <img
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-sm)]">
+                      <Image
                         src={item.image}
                         alt=""
-                        className="aspect-[4/3] w-full rounded-[var(--radius-sm)] object-cover"
+                        fill
+                        sizes="(max-width: 640px) 50vw, 220px"
+                        quality={65}
+                        className="object-cover"
                       />
                       {selected ? (
                         <span className="absolute right-2 top-2 grid size-7 place-items-center rounded-full bg-[var(--green)] text-[var(--white)]">
@@ -267,24 +290,29 @@ export default function SnackBoxPage() {
 
           <aside className="lg:sticky lg:top-20 lg:self-start">
             <div className="rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
-              <div className="font-display text-xl font-bold text-[var(--palm)]">Ringkasan Box</div>
+              <div className="font-display text-xl font-bold text-[var(--palm)]">Ringkasan</div>
               <p className="mt-1 text-xs text-[var(--muted)]">
                 {box.name} - {withWater ? "dengan air mineral" : "tanpa air mineral"}
               </p>
               <div className="mt-3 grid gap-2">
                 {selectedSnacks.length === 0 ? (
-                  <p className="text-sm text-[var(--muted)]">Belum ada snack dipilih.</p>
+                  <p className="text-sm text-[var(--muted)]">Belum ada snack yang dipilih.</p>
                 ) : (
                   selectedSnacks.map((item) => (
                     <div
                       key={item.slug}
                       className="flex items-center gap-2.5 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-2"
                     >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="size-10 rounded-[var(--radius-sm)] object-cover"
-                      />
+                      <div className="relative size-10 shrink-0 overflow-hidden rounded-[var(--radius-sm)]">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          sizes="40px"
+                          quality={60}
+                          className="object-cover"
+                        />
+                      </div>
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-xs font-semibold">{item.name}</div>
                         <div className="text-xs text-[var(--muted)]">{rupiah(item.price)}</div>
@@ -352,23 +380,23 @@ export default function SnackBoxPage() {
                 </div>
                 <p className="mt-1 text-xs text-[var(--muted)]">
                   {minOk
-                    ? `Minimum ${SNACK_BOX_MIN_QTY} box terpenuhi.`
-                    : `Minimum order ${SNACK_BOX_MIN_QTY} box.`}
+                    ? `Jumlahnya sudah memenuhi minimal ${SNACK_BOX_MIN_QTY} box.`
+                    : `Minimal pesanan ${SNACK_BOX_MIN_QTY} box ya.`}
                 </p>
               </div>
               {message ? <p className="mt-2 text-sm text-red-700">{message}</p> : null}
               <Button type="button" size="lg" className="mt-3 w-full" onClick={handleAdd}>
-                <ShoppingBag className="size-4" /> Tambah ke Keranjang
+                <ShoppingBag className="size-4" /> Tambah ke keranjang
               </Button>
               <Button asChild variant="outline" className="mt-2 w-full">
                 <a
                   href={getWhatsAppUrl(
-                    `Halo Snack Boz, saya ingin konsultasi snack box ${box.name}.`,
+                    `Halo Pasar Senen Kue Subuh, saya mau tanya soal snack box ukuran ${box.name}.`,
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <MessageCircle className="size-4" /> Tanya Admin
+                  <MessageCircle className="size-4" /> Tanya lewat WhatsApp
                 </a>
               </Button>
             </div>

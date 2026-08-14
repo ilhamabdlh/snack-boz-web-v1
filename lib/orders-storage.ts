@@ -25,6 +25,11 @@ export function saveOrder(order: Order) {
   saveOrders([order, ...existing]);
 }
 
+export function getOrderById(orderId: string): Order | null {
+  if (typeof window === "undefined") return null;
+  return loadOrders().find((order) => order.id === orderId) ?? null;
+}
+
 export function loadProfile(): CheckoutProfile | null {
   if (typeof window === "undefined") return null;
   return safeParseJson<CheckoutProfile | null>(localStorage.getItem(PROFILE_STORAGE_KEY), null);

@@ -1,9 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, CreditCard, MapPin, Truck } from "lucide-react";
+import {
+  AddressAutocomplete,
+  type SelectedPlace,
+} from "@/components/address-autocomplete";
 import { useCart } from "@/components/cart-provider";
 import { PageShell } from "@/components/page-shell";
 import { Button } from "@/components/ui/button";
@@ -12,7 +17,6 @@ import {
   calcCartTotal,
   getCartOrderIssues,
   PAYMENT_OPTIONS,
-  SHIPPING_OPTIONS,
   type CheckoutProfile,
   type Order,
 } from "@/lib/commerce";
@@ -23,8 +27,12 @@ import {
   saveProfile,
   upsertAddressFromProfile,
 } from "@/lib/orders-storage";
+import {
+  buildShippingOptions,
+  DELIVERY_TIME_SLOTS,
+  type ShippingMethodId,
+} from "@/lib/shipping";
 import { rupiah } from "@/lib/utils";
-import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const emptyProfile: CheckoutProfile = {
   name: "",
@@ -40,10 +48,11 @@ export default function CheckoutPage() {
   const { items, coupon, discount, clearCart, ready } = useCart();
   const [profile, setProfile] = useState<CheckoutProfile>(emptyProfile);
   const [deliveryDate, setDeliveryDate] = useState("");
-  const [deliveryTime, setDeliveryTime] = useState("08.00 - 08.30");
-  const [shippingId, setShippingId] = useState<(typeof SHIPPING_OPTIONS)[number]["id"]>("kurir");
+  const [deliveryTime, setDeliveryTime] = useState<string>(DELIVERY_TIME_SLOTS[4]);
+  const [shippingId, setShippingId] = useState<ShippingMethodId>("gosend-motor");
+  const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [paymentMethod, setPaymentMethod] =
-    useState<(typeof PAYMENT_OPTIONS)[number]>("QRIS");
+    useState<(typeof PAYMENT_OPTIONS)[number]>("Transfer Bank");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -55,7 +64,13 @@ export default function CheckoutPage() {
     setDeliveryDate(tomorrow.toISOString().slice(0, 10));
   }, []);
 
-  const shipping = SHIPPING_OPTIONS.find((item) => item.id === shippingId) ?? SHIPPING_OPTIONS[0];
+  const shippingOptions = useMemo(
+    () => buildShippingOptions(distanceKm),
+    [distanceKm],
+  );
+  const shipping =
+    shippingOptions.find((item) => item.id === shippingId) ?? shippingOptions[0];
+
   const totals = useMemo(
     () => calcCartTotal(items, coupon, shipping.fee),
     [items, coupon, shipping.fee],
@@ -79,10 +94,19 @@ export default function CheckoutPage() {
     setProfile((prev) => ({ ...prev, [key]: value }));
   }
 
+  function handlePlaceSelected(place: SelectedPlace) {
+    setProfile((prev) => ({
+      ...prev,
+      address: place.address,
+      placeName: place.placeName || prev.placeName,
+    }));
+    setDistanceKm(place.distanceKm);
+  }
+
   function placeOrder() {
     setError("");
     if (!items.length) {
-      setError("Keranjang kosong. Tambah menu dulu.");
+      setError("Keranjangnya masih kosong. Pilih menunya dulu, ya.");
       return;
     }
     const issues = getCartOrderIssues(items);
@@ -95,15 +119,26 @@ export default function CheckoutPage() {
       return;
     }
     if (!profile.address.trim()) {
-      setError("Alamat pengiriman wajib diisi.");
+      setError("Alamat antar wajib diisi.");
       return;
     }
     if (!deliveryDate) {
-      setError("Tanggal kirim wajib diisi.");
+      setError("Tanggal antar wajib diisi.");
+      return;
+    }
+    if (!deliveryTime) {
+      setError("Jam antar wajib dipilih.");
       return;
     }
 
     setSubmitting(true);
+    const shippingLabel =
+      shipping.id === "pickup"
+        ? shipping.label
+        : `${shipping.label}${
+            shipping.distanceKm != null ? ` (~${shipping.distanceKm} km)` : ""
+          }`;
+
     const order: Order = {
       id: createOrderId(),
       createdAt: new Date().toISOString(),
@@ -112,7 +147,7 @@ export default function CheckoutPage() {
       profile,
       deliveryDate,
       deliveryTime,
-      shippingMethod: shipping.label,
+      shippingMethod: shippingLabel,
       paymentMethod,
       subtotal: totals.subtotal,
       shippingFee: shipping.fee,
@@ -125,22 +160,7 @@ export default function CheckoutPage() {
     upsertAddressFromProfile(profile);
     saveOrder(order);
     clearCart();
-
-    const lines = order.items.map((item) => `- ${item.name} x${item.qty}`);
-    const waText = [
-      `Halo Snack Boz, saya sudah buat pesanan ${order.id}.`,
-      `Nama: ${profile.name}`,
-      `Kirim: ${deliveryDate} ${deliveryTime}`,
-      `Alamat: ${profile.address}`,
-      "",
-      "Pesanan:",
-      ...lines,
-      "",
-      `Total: ${rupiah(order.total)} via ${paymentMethod}`,
-    ].join("\n");
-
-    window.open(getWhatsAppUrl(waText), "_blank", "noopener,noreferrer");
-    router.push(`/account?order=${order.id}`);
+    router.push(`/invoice/${encodeURIComponent(order.id)}`);
   }
 
   if (!ready) {
@@ -157,10 +177,14 @@ export default function CheckoutPage() {
     return (
       <PageShell>
         <section className="container-shell py-16 text-center">
-          <h1 className="font-display text-3xl font-bold text-[var(--palm)]">Checkout kosong</h1>
-          <p className="mt-2 text-[var(--muted)]">Tambahkan produk ke keranjang terlebih dahulu.</p>
+          <h1 className="font-display text-3xl font-bold text-[var(--palm)]">
+            Keranjangnya masih kosong
+          </h1>
+          <p className="mt-2 text-[var(--muted)]">
+            Pilih menunya dulu sebelum melanjutkan ke pembayaran.
+          </p>
           <Button asChild className="mt-5">
-            <Link href="/products">Lihat produk</Link>
+            <Link href="/products">Lihat menu</Link>
           </Button>
         </section>
       </PageShell>
@@ -172,7 +196,7 @@ export default function CheckoutPage() {
       <section className="container-shell py-8">
         <p className="section-kicker">Checkout</p>
         <h1 className="font-display mt-1 text-3xl font-bold text-[var(--palm)]">
-          Atur jadwal kirim dan pembayaran
+          Isi data antar & cara bayar
         </h1>
         <div className="mt-5 flex flex-wrap gap-1">
           {steps.map((step) => (
@@ -193,7 +217,7 @@ export default function CheckoutPage() {
       <section className="container-shell grid gap-8 pb-10 lg:grid-cols-[1fr_340px]">
         <div className="grid gap-4">
           <div className="rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
-            <h2 className="font-display text-xl font-bold text-[var(--palm)]">Informasi Pemesan</h2>
+            <h2 className="font-display text-xl font-bold text-[var(--palm)]">Data pemesan</h2>
             <div className="mt-3 grid gap-2 md:grid-cols-2">
               <Input
                 placeholder="Nama lengkap"
@@ -215,29 +239,52 @@ export default function CheckoutPage() {
                 onChange={(e) => updateProfile("email", e.target.value)}
               />
             </div>
-            <p className="mt-2 text-xs text-[var(--muted)]">Checkout tanpa membuat akun. Data tersimpan di perangkat Anda.</p>
+            <p className="mt-2 text-xs text-[var(--muted)]">
+              Tidak perlu membuat akun. Data ini hanya tersimpan di perangkat yang
+              Anda pakai sekarang.
+            </p>
           </div>
 
           <div className="rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
             <div className="flex items-center gap-2">
               <MapPin className="size-4 text-[var(--pandan)]" />
-              <h2 className="font-display text-xl font-bold text-[var(--palm)]">Alamat Pengiriman</h2>
+              <h2 className="font-display text-xl font-bold text-[var(--palm)]">Alamat antar</h2>
             </div>
             <div className="mt-3 grid gap-2">
               <Input
-                placeholder="Nama lokasi / kantor"
+                placeholder="Nama lokasi / kantor (opsional)"
                 value={profile.placeName}
                 onChange={(e) => updateProfile("placeName", e.target.value)}
               />
-              <Input
-                placeholder="Alamat lengkap"
+              <AddressAutocomplete
                 value={profile.address}
-                onChange={(e) => updateProfile("address", e.target.value)}
+                onChange={(address) => {
+                  updateProfile("address", address);
+                  setDistanceKm(null);
+                }}
+                onPlaceSelected={handlePlaceSelected}
+                placeholder="Cari alamat pengiriman..."
                 required
               />
+              {distanceKm != null ? (
+                <div className="rounded-[var(--radius-sm)] bg-[var(--ivory)] px-3 py-2.5 text-xs leading-5 text-[var(--cocoa)]">
+                  <p>
+                    Estimasi jarak dari Pasar Senen Jaya, Jakarta Pusat:{" "}
+                    <strong className="text-[var(--palm)]">{distanceKm} km</strong>
+                  </p>
+                  <p className="mt-1 text-[var(--muted)]">
+                    Pengiriman dilakukan dari Pasar Senen Jaya, Jakarta Pusat. Ongkos
+                    kirim menyesuaikan tarif Gojek/Grab Instant.
+                  </p>
+                </div>
+              ) : (
+                <p className="text-xs text-[var(--muted)]">
+                  Pilih saran alamat supaya ongkir bisa dihitung otomatis.
+                </p>
+              )}
               <textarea
                 className="min-h-20 rounded-[var(--radius-sm)] border border-[var(--line)] p-3 text-sm outline-none focus:border-[var(--pandan)]"
-                placeholder="Catatan pengiriman"
+                placeholder="Catatan pengiriman (patokan, lantai, dll.)"
                 value={profile.deliveryNote}
                 onChange={(e) => updateProfile("deliveryNote", e.target.value)}
               />
@@ -248,25 +295,39 @@ export default function CheckoutPage() {
             <div className="rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
               <h2 className="font-display text-xl font-bold text-[var(--palm)]">Tanggal & Jam</h2>
               <div className="mt-3 grid gap-2">
+                <label className="text-xs font-semibold text-[var(--palm)]" htmlFor="delivery-date">
+                  Tanggal antar
+                </label>
                 <Input
+                  id="delivery-date"
                   type="date"
                   value={deliveryDate}
                   onChange={(e) => setDeliveryDate(e.target.value)}
                 />
-                <Input
-                  placeholder="Jam kirim, mis. 08.00 - 08.30"
+                <label className="text-xs font-semibold text-[var(--palm)]" htmlFor="delivery-time">
+                  Jam antar
+                </label>
+                <select
+                  id="delivery-time"
                   value={deliveryTime}
                   onChange={(e) => setDeliveryTime(e.target.value)}
-                />
+                  className="h-10 w-full rounded-[var(--radius-sm)] border border-[var(--line)] bg-white px-3 text-sm outline-none focus:border-[var(--pandan)]"
+                >
+                  {DELIVERY_TIME_SLOTS.map((slot) => (
+                    <option key={slot} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
               <div className="flex items-center gap-2">
                 <Truck className="size-4 text-[var(--pandan)]" />
-                <h2 className="font-display text-xl font-bold text-[var(--palm)]">Metode Kirim</h2>
+                <h2 className="font-display text-xl font-bold text-[var(--palm)]">Cara antar</h2>
               </div>
               <div className="mt-3 grid gap-1.5 text-sm">
-                {SHIPPING_OPTIONS.map((method) => (
+                {shippingOptions.map((method) => (
                   <label
                     key={method.id}
                     className={`flex cursor-pointer items-center justify-between gap-3 rounded-[var(--radius-sm)] border p-2.5 ${
@@ -283,7 +344,14 @@ export default function CheckoutPage() {
                         checked={shippingId === method.id}
                         onChange={() => setShippingId(method.id)}
                       />
-                      {method.label}
+                      <span>
+                        {method.label}
+                        {method.distanceKm != null && method.id !== "pickup" ? (
+                          <span className="mt-0.5 block text-[0.7rem] font-normal text-[var(--muted)]">
+                            ~{method.distanceKm} km dari Pasar Senen Jaya
+                          </span>
+                        ) : null}
+                      </span>
                     </span>
                     <span className="text-xs font-semibold">
                       {method.fee === 0 ? "Gratis" : rupiah(method.fee)}
@@ -291,15 +359,20 @@ export default function CheckoutPage() {
                   </label>
                 ))}
               </div>
+              <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
+                Pengiriman dilakukan dari Pasar Senen Jaya, Jakarta Pusat. Ongkos kirim
+                menyesuaikan tarif Gojek/Grab Instant (estimasi). Harga final bisa
+                sedikit berbeda di aplikasi.
+              </p>
             </div>
           </div>
 
           <div className="rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
             <div className="flex items-center gap-2">
               <CreditCard className="size-4 text-[var(--pandan)]" />
-              <h2 className="font-display text-xl font-bold text-[var(--palm)]">Pembayaran</h2>
+              <h2 className="font-display text-xl font-bold text-[var(--palm)]">Cara bayar</h2>
             </div>
-            <div className="mt-3 grid gap-2 sm:grid-cols-4">
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {PAYMENT_OPTIONS.map((payment) => (
                 <button
                   key={payment}
@@ -315,23 +388,32 @@ export default function CheckoutPage() {
                 </button>
               ))}
             </div>
+            <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
+              Setelah pesanan dibuat, Anda akan melihat invoice beserta detail
+              pembayaran (rekening bank atau QRIS).
+            </p>
           </div>
         </div>
 
         <aside>
           <div className="sticky top-20 rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
-            <div className="font-display text-xl font-bold text-[var(--palm)]">Ringkasan Pesanan</div>
+            <div className="font-display text-xl font-bold text-[var(--palm)]">Ringkasan</div>
             <div className="mt-3 grid gap-2">
               {items.map((item) => (
                 <div
                   key={item.id}
                   className="flex gap-2.5 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-2.5"
                 >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="size-12 rounded-[var(--radius-sm)] object-cover"
-                  />
+                  <div className="relative size-12 shrink-0 overflow-hidden rounded-[var(--radius-sm)]">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="48px"
+                      quality={60}
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-semibold">{item.name}</div>
                     <div className="text-xs text-[var(--muted)]">Qty {item.qty}</div>
@@ -368,10 +450,11 @@ export default function CheckoutPage() {
               disabled={submitting || !items.length}
               onClick={placeOrder}
             >
-              <CheckCircle2 className="size-4" /> Buat Pesanan
+              <CheckCircle2 className="size-4" /> Buat pesanan
             </Button>
             <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
-              Setelah buat pesanan, ringkasan dikirim ke WhatsApp admin dan tersimpan di halaman Akun.
+              Setelah dibuat, Anda diarahkan ke halaman invoice untuk melihat
+              detail pembayaran.
             </p>
           </div>
         </aside>

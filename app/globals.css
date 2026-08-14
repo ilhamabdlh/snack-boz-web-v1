@@ -44,6 +44,7 @@
   --z-raised: 10;
   --z-header: 40;
   --z-dropdown: 50;
+  --z-toast: 80;
 }
 
 * {
@@ -245,6 +246,18 @@ textarea {
   }
 }
 
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .reveal-item {
   animation: reveal-up 480ms var(--ease-soft) both;
   animation-delay: calc(var(--i, 0) * 50ms);
@@ -254,6 +267,49 @@ textarea {
   display: inline;
   background: linear-gradient(180deg, transparent 58%, var(--yellow) 58%);
   padding: 0 0.06em;
+}
+
+.brand-highlight {
+  position: relative;
+  display: inline-block;
+  color: var(--black);
+  background: linear-gradient(180deg, transparent 58%, var(--yellow) 58%);
+  padding: 0 0.08em;
+}
+
+.brand-highlight--light {
+  color: #fff;
+}
+
+.brand-spark-lines {
+  position: absolute;
+  top: -0.35rem;
+  left: 50%;
+  display: flex;
+  gap: 2px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.brand-spark-lines span {
+  display: block;
+  width: 1.5px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--yellow);
+}
+
+.brand-spark-lines span:nth-child(1) {
+  transform: rotate(-28deg);
+}
+
+.brand-spark-lines span:nth-child(2) {
+  height: 9px;
+  transform: rotate(-12deg);
+}
+
+.brand-spark-lines span:nth-child(3) {
+  transform: rotate(8deg);
 }
 
 .hero-spark-lines {
@@ -420,5 +476,22 @@ textarea {
 
   .hero-cover-item.is-side {
     transform: translate(-50%, -50%) translateX(calc(var(--offset, 0) * 7.5rem)) scale(0.58);
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+  }
+
+  header,
+  footer,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  #invoice-sheet {
+    box-shadow: none !important;
+    border: none !important;
   }
 }

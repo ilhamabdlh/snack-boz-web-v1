@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Filter, Search } from "lucide-react";
+import { Filter, Search, X } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { ProductInfiniteGrid } from "@/components/product-infinite-grid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { categories, occasions, products } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 function productsHref(next: { category?: string; occasion?: string; q?: string }) {
   const params = new URLSearchParams();
@@ -13,6 +14,30 @@ function productsHref(next: { category?: string; occasion?: string; q?: string }
   if (next.q) params.set("q", next.q);
   const query = params.toString();
   return query ? `/products?${query}` : "/products";
+}
+
+function FilterChip({
+  href,
+  active,
+  children,
+}: {
+  href: string;
+  active?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "inline-flex h-8 shrink-0 items-center whitespace-nowrap rounded-full px-3.5 text-[0.8125rem] font-medium transition-colors",
+        active
+          ? "bg-[var(--green)] text-white"
+          : "border border-[rgba(27,67,50,0.12)] bg-white text-[var(--palm)] hover:border-[var(--green)] hover:text-[var(--green)]",
+      )}
+    >
+      {children}
+    </Link>
+  );
 }
 
 export default async function ProductsPage({
@@ -24,6 +49,7 @@ export default async function ProductsPage({
   const selectedCategory = params.category;
   const selectedOccasion = params.occasion;
   const query = params.q?.toLowerCase() ?? "";
+  const hasFilter = Boolean(selectedCategory || selectedOccasion || params.q);
 
   const filtered = products.filter((product) => {
     const categoryMatch = selectedCategory ? product.category === selectedCategory : true;
@@ -36,16 +62,17 @@ export default async function ProductsPage({
 
   return (
     <PageShell>
-      <section className="border-b border-[rgba(27,67,50,0.08)] bg-[var(--hero-cream)] py-10">
+      <section className="border-b border-[rgba(27,67,50,0.08)] bg-[var(--hero-cream)] py-8 sm:py-10">
         <div className="container-shell">
           <p className="section-kicker">Produk</p>
           <div className="mt-2 grid gap-5 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
             <div>
               <h1 className="font-display text-balance text-3xl font-bold text-[var(--palm)] md:text-4xl">
-                Pilih menu untuk acara Anda
+                Semua menu kue & snack box
               </h1>
               <p className="section-lead">
-                Filter berdasarkan kategori atau jenis acara.
+                Saring dari kategori atau jenis acara. Minimal 20 pcs untuk satu
+                pesanan, dan boleh dicampur dari beberapa menu sekaligus.
               </p>
             </div>
             <form
@@ -66,7 +93,7 @@ export default async function ProductsPage({
                     name="q"
                     defaultValue={params.q}
                     className="border-0 bg-[var(--page)] pl-10"
-                    placeholder="Cari produk atau paket..."
+                    placeholder="Cari lemper, risoles, nagasari..."
                   />
                 </div>
                 <Button type="submit">Cari</Button>
@@ -76,66 +103,77 @@ export default async function ProductsPage({
         </div>
       </section>
 
-      <section className="container-shell py-8">
-        <div className="flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
-          <Button asChild variant={!selectedCategory ? "secondary" : "outline"} size="sm">
-            <Link href={productsHref({ occasion: selectedOccasion, q: params.q })}>Semua</Link>
-          </Button>
-          {categories.map((category) => (
-            <Button
-              key={category}
-              asChild
-              variant={selectedCategory === category ? "secondary" : "outline"}
-              size="sm"
-            >
+      <section className="container-shell py-6 sm:py-8">
+        <div className="rounded-[var(--radius)] border border-[rgba(27,67,50,0.08)] bg-white/80 p-3 shadow-[var(--shadow-sm)] sm:p-4">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+              Kategori
+            </p>
+            {hasFilter ? (
               <Link
+                href="/products"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--green)] hover:underline"
+              >
+                <X className="size-3.5" />
+                Reset
+              </Link>
+            ) : null}
+          </div>
+          <div className="mt-2 flex gap-2 overflow-x-auto pb-0.5 hide-scrollbar">
+            <FilterChip
+              href={productsHref({ occasion: selectedOccasion, q: params.q })}
+              active={!selectedCategory}
+            >
+              Semua
+            </FilterChip>
+            {categories.map((category) => (
+              <FilterChip
+                key={category}
                 href={productsHref({
                   category,
                   occasion: selectedOccasion,
                   q: params.q,
                 })}
+                active={selectedCategory === category}
               >
                 {category}
-              </Link>
-            </Button>
-          ))}
-        </div>
+              </FilterChip>
+            ))}
+          </div>
 
-        <div className="mt-4 flex gap-2 overflow-x-auto pb-2 hide-scrollbar lg:hidden">
-          <Button
-            asChild
-            variant={!selectedOccasion ? "secondary" : "outline"}
-            size="sm"
-          >
-            <Link href={productsHref({ category: selectedCategory, q: params.q })}>
-              Semua acara
-            </Link>
-          </Button>
-          {occasions.map((occasion) => (
-            <Button
-              key={occasion}
-              asChild
-              variant={selectedOccasion === occasion ? "secondary" : "outline"}
-              size="sm"
-            >
-              <Link
-                href={productsHref({
-                  category: selectedCategory,
-                  occasion,
-                  q: params.q,
-                })}
+          <div className="mt-3 border-t border-[rgba(27,67,50,0.06)] pt-3 lg:hidden">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+              Acara
+            </p>
+            <div className="mt-2 flex gap-2 overflow-x-auto pb-0.5 hide-scrollbar">
+              <FilterChip
+                href={productsHref({ category: selectedCategory, q: params.q })}
+                active={!selectedOccasion}
               >
-                {occasion}
-              </Link>
-            </Button>
-          ))}
+                Semua
+              </FilterChip>
+              {occasions.map((occasion) => (
+                <FilterChip
+                  key={occasion}
+                  href={productsHref({
+                    category: selectedCategory,
+                    occasion,
+                    q: params.q,
+                  })}
+                  active={selectedOccasion === occasion}
+                >
+                  {occasion}
+                </FilterChip>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[220px_1fr]">
           <aside className="hidden lg:block">
             <div className="sticky top-20 rounded-[var(--radius)] bg-white p-4 shadow-[var(--shadow-sm)]">
               <div className="flex items-center gap-2 text-sm font-semibold text-[var(--palm)]">
-                <Filter className="size-4" /> Filter Acara
+                <Filter className="size-4" /> Saring acara
               </div>
               <div className="mt-3 grid gap-1">
                 <Link
@@ -167,7 +205,8 @@ export default async function ProductsPage({
                 ))}
               </div>
               <p className="mt-4 rounded-[var(--radius-sm)] bg-[var(--yellow-soft)] p-3 text-xs leading-5 text-[var(--cocoa)]">
-                Pesanan banyak? Admin bisa bantu rekomendasi isi box dan jadwal kirim.
+                Pesanan di atas 100 pcs? Hubungi kami lewat WhatsApp, nanti dibantu
+                hitung isi box dan jam antarnya.
               </p>
             </div>
           </aside>
@@ -175,15 +214,17 @@ export default async function ProductsPage({
           <div>
             <div className="mb-4">
               <p className="text-sm text-[var(--muted)]">
-                {filtered.length} menu tersedia
-                {selectedCategory ? ` - ${selectedCategory}` : ""}
-                {selectedOccasion ? ` - ${selectedOccasion}` : ""}
-                {params.q ? ` - "${params.q}"` : ""}
+                {filtered.length} menu
+                {selectedCategory ? ` · ${selectedCategory}` : ""}
+                {selectedOccasion ? ` · ${selectedOccasion}` : ""}
+                {params.q ? ` · “${params.q}”` : ""}
               </p>
             </div>
             {filtered.length === 0 ? (
               <div className="rounded-[var(--radius)] bg-white p-6 shadow-[var(--shadow-sm)]">
-                <p className="text-[var(--muted)]">Tidak ada produk yang cocok.</p>
+                <p className="text-[var(--muted)]">
+                  Tidak ada menu yang cocok. Coba hapus filternya atau ganti kata kuncinya.
+                </p>
                 <Button asChild className="mt-4" variant="outline">
                   <Link href="/products">Reset filter</Link>
                 </Button>

@@ -13,34 +13,32 @@ import {
   Clock,
   Gift,
   MessageCircle,
-  Quote,
-  Star,
   Truck,
+  Users,
   UtensilsCrossed,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ReviewRotator } from "@/components/review-rotator";
 import { Product, products } from "@/lib/data";
+import { BRAND } from "@/lib/brand";
 import { cn, rupiah } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import heroCarousel from "@/data/hero-carousel.json";
 
-const SLIDE_CONFIG: { slug: string; image: string }[] = [
-  { slug: "dadar-gulung", image: "/hero/3.png" },
-  { slug: "risol-rogut", image: "/hero/2.png" },
-  { slug: "lemper-isi-ayam", image: "/hero/1.png" },
-  { slug: "kue-lapis-legit", image: "/hero/4.png" },
-  { slug: "kroket-isi-daging", image: "/hero/5.png" },
-  { slug: "bolu-gulung-pelangi", image: "/hero/6.png" },
-  { slug: "gabin-tape", image: "/hero/7.png" },
-  { slug: "ketan-serundeng", image: "/hero/8.png" },
-  { slug: "bakwan-udang", image: "/hero/9.png" },
-  { slug: "donat-gula-halus", image: "/hero/10.png" },
-  { slug: "bolu-karamel", image: "/hero/11.png" },
-  { slug: "cantik-manis", image: "/hero/12.png" },
-];
+type HeroSlide = {
+  product: Product | null;
+  slug: string;
+  name: string;
+  image: string;
+  href: string;
+  price?: number;
+  minOrder?: number;
+};
 
 const OCCASION_ICONS = {
-  "Rapat Kantor": Briefcase,
   Arisan: Calendar,
+  Pengajian: Users,
+  "Rapat Kantor": Briefcase,
   "Hari Raya": Gift,
 } as const;
 
@@ -62,12 +60,20 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({ occasions }: HeroSectionProps) {
-  const slides = useMemo(
+  const slides = useMemo<HeroSlide[]>(
     () =>
-      SLIDE_CONFIG.map(({ slug, image }) => {
-        const product = products.find((p) => p.slug === slug);
-        return product ? { product, image } : null;
-      }).filter((slide): slide is { product: Product; image: string } => slide !== null),
+      heroCarousel.map((entry) => {
+        const product = products.find((p) => p.slug === entry.slug) ?? null;
+        return {
+          product,
+          slug: entry.slug,
+          name: product?.name ?? entry.name,
+          image: entry.image,
+          href: product ? `/products/${product.slug}` : "/products",
+          price: product?.price,
+          minOrder: product?.minOrder,
+        };
+      }),
     [],
   );
 
@@ -137,35 +143,37 @@ export function HeroSection({ occasions }: HeroSectionProps) {
           <div className="relative z-[var(--z-raised)] max-w-xl">
             <div className="inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-white px-3.5 py-1.5 text-xs font-medium text-[var(--green)] shadow-[var(--shadow-sm)]">
               <ChefHat className="size-3.5 shrink-0" />
-              Kue & catering acara, Jabodetabek
+              Dapur kue basah · antar Jabodetabek
             </div>
 
             <h1 className="font-display mt-4 text-balance text-[1.85rem] font-bold leading-[1.12] text-[var(--green)] sm:mt-5 sm:text-[2.4rem] lg:text-[3rem] lg:leading-[1.1]">
-              Pilihan{" "}
+              Kue Tradisional Indonesia terlengkap di{" "}
               <span className="relative inline-block">
                 <span className="hero-spark-lines" aria-hidden>
                   <span />
                   <span />
                   <span />
                 </span>
-                <span className="hero-highlight">#1</span>
-              </span>{" "}
-              kue & snack box untuk acara Anda.
+                <span className="hero-highlight">Jakarta</span>
+              </span>
+              , selalu fresh dan lezat.
             </h1>
 
-            <p className="mt-3 max-w-[36ch] text-pretty text-sm leading-6 text-[var(--muted)] sm:mt-4 sm:text-[0.95rem] sm:leading-7">
-              Lemper, risoles, tampah, hingga paket kantor. Dibuat sesuai jadwal
-              pesanan dan dikirim tepat waktu ke lokasi acara.
+            <p className="mt-3 max-w-[38ch] text-pretty text-sm leading-6 text-[var(--muted)] sm:mt-4 sm:text-[0.95rem] sm:leading-7">
+              Lebih dari 50 pilihan kue tradisional: lemper, risoles, pastel, nagasari, sampai
+              kue tampah pun ada. kita buat kue tiap hari, jadi dijamin fresh dan lezat. Mulai Rp 2.000 per pcs
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-2.5 sm:mt-6 sm:gap-3">
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <a
-                  href={getWhatsAppUrl("Halo Snack Boz, saya ingin pesan kue/snack box.")}
+                  href={getWhatsAppUrl(
+                    `${BRAND.waGreeting}, saya mau tanya menu dan jadwal antar.`,
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Pesan Sekarang
+                  Tanya lewat WhatsApp
                   <MessageCircle className="size-4" />
                 </a>
               </Button>
@@ -173,7 +181,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
                 href="/products"
                 className="inline-flex h-11 items-center gap-1.5 px-2 text-sm font-semibold text-[var(--green)] transition-colors hover:text-[var(--green-mid)]"
               >
-                Lihat Menu
+                Lihat menu
                 <ArrowRight className="size-4" />
               </Link>
             </div>
@@ -190,22 +198,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
               })}
             </div>
 
-            <div className="mt-6 max-w-md rounded-[var(--radius)] bg-white p-3.5 shadow-[var(--shadow-sm)] sm:mt-8 sm:p-4">
-              <Quote className="size-4 text-[var(--green)]/40" aria-hidden />
-              <p className="mt-2 text-sm leading-6 text-[var(--cocoa)]">
-                Snack Boz jadi andalan rapat kantor kami. Rapi, tepat waktu, dan
-                isi box bisa disesuaikan.
-              </p>
-              <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
-                <span className="font-semibold text-[var(--black)]">Sari Prameswari</span>
-                <span className="text-[var(--muted)]">- Admin HR, Jakarta</span>
-                <span className="flex text-[#e6a800] sm:ml-auto" aria-label="5 dari 5 bintang">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="size-3.5 fill-current" />
-                  ))}
-                </span>
-              </div>
-            </div>
+            <ReviewRotator className="mt-6 sm:mt-8" />
           </div>
 
           <div
@@ -219,26 +212,34 @@ export function HeroSection({ occasions }: HeroSectionProps) {
               <div className="relative min-h-[4.75rem] min-w-0 flex-1">
                 {slides.map((slide, i) => (
                   <div
-                    key={slide.product.slug}
+                    key={slide.slug}
                     className={cn(
                       "hero-copy-layer absolute inset-x-0 top-0 pr-2",
                       i === index ? "is-active" : "is-idle",
                     )}
                     aria-hidden={i !== index}
                   >
-                    <p className="text-xs font-medium text-[var(--muted)]">Pilihan hari ini</p>
+                    <p className="text-xs font-medium text-[var(--muted)]">Menu pilihan</p>
                     <Link
-                      href={`/products/${slide.product.slug}`}
+                      href={slide.href}
                       tabIndex={i === index ? 0 : -1}
                       className="font-display block truncate text-2xl font-bold text-[var(--green)]"
                     >
-                      {slide.product.name}
+                      {slide.name}
                     </Link>
                     <p className="mt-0.5 text-sm text-[var(--muted)]">
-                      <span className="font-semibold tabular-nums text-[var(--green)]">
-                        {rupiah(slide.product.price)}
-                      </span>
-                      {" / min. 20 pcs (bisa mix)"}
+                      {slide.price != null ? (
+                        <>
+                          <span className="font-semibold tabular-nums text-[var(--green)]">
+                            {rupiah(slide.price)}
+                          </span>
+                          {slide.minOrder && slide.minOrder > 1
+                            ? ` / min. ${slide.minOrder} pcs`
+                            : " / pcs"}
+                        </>
+                      ) : (
+                        "Lihat semua menu"
+                      )}
                     </p>
                   </div>
                 ))}
@@ -277,7 +278,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
 
                 return (
                   <div
-                    key={slide.product.slug}
+                    key={slide.slug}
                     className={cn(
                       "hero-cover-item absolute left-1/2 top-1/2",
                       isActive && "is-active",
@@ -291,16 +292,17 @@ export function HeroSection({ occasions }: HeroSectionProps) {
                     }
                   >
                     <Link
-                      href={`/products/${slide.product.slug}`}
+                      href={slide.href}
                       tabIndex={isActive ? 0 : -1}
                       className="hero-cover-frame relative block"
                       aria-hidden={!isVisible}
                     >
                       <Image
                         src={slide.image}
-                        alt={slide.product.name}
+                        alt={slide.name}
                         fill
                         sizes="(max-width: 640px) 300px, 360px"
+                        quality={75}
                         className="hero-food-shadow object-contain"
                         style={{ background: "transparent" }}
                         priority={i < 3}
@@ -312,7 +314,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
                         )}
                       >
                         <Clock className="size-2.5" />
-                        Siap besok
+                         Favorit Warga!
                       </span>
                     </Link>
                   </div>
@@ -323,15 +325,15 @@ export function HeroSection({ occasions }: HeroSectionProps) {
             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[var(--green)]">
               <span className="inline-flex items-center gap-1.5 font-medium">
                 <UtensilsCrossed className="size-3.5 opacity-70" />
-                <span className="tabular-nums font-bold">90+</span> menu
+                <span className="tabular-nums font-bold">50+</span> pilihan menu
               </span>
               <span className="inline-flex items-center gap-1.5 font-medium">
                 <Calendar className="size-3.5 opacity-70" />
-                Min. <span className="tabular-nums font-bold">20</span> pcs
+                Min. <span className="tabular-nums font-bold">20</span> pcs, boleh campur
               </span>
               <span className="inline-flex items-center gap-1.5 font-medium">
                 <Truck className="size-3.5 opacity-70" />
-                <span className="font-bold">H+1</span> siap kirim
+                Pemesanan H-1
               </span>
             </div>
           </div>

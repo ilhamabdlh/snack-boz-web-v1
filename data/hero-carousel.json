@@ -1,0 +1,360 @@
+[
+  {
+    "slug": "bakpao-isi-coklat",
+    "image": "/hero/carousel/bakpao-isi-coklat.webp",
+    "name": "Bakpao Isi Coklat",
+    "hasProduct": true,
+    "source": "Bakpao Isi Coklat.png"
+  },
+  {
+    "slug": "bakwan-udang",
+    "image": "/hero/carousel/bakwan-udang.webp",
+    "name": "Bakwan Udang",
+    "hasProduct": true,
+    "source": "Bakwan Udang.png"
+  },
+  {
+    "slug": "bolu-gulung-pelangi",
+    "image": "/hero/carousel/bolu-gulung-pelangi.webp",
+    "name": "Bolu Gulung Pelangi",
+    "hasProduct": true,
+    "source": "Bolu Gulung Pelangi.png"
+  },
+  {
+    "slug": "bolu-karamel",
+    "image": "/hero/carousel/bolu-karamel.webp",
+    "name": "Bolu Karamel",
+    "hasProduct": true,
+    "source": "Bolu Karamel.png"
+  },
+  {
+    "slug": "bolu-kukus-coklat",
+    "image": "/hero/carousel/bolu-kukus-coklat.webp",
+    "name": "Bolu Kukus Coklat",
+    "hasProduct": true,
+    "source": "Bolu Kukus Coklat.png"
+  },
+  {
+    "slug": "bolu-kukus-strawbery",
+    "image": "/hero/carousel/bolu-kukus-strawbery.webp",
+    "name": "Bolu Kukus Strawbery",
+    "hasProduct": true,
+    "source": "Bolu Kukus Strawbery.png"
+  },
+  {
+    "slug": "bolu-pelangi",
+    "image": "/hero/carousel/bolu-pelangi.webp",
+    "name": "Bolu Pelangi",
+    "hasProduct": true,
+    "source": "Bolu Pelangi.png"
+  },
+  {
+    "slug": "bolu-pisang",
+    "image": "/hero/carousel/bolu-pisang.webp",
+    "name": "Bolu Pisang",
+    "hasProduct": true,
+    "source": "Bolu Pisang.png"
+  },
+  {
+    "slug": "bolu-tape",
+    "image": "/hero/carousel/bolu-tape.webp",
+    "name": "Bika Ambon Original",
+    "hasProduct": true,
+    "source": "Bolu Tape.png"
+  },
+  {
+    "slug": "cantik-manis",
+    "image": "/hero/carousel/cantik-manis.webp",
+    "name": "Cantik Manis",
+    "hasProduct": true,
+    "source": "Cantik Manis.png"
+  },
+  {
+    "slug": "gabin-tape",
+    "image": "/hero/carousel/gabin-tape.webp",
+    "name": "Gabin Tape",
+    "hasProduct": true,
+    "source": "Gabin Tape.png"
+  },
+  {
+    "slug": "ketan-serundeng",
+    "image": "/hero/carousel/ketan-serundeng.webp",
+    "name": "Ketan Serundeng",
+    "hasProduct": true,
+    "source": "Ketan Serundeng.png"
+  },
+  {
+    "slug": "kroket-isi-daging",
+    "image": "/hero/carousel/kroket-isi-daging.webp",
+    "name": "Kroket Isi Daging",
+    "hasProduct": true,
+    "source": "Kroket Isi Daging.png"
+  },
+  {
+    "slug": "kue-angku",
+    "image": "/hero/carousel/kue-angku.webp",
+    "name": "Kue Angku",
+    "hasProduct": true,
+    "source": "Kue Angku.png"
+  },
+  {
+    "slug": "kue-bugis-pandan",
+    "image": "/hero/carousel/kue-bugis-pandan.webp",
+    "name": "Kue Bugis Pandan",
+    "hasProduct": true,
+    "source": "Kue Bugis Pandan.png"
+  },
+  {
+    "slug": "kue-lapis",
+    "image": "/hero/carousel/kue-lapis.webp",
+    "name": "Kue Lapis",
+    "hasProduct": true,
+    "source": "Kue Lapis.png"
+  },
+  {
+    "slug": "kue-lumpur-pandan",
+    "image": "/hero/carousel/kue-lumpur-pandan.webp",
+    "name": "Kue Lumpur Pandan",
+    "hasProduct": true,
+    "source": "Kue Lumpur Pandan.png"
+  },
+  {
+    "slug": "kue-soes",
+    "image": "/hero/carousel/kue-soes.webp",
+    "name": "Kue Soes",
+    "hasProduct": true,
+    "source": "Kue Soes.png"
+  },
+  {
+    "slug": "lapis-legit-pandan",
+    "image": "/hero/carousel/lapis-legit-pandan.webp",
+    "name": "Lapis Legit Pandan",
+    "hasProduct": true,
+    "source": "Lapis Legit Pandan.png"
+  },
+  {
+    "slug": "lemper-isi-ayam",
+    "image": "/hero/carousel/lemper-isi-ayam.webp",
+    "name": "Lemper Isi Ayam",
+    "hasProduct": true,
+    "source": "Lemper Isi Ayam.png"
+  },
+  {
+    "slug": "lontong-isi-ayam",
+    "image": "/hero/carousel/lontong-isi-ayam.webp",
+    "name": "Lontong Isi Ayam",
+    "hasProduct": true,
+    "source": "Lontong Isi Ayam.png"
+  },
+  {
+    "slug": "lontong-isi-sayuran",
+    "image": "/hero/carousel/lontong-isi-sayuran.webp",
+    "name": "Lontong Isi Sayuran",
+    "hasProduct": true,
+    "source": "Lontong Isi Sayuran.png"
+  },
+  {
+    "slug": "lumpia-goreng",
+    "image": "/hero/carousel/lumpia-goreng.webp",
+    "name": "Lumpia Goreng",
+    "hasProduct": true,
+    "source": "Lumpia Goreng.png"
+  },
+  {
+    "slug": "muffin-chocolate",
+    "image": "/hero/carousel/muffin-chocolate.webp",
+    "name": "Muffin Chocolate",
+    "hasProduct": true,
+    "source": "Muffin Chocolate.png"
+  },
+  {
+    "slug": "nagasari",
+    "image": "/hero/carousel/nagasari.webp",
+    "name": "Nagasari",
+    "hasProduct": true,
+    "source": "Nagasari.png"
+  },
+  {
+    "slug": "onde-onde",
+    "image": "/hero/carousel/onde-onde.webp",
+    "name": "Onde-Onde",
+    "hasProduct": true,
+    "source": "Onde-Onde.png"
+  },
+  {
+    "slug": "pastel",
+    "image": "/hero/carousel/pastel.webp",
+    "name": "Pastel",
+    "hasProduct": true,
+    "source": "Pastel.png"
+  },
+  {
+    "slug": "pie-buah",
+    "image": "/hero/carousel/pie-buah.webp",
+    "name": "Pie Buah",
+    "hasProduct": true,
+    "source": "Pie Buah.png"
+  },
+  {
+    "slug": "pie-susu",
+    "image": "/hero/carousel/pie-susu.webp",
+    "name": "Pie Susu",
+    "hasProduct": true,
+    "source": "Pie Susu.png"
+  },
+  {
+    "slug": "putri-ayu",
+    "image": "/hero/carousel/putri-ayu.webp",
+    "name": "Putri Ayu",
+    "hasProduct": true,
+    "source": "Putri Ayu.png"
+  },
+  {
+    "slug": "risol-mayones",
+    "image": "/hero/carousel/risol-mayones.webp",
+    "name": "Risol Mayones",
+    "hasProduct": true,
+    "source": "Risol Mayones.png"
+  },
+  {
+    "slug": "risol-rogut",
+    "image": "/hero/carousel/risol-rogut.webp",
+    "name": "Risol Rogut",
+    "hasProduct": true,
+    "source": "Risol Rogut.png"
+  },
+  {
+    "slug": "risol-sayur",
+    "image": "/hero/carousel/risol-sayur.webp",
+    "name": "Risol Sayur",
+    "hasProduct": true,
+    "source": "Risol Sayur.png"
+  },
+  {
+    "slug": "risoles-mayones",
+    "image": "/hero/carousel/risoles-mayones.webp",
+    "name": "Risoles Mayones",
+    "hasProduct": true,
+    "source": "Risoles Mayones.png"
+  },
+  {
+    "slug": "sosis-solo",
+    "image": "/hero/carousel/sosis-solo.webp",
+    "name": "Sosis Solo",
+    "hasProduct": true,
+    "source": "Sosis Solo.png"
+  },
+  {
+    "slug": "talam-pandan",
+    "image": "/hero/carousel/talam-pandan.webp",
+    "name": "Talam Pandan",
+    "hasProduct": true,
+    "source": "Talam Pandan.png"
+  },
+  {
+    "slug": "talam-ubi",
+    "image": "/hero/carousel/talam-ubi.webp",
+    "name": "Talam Ubi",
+    "hasProduct": true,
+    "source": "Talam Ubi.png"
+  },
+  {
+    "slug": "wajik",
+    "image": "/hero/carousel/wajik.webp",
+    "name": "Wajik",
+    "hasProduct": true,
+    "source": "Wajik.png"
+  },
+  {
+    "slug": "wingko-babat",
+    "image": "/hero/carousel/wingko-babat.webp",
+    "name": "Wingko Babat",
+    "hasProduct": true,
+    "source": "Wingko Babat.png"
+  },
+  {
+    "slug": "chicken-katsu-mayo-bento",
+    "image": "/hero/carousel/chicken-katsu-mayo-bento.webp",
+    "name": "Chicken Katsu Mayo Bento",
+    "hasProduct": true,
+    "source": "makanan_berat/chicken_katsu_mayo_bento.png"
+  },
+  {
+    "slug": "chicken-katsu-teriyaki-bento",
+    "image": "/hero/carousel/chicken-katsu-teriyaki-bento.webp",
+    "name": "Chicken Katsu Teriyaki Bento",
+    "hasProduct": true,
+    "source": "makanan_berat/chicken_katsu_teriyaki_bento.png"
+  },
+  {
+    "slug": "chicken-teriyaki-box",
+    "image": "/hero/carousel/chicken-teriyaki-box.webp",
+    "name": "Chicken Teriyaki Box",
+    "hasProduct": true,
+    "source": "makanan_berat/chicken_teriyaki_box.png"
+  },
+
+  {
+    "slug": "nasi-bakar-teri-pete",
+    "image": "/hero/carousel/nasi-bakar-teri-pete.webp",
+    "name": "Nasi Bakar Teri Pete",
+    "hasProduct": true,
+    "source": "Nasi Bakar Teri Pete.png"
+  },
+  {
+    "slug": "nasi-bakar-ayam-pedas",
+    "image": "/hero/carousel/nasi_bakar.webp",
+    "name": "Nasi Bakar Ayam Pedas",
+    "hasProduct": true,
+    "source": "Nasi Bakar.png"
+  },
+  {
+    "slug": "nasi-bakar-cumi",
+    "image": "/hero/carousel/nasi_bakar_2.webp",
+    "name": "Nasi Bakar Cumi",
+    "hasProduct": true,
+    "source": "Nasi Bakar Ayam Sambal Terasi.png"
+  },
+  {
+    "slug": "nasi-ayam-asam-manis-bowl",
+    "image": "/hero/carousel/nasi-ayam-asam-manis-bowl.webp",
+    "name": "Nasi Ayam Asam Manis Bowl",
+    "hasProduct": true,
+    "source": "makanan_berat/nasi_ayam_asam_manis_bowl.png"
+  },
+  {
+    "slug": "nasi-ayam-suwir-kemangi-bowl",
+    "image": "/hero/carousel/nasi-ayam-suwir-kemangi-bowl.webp",
+    "name": "Nasi Ayam Suwir Kemangi Bowl",
+    "hasProduct": true,
+    "source": "makanan_berat/nasi_ayam_suwir_kemangi_bowl.png"
+  },
+  {
+    "slug": "nasi-ayam-teriyaki-bowl",
+    "image": "/hero/carousel/nasi-ayam-teriyaki-bowl.webp",
+    "name": "Nasi Ayam Teriyaki Bowl",
+    "hasProduct": true,
+    "source": "makanan_berat/nasi_ayam_teriyaki_bowl.png"
+  },
+  {
+    "slug": "nasi-cumi-asin-balado-bowl",
+    "image": "/hero/carousel/nasi-cumi-asin-balado-bowl.webp",
+    "name": "Nasi Cumi Asin Balado Bowl",
+    "hasProduct": true,
+    "source": "makanan_berat/nasi_cumi_asin_balado_bowl.png"
+  },
+  {
+    "slug": "nasi-goreng-katsu",
+    "image": "/hero/carousel/nasi-goreng-katsu.webp",
+    "name": "Nasi Goreng Katsu",
+    "hasProduct": true,
+    "source": "makanan_berat/nasi_goreng_katsu.png"
+  },
+  {
+    "slug": "nasi-tongkol-suwir-bowl",
+    "image": "/hero/carousel/nasi-tongkol-suwir-bowl.webp",
+    "name": "Nasi Tongkol Suwir Bowl",
+    "hasProduct": true,
+    "source": "makanan_berat/nasi_tongkol_suwir_bowl.png"
+  }
+]

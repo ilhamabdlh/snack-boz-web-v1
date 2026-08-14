@@ -1,0 +1,15 @@
+export const BRAND = {
+  name: "Pasar Senen Kue Subuh",
+  shortName: "Kue Subuh",
+  tagline: "Kue basah & snack box dari Pasar Senen Jaya",
+  domain: "pasarsenenkuesubuh.com",
+  siteUrl: "https://pasarsenenkuesubuh.com",
+  location: "Pasar Senen Jaya, Jakarta Pusat",
+  deliveryArea: "Jabodetabek",
+  hours: "Senin–Minggu, 24 jam",
+  orderLead: "Pemesanan H-1",
+  whatsappFallback: "6281806791309",
+  waGreeting: "Halo Pasar Senen Kue Subuh",
+  instagram: "pasarsenenkuesubuh_",
+  threads: "pasarsenenkuesubuh_",
+} as const;

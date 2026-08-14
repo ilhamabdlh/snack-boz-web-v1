@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/app-providers";
+import { BRAND } from "@/lib/brand";
 import "./globals.css";
 
 const sans = Plus_Jakarta_Sans({
@@ -16,9 +17,9 @@ const display = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Snack Boz | Kue dan Snack Box untuk Acara",
-  description:
-    "Snack Boz menyediakan kue basah, kue kering, snack box, kue tampah, dan paket acara dengan pemesanan online.",
+  metadataBase: new URL(BRAND.siteUrl),
+  title: `${BRAND.name} | Kue basah & snack box untuk acara di ${BRAND.deliveryArea}`,
+  description: `${BRAND.tagline}. Lebih dari 50 pilihan kue basah: lemper, risoles, pastel, nagasari, sampai kue tampah. Mulai Rp 5.000 per pcs. ${BRAND.orderLead}. Antar ${BRAND.deliveryArea}.`,
 };
 
 export default function RootLayout({

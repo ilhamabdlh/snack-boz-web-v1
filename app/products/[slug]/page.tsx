@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/page-shell";
 import { ProductCard } from "@/components/product-card";
 import { ProductPurchasePanel } from "@/components/product-purchase-panel";
-import { products } from "@/lib/data";
+import { productImageObjectClass, products } from "@/lib/data";
 import { rupiah } from "@/lib/utils";
 
 export default async function ProductDetailPage({
@@ -23,11 +24,15 @@ export default async function ProductDetailPage({
     <PageShell>
       <section className="container-shell grid gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <div className="lg:sticky lg:top-20 lg:self-start">
-          <div className="overflow-hidden rounded-[var(--radius-lg)] bg-[var(--rice)] shadow-[var(--shadow-sm)]">
-            <img
+          <div className="relative aspect-[5/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--rice)] shadow-[var(--shadow-sm)] lg:aspect-[4/5]">
+            <Image
               src={product.image}
               alt={product.name}
-              className="aspect-[5/4] w-full object-cover object-bottom lg:aspect-[4/5]"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              quality={75}
+              className={productImageObjectClass(product.slug, product.category)}
             />
           </div>
           {similar.length > 0 && (
@@ -36,12 +41,15 @@ export default async function ProductDetailPage({
                 <Link
                   key={item.slug}
                   href={`/products/${item.slug}`}
-                  className={`overflow-hidden rounded-[var(--radius-sm)] bg-[var(--rice)] ${item.slug === product.slug ? "ring-2 ring-[var(--pandan)]" : ""}`}
+                  className={`relative aspect-square overflow-hidden rounded-[var(--radius-sm)] bg-[var(--rice)] ${item.slug === product.slug ? "ring-2 ring-[var(--pandan)]" : ""}`}
                 >
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.name}
-                    className="aspect-square w-full object-cover object-bottom"
+                    fill
+                    sizes="120px"
+                    quality={65}
+                    className={productImageObjectClass(item.slug, item.category)}
                   />
                 </Link>
               ))}
@@ -57,7 +65,18 @@ export default async function ProductDetailPage({
             {product.name}
           </h1>
           <p className="mt-3 text-base leading-7 text-[var(--muted)]">{product.description}</p>
-          <div className="mt-5 text-2xl font-bold text-[var(--palm)]">{rupiah(product.price)}</div>
+          <div className="mt-5">
+            {product.variants?.length ? (
+              <>
+                <div className="text-xs font-medium text-[var(--muted)]">Mulai dari</div>
+                <div className="text-2xl font-bold text-[var(--palm)]">
+                  {rupiah(Math.min(...product.variants.map((item) => item.price)))}
+                </div>
+              </>
+            ) : (
+              <div className="text-2xl font-bold text-[var(--palm)]">{rupiah(product.price)}</div>
+            )}
+          </div>
 
           <ProductPurchasePanel product={product} />
 
@@ -68,7 +87,13 @@ export default async function ProductDetailPage({
             </div>
             <div className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--warm-white)] p-4">
               <div className="text-sm font-semibold text-[var(--palm)]">Porsi</div>
-              <p className="mt-1.5 text-sm leading-6 text-[var(--muted)]">{product.portion}</p>
+              <p className="mt-1.5 text-sm leading-6 text-[var(--muted)]">
+                {product.variants?.length
+                  ? product.variants
+                      .map((item) => `${item.name}: ${item.portion}`)
+                      .join(" · ")
+                  : product.portion}
+              </p>
             </div>
           </div>
           <div className="mt-4 flex flex-wrap gap-1.5">

@@ -1,4 +1,6 @@
-const FALLBACK_WA = "6281200000000";
+import { BRAND } from "@/lib/brand";
+
+const FALLBACK_WA = BRAND.whatsappFallback;
 
 export function getWhatsAppNumber() {
   return (process.env.NEXT_PUBLIC_WHATSAPP || FALLBACK_WA).replace(/\D/g, "");

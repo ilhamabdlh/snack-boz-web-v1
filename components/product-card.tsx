@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { Check, Plus, Timer } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
+import { useToast } from "@/components/toast-provider";
 import { MIXED_PRODUCT_MIN_QTY } from "@/lib/commerce";
-import { Product } from "@/lib/data";
+import { productImageObjectClass, Product } from "@/lib/data";
 import { cn, rupiah } from "@/lib/utils";
 
 export function ProductCard({
@@ -23,19 +24,37 @@ export function ProductCard({
   style?: React.CSSProperties;
 }) {
   const { addProduct } = useCart();
+  const { toast } = useToast();
   const [justAdded, setJustAdded] = useState(false);
+  const hasVariants = Boolean(product.variants?.length);
+  const defaultVariant =
+    product.variants?.find((item) => item.id === "sedang") ?? product.variants?.[0];
+  const displayPrice = defaultVariant?.price ?? product.price;
+  const isTray = product.category === "Kue Tampah" || hasVariants;
+  const isHeavyMeal = product.category === "Makanan Berat";
+  const exemptFromMixedMin = isTray || isHeavyMeal;
+  const minOrder = product.minOrder || 1;
+  const addQty = isHeavyMeal ? minOrder : 1;
 
   function handleAdd(event: React.MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
+    if (hasVariants && !defaultVariant) return;
+
     addProduct({
       slug: product.slug,
       name: product.name,
       image: product.image,
-      unitPrice: product.price,
-      qty: 1,
-      minOrder: 1,
+      unitPrice: displayPrice,
+      qty: addQty,
+      minOrder,
+      variantId: defaultVariant?.id,
+      variantName: defaultVariant?.name,
+      exemptFromMixedMin,
     });
+    toast(
+      `${product.name}${defaultVariant ? ` ${defaultVariant.name}` : ""} berhasil ditambahkan ke keranjang`,
+    );
     setJustAdded(true);
     window.setTimeout(() => setJustAdded(false), 1600);
   }
@@ -65,13 +84,17 @@ export function ProductCard({
           sizes={
             featured
               ? "(max-width: 1024px) 50vw, 50vw"
-              : "(max-width: 640px) 50vw, 33vw"
+              : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           }
-          className="object-cover object-bottom transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          quality={70}
+          className={cn(
+            productImageObjectClass(product.slug, product.category),
+            "transition-transform duration-500 ease-out group-hover:scale-[1.03]",
+          )}
         />
         {product.bestSeller ? (
           <span className="absolute left-2 top-2 z-[1] rounded-[6px] bg-[var(--green)] px-1.5 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wide text-[var(--white)] sm:left-3 sm:top-3 sm:px-2 sm:py-1 sm:text-[0.65rem]">
-            Favorit
+            Laris
           </span>
         ) : null}
       </Link>
@@ -111,16 +134,38 @@ export function ProductCard({
         >
           <div className="min-w-0">
             <div className="text-[0.8125rem] font-semibold tabular-nums text-[var(--green)] sm:text-sm">
-              {rupiah(product.price)}
+              {hasVariants ? `Mulai ${rupiah(displayPrice)}` : rupiah(displayPrice)}
             </div>
             <div className="mt-0.5 flex items-center gap-1 text-[0.65rem] text-[var(--muted)] sm:mt-1 sm:text-xs">
               <Timer className="hidden size-3.5 opacity-70 sm:block" />
-              <span className="sm:hidden">Min. {MIXED_PRODUCT_MIN_QTY}</span>
-              <span className="hidden sm:inline">
-                Min. {MIXED_PRODUCT_MIN_QTY} pcs (bisa mix)
-              </span>
+              {isTray ? (
+                <>
+                  <span className="sm:hidden">3 ukuran</span>
+                  <span className="hidden sm:inline">Kecil · Sedang · Besar</span>
+                </>
+              ) : isHeavyMeal ? (
+                <>
+                  <span className="sm:hidden">Min. {minOrder}</span>
+                  <span className="hidden sm:inline">Min. {minOrder} box</span>
+                </>
+              ) : (
+                <>
+                  <span className="sm:hidden">Min. {MIXED_PRODUCT_MIN_QTY}</span>
+                  <span className="hidden sm:inline">
+                    Min. {MIXED_PRODUCT_MIN_QTY} pcs, boleh campur
+                  </span>
+                </>
+              )}
             </div>
           </div>
+          {hasVariants ? (
+            <Link
+              href={`/products/${product.slug}`}
+              className="inline-flex h-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--green)] px-2.5 text-xs font-semibold text-[var(--white)] transition-[background-color,transform] duration-200 hover:bg-[var(--green-mid)] active:scale-[0.98] sm:h-9 sm:px-3.5 sm:text-sm"
+            >
+              Pilih
+            </Link>
+          ) : (
           <button
             type="button"
             onClick={handleAdd}
@@ -139,6 +184,7 @@ export function ProductCard({
               </>
             )}
           </button>
+          )}
         </div>
       </div>
     </article>

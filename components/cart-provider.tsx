@@ -28,6 +28,9 @@ type AddProductInput = {
   qty: number;
   minOrder: number;
   note?: string;
+  variantId?: string;
+  variantName?: string;
+  exemptFromMixedMin?: boolean;
 };
 
 type AddSnackBoxInput = {
@@ -82,16 +85,33 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [state, ready]);
 
   const addProduct = useCallback((input: AddProductInput) => {
-    const id = createCartItemId("product", input.slug);
+    const id = createCartItemId("product", input.slug, input.variantId);
     const qty = Math.max(1, input.qty);
+    const displayName = input.variantName
+      ? `${input.name} (${input.variantName})`
+      : input.name;
     setState((prev) => {
       const existing = prev.items.find((item) => item.id === id);
+      const minOrder = Math.max(1, input.minOrder || 1);
       if (existing) {
         return {
           ...prev,
           items: prev.items.map((item) =>
             item.id === id
-              ? { ...item, qty: item.qty + qty, note: input.note ?? item.note, minOrder: 1 }
+              ? {
+                  ...item,
+                  qty: item.qty + qty,
+                  note: input.note ?? item.note,
+                  minOrder,
+                  unitPrice: input.unitPrice,
+                  name: displayName,
+                  meta: {
+                    ...item.meta,
+                    variantId: input.variantId,
+                    variantName: input.variantName,
+                    exemptFromMixedMin: input.exemptFromMixedMin,
+                  },
+                }
               : item,
           ),
         };
@@ -100,12 +120,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
         id,
         kind: "product",
         slug: input.slug,
-        name: input.name,
+        name: displayName,
         image: input.image,
         unitPrice: input.unitPrice,
         qty,
-        minOrder: 1,
+        minOrder,
         note: input.note,
+        meta: {
+          variantId: input.variantId,
+          variantName: input.variantName,
+          exemptFromMixedMin: input.exemptFromMixedMin,
+        },
       };
       return { ...prev, items: [...prev.items, next] };
     });
@@ -165,7 +190,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
         .map((item) => {
           if (item.id !== id) return item;
           if (item.kind === "product") {
-            return { ...item, qty: Math.max(0, qty), minOrder: 1 };
+            const enforceMin =
+              Boolean(item.meta?.exemptFromMixedMin) && item.minOrder > 1;
+            if (qty <= 0) return { ...item, qty: 0 };
+            return {
+              ...item,
+              qty: enforceMin ? Math.max(item.minOrder, qty) : Math.max(0, qty),
+            };
           }
           return { ...item, qty: Math.max(item.minOrder, qty) };
         })
