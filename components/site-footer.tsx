@@ -125,7 +125,7 @@ export function SiteFooter() {
         <div className="container-shell flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <PaymentMarks />
           <span className="text-xs text-white/50">
-            © 2026 {BRAND.name} · {BRAND.domain}
+            © 2026 {BRAND.legalName} · {BRAND.name}
           </span>
         </div>
       </div>

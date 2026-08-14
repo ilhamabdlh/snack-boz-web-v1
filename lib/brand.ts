@@ -1,5 +1,6 @@
 export const BRAND = {
   name: "Pasar Senen Kue Subuh",
+  legalName: "PT. Kue Karya Anak Bangsa",
   shortName: "Kue Subuh",
   tagline: "Kue basah & snack box dari Pasar Senen Jaya",
   domain: "pasarsenenkuesubuh.com",
