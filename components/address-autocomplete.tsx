@@ -166,9 +166,7 @@ export function AddressAutocomplete({
                 onClick={() => pickSuggestion(item)}
               >
                 <span className="font-medium text-[var(--palm)]">{item.mainText}</span>
-                {item.secondaryText ? (
-                  <span className="text-xs text-[var(--muted)]">{item.secondaryText}</span>
-                ) : null}
+                <span className="text-xs leading-snug text-[var(--muted)]">{item.description}</span>
               </button>
             </li>
           ))}

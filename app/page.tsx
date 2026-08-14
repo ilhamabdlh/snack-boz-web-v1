@@ -6,11 +6,27 @@ import { OccasionCarousel } from "@/components/occasion-carousel";
 import { PosterCarousel } from "@/components/poster-carousel";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
-import { bestSellers, occasions, products } from "@/lib/data";
+import { FaqSection } from "@/components/faq-section";
+import { JsonLd } from "@/components/json-ld";
 import { BOX_PRICE_WITH_WATER } from "@/lib/commerce";
+import { bestSellers, occasions, products } from "@/lib/data";
 import { posters } from "@/lib/posters";
+import { faqPageSchema, graphSchema, pageMetadata } from "@/lib/seo";
 import { rupiah } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+
+export const metadata = pageMetadata({
+  title: `Kue basah & snack box untuk acara di Jabodetabek`,
+  description:
+    "Pasar Senen Kue Subuh menyediakan kue basah, snack box, dan kue tampah dari Pasar Senen Jaya. Minimal 20 pcs, boleh campur menu, pemesanan H-1, antar Jabodetabek.",
+  path: "/",
+  keywords: [
+    "kue basah Jakarta Pusat",
+    "snack box arisan",
+    "kue tampah pengajian",
+    "Pasar Senen Jaya",
+  ],
+});
 
 const heroFeatured = [
   products.find((p) => p.slug === "dadar-gulung")!,
@@ -50,6 +66,7 @@ export default function HomePage() {
 
   return (
     <PageShell>
+      <JsonLd data={graphSchema([faqPageSchema()])} />
       <HeroSection featured={heroFeatured} occasions={heroOccasions} />
 
       {/* Poster menu */}
@@ -199,6 +216,8 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+
+      <FaqSection />
 
       {/* Final CTA */}
       <section className="container-shell pb-12 sm:pb-16">

@@ -1,11 +1,41 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { JsonLd } from "@/components/json-ld";
 import { PageShell } from "@/components/page-shell";
 import { ProductCard } from "@/components/product-card";
 import { ProductPurchasePanel } from "@/components/product-purchase-panel";
 import { productImageObjectClass, products } from "@/lib/data";
+import {
+  breadcrumbSchema,
+  graphSchema,
+  pageMetadata,
+  productSchema,
+} from "@/lib/seo";
 import { rupiah } from "@/lib/utils";
+
+export function generateStaticParams() {
+  return products.map((product) => ({ slug: product.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const product = products.find((item) => item.slug === slug);
+  if (!product) return { title: "Menu tidak ditemukan" };
+
+  return pageMetadata({
+    title: `${product.name} — ${product.category}`,
+    description: `${product.description} Harga ${rupiah(product.price)}. Minimal ${product.minOrder} pcs. Cocok untuk ${product.occasions.slice(0, 3).join(", ")}.`,
+    path: `/products/${product.slug}`,
+    image: product.image,
+    keywords: [product.name, product.category, ...product.occasions, ...product.tags],
+  });
+}
 
 export default async function ProductDetailPage({
   params,
@@ -22,6 +52,16 @@ export default async function ProductDetailPage({
 
   return (
     <PageShell>
+      <JsonLd
+        data={graphSchema([
+          productSchema(product),
+          breadcrumbSchema([
+            { name: "Beranda", path: "/" },
+            { name: "Menu", path: "/products" },
+            { name: product.name, path: `/products/${product.slug}` },
+          ]),
+        ])}
+      />
       <section className="container-shell grid gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <div className="lg:sticky lg:top-20 lg:self-start">
           <div className="relative aspect-[5/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--rice)] shadow-[var(--shadow-sm)] lg:aspect-[4/5]">

@@ -1,10 +1,18 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Filter, Search, X } from "lucide-react";
+import { JsonLd } from "@/components/json-ld";
 import { PageShell } from "@/components/page-shell";
 import { ProductInfiniteGrid } from "@/components/product-infinite-grid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { categories, occasions, products } from "@/lib/data";
+import {
+  breadcrumbSchema,
+  graphSchema,
+  itemListSchema,
+  pageMetadata,
+} from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 function productsHref(next: { category?: string; occasion?: string; q?: string }) {
@@ -40,6 +48,27 @@ function FilterChip({
   );
 }
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string; occasion?: string; q?: string }>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const bits = [params.category, params.occasion, params.q].filter(Boolean);
+  const label = bits.length ? bits.join(" · ") : "Semua menu";
+  return pageMetadata({
+    title: `${label} kue & snack box`,
+    description:
+      "Lihat semua menu kue basah, kue kering, snack box, kue tampah, dan makanan berat. Saring per kategori atau acara. Minimal 20 pcs, boleh campur menu. Antar Jabodetabek.",
+    path: productsHref({
+      category: params.category,
+      occasion: params.occasion,
+      q: params.q,
+    }),
+    keywords: ["menu kue basah", "katalog snack box", ...categories, ...occasions],
+  });
+}
+
 export default async function ProductsPage({
   searchParams,
 }: {
@@ -62,6 +91,15 @@ export default async function ProductsPage({
 
   return (
     <PageShell>
+      <JsonLd
+        data={graphSchema([
+          itemListSchema(filtered, "Menu Pasar Senen Kue Subuh", "/products"),
+          breadcrumbSchema([
+            { name: "Beranda", path: "/" },
+            { name: "Menu", path: "/products" },
+          ]),
+        ])}
+      />
       <section className="border-b border-[rgba(27,67,50,0.08)] bg-[var(--hero-cream)] py-8 sm:py-10">
         <div className="container-shell">
           <p className="section-kicker">Produk</p>
