@@ -2,7 +2,7 @@
   {
     "slug": "bakpao-isi-coklat",
     "image": "/hero/carousel/bakpao-isi-coklat.webp",
-    "name": "Bakpao Isi Coklat",
+    "name": "Bakpao",
     "hasProduct": true,
     "source": "Bakpao Isi Coklat.png"
   },
@@ -37,7 +37,7 @@
   {
     "slug": "bolu-kukus-strawbery",
     "image": "/hero/carousel/bolu-kukus-strawbery.webp",
-    "name": "Bolu Kukus Strawbery",
+    "name": "Kue Mangkok",
     "hasProduct": true,
     "source": "Bolu Kukus Strawbery.png"
   },
@@ -51,14 +51,14 @@
   {
     "slug": "bolu-pisang",
     "image": "/hero/carousel/bolu-pisang.webp",
-    "name": "Bolu Pisang",
+    "name": "Butter Cake / Bolu Marmer",
     "hasProduct": true,
     "source": "Bolu Pisang.png"
   },
   {
     "slug": "bolu-tape",
     "image": "/hero/carousel/bolu-tape.webp",
-    "name": "Bika Ambon Original",
+    "name": "Bika Ambon",
     "hasProduct": true,
     "source": "Bolu Tape.png"
   },
@@ -86,56 +86,56 @@
   {
     "slug": "kroket-isi-daging",
     "image": "/hero/carousel/kroket-isi-daging.webp",
-    "name": "Kroket Isi Daging",
+    "name": "Kroket Isi Ikan Cakalang",
     "hasProduct": true,
     "source": "Kroket Isi Daging.png"
   },
   {
     "slug": "kue-angku",
     "image": "/hero/carousel/kue-angku.webp",
-    "name": "Kue Angku",
+    "name": "Kue Angku Isi Kacang Hijau",
     "hasProduct": true,
     "source": "Kue Angku.png"
   },
   {
     "slug": "kue-bugis-pandan",
     "image": "/hero/carousel/kue-bugis-pandan.webp",
-    "name": "Kue Bugis Pandan",
+    "name": "Kue Bugis Pandan Isi Gula Merah",
     "hasProduct": true,
     "source": "Kue Bugis Pandan.png"
   },
   {
     "slug": "kue-lapis",
     "image": "/hero/carousel/kue-lapis.webp",
-    "name": "Kue Lapis",
+    "name": "Kue Lapis Pepe",
     "hasProduct": true,
     "source": "Kue Lapis.png"
   },
   {
     "slug": "kue-lumpur-pandan",
     "image": "/hero/carousel/kue-lumpur-pandan.webp",
-    "name": "Kue Lumpur Pandan",
+    "name": "Bika Ambon Pandan",
     "hasProduct": true,
     "source": "Kue Lumpur Pandan.png"
   },
   {
     "slug": "kue-soes",
     "image": "/hero/carousel/kue-soes.webp",
-    "name": "Kue Soes",
+    "name": "Kue Soes Fla",
     "hasProduct": true,
     "source": "Kue Soes.png"
   },
   {
     "slug": "lapis-legit-pandan",
     "image": "/hero/carousel/lapis-legit-pandan.webp",
-    "name": "Lapis Legit Pandan",
+    "name": "Kue Lapis Surabaya Roll",
     "hasProduct": true,
     "source": "Lapis Legit Pandan.png"
   },
   {
     "slug": "lemper-isi-ayam",
     "image": "/hero/carousel/lemper-isi-ayam.webp",
-    "name": "Lemper Isi Ayam",
+    "name": "Lemper Original Isi Ayam",
     "hasProduct": true,
     "source": "Lemper Isi Ayam.png"
   },
@@ -177,14 +177,14 @@
   {
     "slug": "onde-onde",
     "image": "/hero/carousel/onde-onde.webp",
-    "name": "Onde-Onde",
+    "name": "Onde-Onde Isi Kacang Hijau",
     "hasProduct": true,
     "source": "Onde-Onde.png"
   },
   {
     "slug": "pastel",
     "image": "/hero/carousel/pastel.webp",
-    "name": "Pastel",
+    "name": "Pastel Isi Telur dan Sayuran",
     "hasProduct": true,
     "source": "Pastel.png"
   },
@@ -212,7 +212,7 @@
   {
     "slug": "risol-mayones",
     "image": "/hero/carousel/risol-mayones.webp",
-    "name": "Risol Mayones",
+    "name": "Risol Mayones Sayuran",
     "hasProduct": true,
     "source": "Risol Mayones.png"
   },
@@ -233,7 +233,7 @@
   {
     "slug": "risoles-mayones",
     "image": "/hero/carousel/risoles-mayones.webp",
-    "name": "Risoles Mayones",
+    "name": "Risoles Beef Mayones",
     "hasProduct": true,
     "source": "Risoles Mayones.png"
   },
@@ -247,7 +247,7 @@
   {
     "slug": "talam-pandan",
     "image": "/hero/carousel/talam-pandan.webp",
-    "name": "Talam Pandan",
+    "name": "Talam Ubi Pandan",
     "hasProduct": true,
     "source": "Talam Pandan.png"
   },
@@ -261,7 +261,7 @@
   {
     "slug": "wajik",
     "image": "/hero/carousel/wajik.webp",
-    "name": "Wajik",
+    "name": "Kue Wajik",
     "hasProduct": true,
     "source": "Wajik.png"
   },
@@ -293,7 +293,6 @@
     "hasProduct": true,
     "source": "makanan_berat/chicken_teriyaki_box.png"
   },
-
   {
     "slug": "nasi-bakar-teri-pete",
     "image": "/hero/carousel/nasi-bakar-teri-pete.webp",

@@ -27,6 +27,8 @@ export type Product = {
   ingredients: string;
   portion: string;
   variants?: ProductVariant[];
+  /** Isi tetap untuk paket snack box siap pakai. */
+  packageItems?: string[];
 };
 
 export const categories: Category[] = [
@@ -64,6 +66,7 @@ const IMAGE_OBJECT_TOP_SLUGS = new Set([
 
 export function productImageObjectClass(slug: string, category?: Category) {
   if (IMAGE_OBJECT_TOP_SLUGS.has(slug)) return "object-cover object-[center_55%]";
+  if (category === "Snack Box") return "object-contain object-center";
   if (category === "Kue Tampah") return "object-cover object-center";
   return "object-cover object-bottom";
 }

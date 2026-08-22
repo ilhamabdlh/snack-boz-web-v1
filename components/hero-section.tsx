@@ -140,7 +140,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
 
       <div className="container-shell relative py-8 sm:py-10 lg:py-16">
         <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 xl:gap-14">
-          <div className="relative z-[var(--z-raised)] max-w-xl">
+          <div className="relative z-[var(--z-raised)] order-1 max-w-xl lg:col-start-1 lg:row-start-1">
             <div className="inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-white px-3.5 py-1.5 text-xs font-medium text-[var(--green)] shadow-[var(--shadow-sm)]">
               <ChefHat className="size-3.5 shrink-0" />
               Dapur kue basah · antar Jabodetabek
@@ -197,12 +197,10 @@ export function HeroSection({ occasions }: HeroSectionProps) {
                 );
               })}
             </div>
-
-            <ReviewRotator className="mt-6 sm:mt-8" />
           </div>
 
           <div
-            className="relative z-[var(--z-raised)] mx-auto w-full max-w-[560px]"
+            className="relative z-[var(--z-raised)] order-2 mx-auto w-full max-w-[560px] lg:col-start-2 lg:row-span-2 lg:row-start-1"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={onTouchStart}
@@ -337,6 +335,8 @@ export function HeroSection({ occasions }: HeroSectionProps) {
               </span>
             </div>
           </div>
+
+          <ReviewRotator className="order-3 mt-2 sm:mt-0 lg:col-start-1 lg:row-start-2 lg:mt-8" />
         </div>
       </div>
     </section>

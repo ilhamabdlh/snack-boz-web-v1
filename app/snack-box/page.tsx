@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -35,6 +36,7 @@ function isSnackBoxEligible(product: Product) {
 }
 
 const snackItems = products.filter(isSnackBoxEligible);
+const presetPackages = products.filter((product) => product.category === "Snack Box");
 
 const boxSizes = [
   {
@@ -61,7 +63,7 @@ export default function SnackBoxPage() {
   const [boxIndex, setBoxIndex] = useState(1);
   const [withWater, setWithWater] = useState(true);
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([]);
-  const [boxCount, setBoxCount] = useState(30);
+  const [boxCount, setBoxCount] = useState(SNACK_BOX_MIN_QTY);
   const [eventDate, setEventDate] = useState("");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState("");
@@ -135,13 +137,63 @@ export default function SnackBoxPage() {
           </div>
           <p className="section-lead mt-0">
             Pilih ukuran box, isi snacknya, pakai air mineral atau tidak, lalu
-            tentukan jumlah dan jam antar. Minimal 20 box, dan totalnya
+            tentukan jumlah dan jam antar. Minimal 10 box, dan totalnya
             terhitung otomatis sambil Anda memilih.
           </p>
         </div>
       </section>
 
       <section className="container-shell py-8">
+        {presetPackages.length > 0 ? (
+          <div className="mb-10">
+            <h2 className="text-sm font-semibold text-[var(--palm)]">Paket siap pakai</h2>
+            <p className="mt-1 max-w-[52ch] text-xs leading-5 text-[var(--muted)]">
+              Isi box sudah ditentukan, tinggal pilih jumlah. Cocok kalau mau pesan cepat
+              tanpa susun sendiri.
+            </p>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {presetPackages.map((pkg) => (
+                <article
+                  key={pkg.slug}
+                  className="grid gap-4 rounded-[var(--radius)] border border-[var(--line)] bg-white p-4 sm:grid-cols-[140px_1fr]"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-sm)] bg-[var(--rice)] sm:aspect-[3/4]">
+                    <Image
+                      src={pkg.image}
+                      alt={pkg.name}
+                      fill
+                      sizes="140px"
+                      quality={70}
+                      className="object-contain object-center"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-lg font-bold text-[var(--palm)]">
+                      {pkg.name}
+                    </h3>
+                    <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{pkg.description}</p>
+                    {pkg.packageItems?.length ? (
+                      <ul className="mt-2 space-y-1 text-xs leading-5 text-[var(--muted)]">
+                        {pkg.packageItems.map((item) => (
+                          <li key={item}>• {item}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    <div className="mt-3 flex flex-wrap items-center gap-3">
+                      <strong className="text-sm text-[var(--green)]">
+                        {rupiah(pkg.price)}/box
+                      </strong>
+                      <Button asChild size="sm" variant="outline">
+                        <Link href={`/products/${pkg.slug}`}>Lihat detail</Link>
+                      </Button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
         <div className="mb-8 flex flex-wrap gap-4 border-b border-[var(--line)] pb-6">
           {["Ukuran box", "Pilih snack", "Jumlah & jadwal"].map((step, i) => {
             const active =

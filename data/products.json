@@ -1,9 +1,9 @@
 [
   {
     "slug": "bakpao-isi-coklat",
-    "name": "Bakpao Isi Coklat",
+    "name": "Bakpao",
     "category": "Kue Basah",
-    "description": "Adonan kukus yang empuk dengan cokelat meleleh di tengahnya. Tidak berminyak, jadi aman untuk tamu anak-anak.",
+    "description": "Adonan kukus empuk. Pilih isi cokelat atau kacang hijau.",
     "price": 4000,
     "minOrder": 20,
     "image": "/makanan/bakpao-isi-coklat.webp",
@@ -17,8 +17,22 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung, ragi, coklat, gula.",
-    "portion": "1 pcs per porsi"
+    "ingredients": "Tepung, ragi, gula, isi cokelat atau kacang hijau.",
+    "portion": "Pilih isi",
+    "variants": [
+      {
+        "id": "coklat",
+        "name": "Isi Coklat",
+        "price": 4000,
+        "portion": "1 pcs"
+      },
+      {
+        "id": "kacang-hijau",
+        "name": "Isi Kacang Hijau",
+        "price": 4000,
+        "portion": "1 pcs"
+      }
+    ]
   },
   {
     "slug": "bakwan-udang",
@@ -36,7 +50,7 @@
     "tags": [
       "Gurih"
     ],
-    "bestSeller": false,
+    "bestSeller": true,
     "readySoon": true,
     "ingredients": "Tepung, udang, wortel, daun bawang.",
     "portion": "1 pcs per porsi"
@@ -46,7 +60,7 @@
     "name": "Bolu Gulung Pelangi",
     "category": "Kue Basah",
     "description": "Gulungan warna-warni dengan selai tipis di tengah. Sering diambil untuk acara ulang tahun anak.",
-    "price": 5000,
+    "price": 3500,
     "minOrder": 20,
     "image": "/makanan/bolu-gulung-pelangi.webp",
     "occasions": [
@@ -86,7 +100,7 @@
     "name": "Bolu Kukus Coklat",
     "category": "Kue Basah",
     "description": "Dikukus, bukan dipanggang, jadi teksturnya lembap dan tidak seret di tenggorokan.",
-    "price": 5000,
+    "price": 2500,
     "minOrder": 20,
     "image": "/makanan/bolu-kukus-coklat.webp",
     "occasions": [
@@ -123,10 +137,10 @@
   },
   {
     "slug": "bolu-kukus-strawbery",
-    "name": "Bolu Kukus Strawbery",
+    "name": "Kue Mangkok",
     "category": "Kue Basah",
-    "description": "Wangi stroberi dengan warna merah muda. Berguna untuk menyegarkan isi box yang kebanyakan gurih.",
-    "price": 5000,
+    "description": "Kue mangkok kukus yang empuk. Ukurannya kecil, gampang dibagi di acara.",
+    "price": 2000,
     "minOrder": 20,
     "image": "/makanan/bolu-kukus-strawbery.webp",
     "occasions": [
@@ -138,7 +152,7 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung, stroberi, telur, gula.",
+    "ingredients": "Tepung, telur, gula, pewarna makanan.",
     "portion": "1 pcs per porsi"
   },
   {
@@ -146,7 +160,7 @@
     "name": "Bolu Pelangi",
     "category": "Kue Basah",
     "description": "Lapisan warnanya tegas dan rapi waktu dipotong. Pilihan aman untuk acara anak.",
-    "price": 5000,
+    "price": 3500,
     "minOrder": 20,
     "image": "/makanan/bolu-pelangi.webp",
     "occasions": [
@@ -163,10 +177,10 @@
   },
   {
     "slug": "bolu-pisang",
-    "name": "Bolu Pisang",
+    "name": "Butter Cake / Bolu Marmer",
     "category": "Kue Basah",
-    "description": "Pakai pisang matang, jadi wanginya keluar dan teksturnya lembap. Tidak cepat kering.",
-    "price": 5000,
+    "description": "Bolu marmer dengan aroma butter. Potongan rapi untuk tampah atau snack box.",
+    "price": 3500,
     "minOrder": 20,
     "image": "/makanan/bolu-pisang.webp",
     "occasions": [
@@ -178,15 +192,15 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Pisang, tepung, telur, gula.",
+    "ingredients": "Tepung, telur, gula, mentega.",
     "portion": "1 potong"
   },
   {
     "slug": "bolu-tape",
-    "name": "Bolu Tape",
+    "name": "Bika Ambon",
     "category": "Kue Basah",
-    "description": "Tape singkongnya masih terasa asam manis di belakang lidah. Rasa lama yang biasanya dicari tamu senior.",
-    "price": 5000,
+    "description": "Bika ambon bersarang dengan aroma yang khas. Kenyal dan tidak cepat basi.",
+    "price": 2500,
     "minOrder": 20,
     "image": "/makanan/bolu-tape.webp",
     "occasions": [
@@ -198,7 +212,7 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tape singkong, tepung, telur, gula.",
+    "ingredients": "Tepung sagu, santan, telur, gula, ragi.",
     "portion": "1 potong"
   },
   {
@@ -224,7 +238,7 @@
   },
   {
     "slug": "dadar-gulung",
-    "name": "Dadar Gulung",
+    "name": "Dadar Gulung Isi Gula Aren",
     "category": "Kue Basah",
     "description": "Kulit pandan tipis berisi kelapa parut dan gula aren. Salah satu yang paling sering dipesan di sini.",
     "price": 3000,
@@ -246,10 +260,10 @@
   },
   {
     "slug": "donat-gula-halus",
-    "name": "Donat Gula Halus",
+    "name": "Bomboloni",
     "category": "Kue Basah",
-    "description": "Empuk dan ditabur gula halus. Menu paling aman kalau selera tamunya bermacam-macam.",
-    "price": 5000,
+    "description": "Bomboloni empuk dengan isi cokelat atau stroberi. Digoreng lalu diisi.",
+    "price": 3500,
     "minOrder": 20,
     "image": "/makanan/donat-gula-halus.webp",
     "occasions": [
@@ -261,8 +275,22 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung, telur, gula, mentega.",
-    "portion": "1 pcs per porsi"
+    "ingredients": "Tepung, telur, gula, isi cokelat atau stroberi.",
+    "portion": "Pilih isi",
+    "variants": [
+      {
+        "id": "coklat",
+        "name": "Isi Coklat",
+        "price": 3500,
+        "portion": "1 pcs"
+      },
+      {
+        "id": "strawberry",
+        "name": "Isi Strawberry",
+        "price": 3500,
+        "portion": "1 pcs"
+      }
+    ]
   },
   {
     "slug": "gabin-tape",
@@ -306,9 +334,9 @@
   },
   {
     "slug": "kroket-isi-daging",
-    "name": "Kroket Isi Daging",
+    "name": "Kroket Isi Ikan Cakalang",
     "category": "Kue Basah",
-    "description": "Kentang halus berisi daging cincang, dibalut tepung roti sebelum digoreng.",
+    "description": "Kentang halus berisi ikan cakalang, dibalut tepung roti lalu digoreng.",
     "price": 3500,
     "minOrder": 20,
     "image": "/makanan/kroket-isi-daging.webp",
@@ -321,12 +349,12 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung, daging sapi, kentang, bumbu.",
+    "ingredients": "Kentang, ikan cakalang, tepung roti, bumbu.",
     "portion": "1 pcs per porsi"
   },
   {
     "slug": "kue-angku",
-    "name": "Kue Angku",
+    "name": "Kue Angku Isi Kacang Hijau",
     "category": "Kue Basah",
     "description": "Cetakan berbentuk ikan dengan isi kacang hijau. Sering dipakai untuk syukuran.",
     "price": 3000,
@@ -346,10 +374,10 @@
   },
   {
     "slug": "kue-bugis-pandan",
-    "name": "Kue Bugis Pandan",
+    "name": "Kue Bugis Pandan Isi Gula Merah",
     "category": "Kue Basah",
-    "description": "Ketan kenyal berisi kelapa parut, harum pandan. Manisnya tidak berlebihan.",
-    "price": 3000,
+    "description": "Ketan kenyal harum pandan berisi gula merah. Manisnya tidak berlebihan.",
+    "price": 2500,
     "minOrder": 20,
     "image": "/makanan/kue-bugis-pandan.webp",
     "occasions": [
@@ -362,15 +390,15 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung ketan, kelapa parut, pandan, gula.",
+    "ingredients": "Tepung ketan, kelapa parut, pandan, gula merah.",
     "portion": "1 pcs per porsi"
   },
   {
     "slug": "kue-lapis",
-    "name": "Kue Lapis",
+    "name": "Kue Lapis Pepe",
     "category": "Kue Basah",
     "description": "Lapisannya tipis-tipis dan kenyal, enak dimakan sambil dikelupas satu per satu.",
-    "price": 2500,
+    "price": 2000,
     "minOrder": 20,
     "image": "/makanan/kue-lapis.webp",
     "occasions": [
@@ -388,10 +416,10 @@
   },
   {
     "slug": "kue-lapis-legit",
-    "name": "Kue Lapis Legit",
+    "name": "Kue Lapis Surabaya",
     "category": "Kue Basah",
-    "description": "Berlapis-lapis dengan aroma rempah dan mentega. Dipotong kecil karena rasanya padat.",
-    "price": 12000,
+    "description": "Lapis Surabaya berlapis cokelat dan kuning. Dipotong rapi untuk hampers atau acara.",
+    "price": 4000,
     "minOrder": 10,
     "image": "/makanan/kue-lapis-legit.webp",
     "occasions": [
@@ -430,10 +458,10 @@
   },
   {
     "slug": "kue-lumpur-pandan",
-    "name": "Kue Lumpur Pandan",
+    "name": "Bika Ambon Pandan",
     "category": "Kue Basah",
-    "description": "Versi pandan dari kue lumpur. Wanginya lebih kuat, teksturnya sama lembutnya.",
-    "price": 5000,
+    "description": "Bika ambon rasa pandan, bersarang dan wangi. Teksturnya kenyal.",
+    "price": 2500,
     "minOrder": 20,
     "image": "/makanan/kue-lumpur-pandan.webp",
     "occasions": [
@@ -446,7 +474,7 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Kentang, santan, telur, pandan.",
+    "ingredients": "Tepung sagu, santan, telur, gula, pandan.",
     "portion": "1 pcs per porsi"
   },
   {
@@ -472,7 +500,7 @@
   },
   {
     "slug": "kue-soes",
-    "name": "Kue Soes",
+    "name": "Kue Soes Fla",
     "category": "Kue Basah",
     "description": "Kulit berongga yang ringan dengan vla susu di dalamnya. Tidak bikin eneg.",
     "price": 3500,
@@ -493,7 +521,7 @@
   },
   {
     "slug": "tampah-keluarga",
-    "name": "Kue Tampah",
+    "name": "Kue Tampah Aneka Kue",
     "category": "Kue Tampah",
     "description": "Beragam kue basah manis dan gurih, ditata rapi di tampah. Siap ditaruh di meja acara tanpa perlu ditata ulang.",
     "price": 98000,
@@ -536,10 +564,10 @@
   },
   {
     "slug": "lapis-legit-pandan",
-    "name": "Lapis Legit Pandan",
+    "name": "Kue Lapis Surabaya Roll",
     "category": "Kue Basah",
-    "description": "Lapis legit dengan pandan menggantikan rempah. Wanginya lebih segar dan warnanya hijau.",
-    "price": 12000,
+    "description": "Lapis Surabaya gulung. Potongan berwarna, enak untuk tampah atau box.",
+    "price": 4000,
     "minOrder": 20,
     "image": "/makanan/lapis-legit-pandan.webp",
     "occasions": [
@@ -552,15 +580,15 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Telur, mentega, tepung, pandan.",
+    "ingredients": "Telur, mentega, tepung, cokelat.",
     "portion": "1 pcs per porsi"
   },
   {
     "slug": "lemper-isi-ayam",
-    "name": "Lemper Isi Ayam",
+    "name": "Lemper Original Isi Ayam",
     "category": "Kue Basah",
     "description": "Ketan gurih berisi ayam suwir berbumbu, dibungkus daun pisang. Favorit untuk rapat pagi karena mengenyangkan.",
-    "price": 3000,
+    "price": 2500,
     "minOrder": 20,
     "image": "/makanan/lemper-isi-ayam.webp",
     "occasions": [
@@ -572,10 +600,30 @@
       "Gurih",
       "Favorit"
     ],
-    "bestSeller": true,
+    "bestSeller": false,
     "readySoon": true,
     "ingredients": "Beras ketan, santan, ayam suwir, bumbu rempah.",
-    "portion": "1 pcs per porsi"
+    "portion": "Pilih ukuran",
+    "variants": [
+      {
+        "id": "biasa",
+        "name": "Ukuran Biasa",
+        "price": 2500,
+        "portion": "1 pcs"
+      },
+      {
+        "id": "sedang",
+        "name": "Ukuran Sedang",
+        "price": 3000,
+        "portion": "1 pcs"
+      },
+      {
+        "id": "jumbo",
+        "name": "Ukuran Jumbo",
+        "price": 3500,
+        "portion": "1 pcs"
+      }
+    ]
   },
   {
     "slug": "lontong-isi-ayam",
@@ -645,7 +693,7 @@
     "name": "Muffin Chocolate",
     "category": "Kue Kering",
     "description": "Padat dan tidak gampang hancur. Aman kalau boxnya masih harus dibawa pulang tamu.",
-    "price": 5000,
+    "price": 4000,
     "minOrder": 20,
     "image": "/makanan/muffin-chocolate.webp",
     "occasions": [
@@ -965,10 +1013,10 @@
   },
   {
     "slug": "onde-onde",
-    "name": "Onde-Onde",
+    "name": "Onde-Onde Isi Kacang Hijau",
     "category": "Kue Basah",
     "description": "Bola ketan bertabur wijen dengan isi kacang hijau. Digoreng, jadi luarnya renyah.",
-    "price": 5000,
+    "price": 2500,
     "minOrder": 20,
     "image": "/makanan/onde-onde.webp",
     "occasions": [
@@ -979,17 +1027,17 @@
     "tags": [
       "Snack"
     ],
-    "bestSeller": true,
+    "bestSeller": false,
     "readySoon": true,
     "ingredients": "Tepung ketan, kacang hijau, wijen, gula.",
     "portion": "1 pcs per porsi"
   },
   {
     "slug": "pastel",
-    "name": "Pastel",
+    "name": "Pastel Isi Telur dan Sayuran",
     "category": "Kue Basah",
-    "description": "Kulit berlipat dengan isian sayur dan bihun. Salah satu isi snack box yang paling klasik.",
-    "price": 4000,
+    "description": "Kulit berlipat berisi telur dan sayuran. Isi snack box yang klasik.",
+    "price": 3500,
     "minOrder": 20,
     "image": "/makanan/pastel.webp",
     "occasions": [
@@ -1002,7 +1050,7 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung, wortel, kentang, bihun, telur.",
+    "ingredients": "Tepung, wortel, kentang, telur, sayuran.",
     "portion": "1 pcs per porsi"
   },
   {
@@ -1094,7 +1142,7 @@
     "name": "Putri Ayu",
     "category": "Kue Basah",
     "description": "Bolu pandan kukus dengan kelapa parut di atasnya. Bentuknya rapi, enak dilihat waktu ditata di tampah.",
-    "price": 3000,
+    "price": 2500,
     "minOrder": 20,
     "image": "/makanan/putri-ayu.webp",
     "occasions": [
@@ -1112,10 +1160,10 @@
   },
   {
     "slug": "risol-mayones",
-    "name": "Risol Mayones",
+    "name": "Risol Mayones Sayuran",
     "category": "Kue Basah",
-    "description": "Isian mayones dan telur yang creamy dalam balutan tepung roti. Termasuk yang paling cepat habis.",
-    "price": 6500,
+    "description": "Risoles berisi mayones dan sayuran, dibalut tepung roti.",
+    "price": 3500,
     "minOrder": 20,
     "image": "/makanan/risol-mayones.webp",
     "occasions": [
@@ -1128,7 +1176,7 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung, telur, mayones, tepung roti.",
+    "ingredients": "Tepung, sayuran, mayones, tepung roti.",
     "portion": "1 pcs per porsi"
   },
   {
@@ -1176,10 +1224,10 @@
   },
   {
     "slug": "risoles-mayones",
-    "name": "Risoles Mayones",
+    "name": "Risoles Beef Mayones",
     "category": "Kue Basah",
-    "description": "Ukurannya lebih besar dengan isian mayones yang penuh. Cukup mengenyangkan sendiri.",
-    "price": 6500,
+    "description": "Risoles lebih besar berisi daging dan mayones.",
+    "price": 3500,
     "minOrder": 20,
     "image": "/makanan/risoles-mayones.webp",
     "occasions": [
@@ -1190,9 +1238,9 @@
     "tags": [
       "Snack"
     ],
-    "bestSeller": false,
+    "bestSeller": true,
     "readySoon": true,
-    "ingredients": "Tepung, telur, mayones, tepung roti.",
+    "ingredients": "Tepung, daging, mayones, tepung roti.",
     "portion": "1 pcs per porsi"
   },
   {
@@ -1200,7 +1248,7 @@
     "name": "Serabi Solo",
     "category": "Kue Basah",
     "description": "Dipanggang di wajan kecil sampai pinggirannya tipis dan renyah, tengahnya lembut oleh santan.",
-    "price": 5000,
+    "price": 3000,
     "minOrder": 20,
     "image": "/makanan/serabi-solo.webp",
     "occasions": [
@@ -1217,24 +1265,207 @@
     "portion": "1 pcs per porsi"
   },
   {
-    "slug": "snack-box-rapat",
-    "name": "Snack Box Rapat Pagi",
+    "slug": "paket-snack-box-1",
+    "name": "Paket Snack Box 1",
     "category": "Snack Box",
-    "description": "Dua macam kue basah dan satu air mineral dalam satu box. Tinggal dibagikan di meja rapat.",
-    "price": 21500,
-    "minOrder": 20,
-    "image": "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=1200&q=80",
+    "description": "Paket siap pakai: dadar gulung isi kelapa gula aren, kue soes fla, cente manis, Cleo mineral 220 ml, plus box putih dengan tatakan dan tissue.",
+    "price": 15000,
+    "minOrder": 10,
+    "image": "/snack-box/paket-1.jpg",
     "occasions": [
-      "Rapat Kantor"
+      "Rapat Kantor",
+      "Arisan",
+      "Pengajian"
     ],
     "tags": [
       "Paket",
-      "Kantor"
+      "Snack Box"
     ],
     "bestSeller": true,
     "readySoon": true,
-    "ingredients": "Isi dapat dipilih sesuai kebutuhan.",
-    "portion": "1 box per orang"
+    "ingredients": "Dadar gulung isi kelapa gula aren, kue soes fla, cente manis, Cleo mineral 220 ml, box putih + tatakan + tissue.",
+    "portion": "1 box per orang",
+    "packageItems": [
+      "Dadar gulung isi kelapa gula aren",
+      "Kue soes fla",
+      "Cente manis",
+      "Cleo mineral 220 ml",
+      "Box putih + tatakan + tissue"
+    ]
+  },
+  {
+    "slug": "paket-snack-box-2",
+    "name": "Paket Snack Box 2",
+    "category": "Snack Box",
+    "description": "Paket siap pakai: bolu kukus original (coklat, pandan, strawberry), bacang ayam kecap, kue lumpur topping kismis, Aqua mineral 220 ml, plus box putih dengan tatakan dan tissue.",
+    "price": 17000,
+    "minOrder": 10,
+    "image": "/snack-box/paket-2.jpg",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Pengajian"
+    ],
+    "tags": [
+      "Paket",
+      "Snack Box"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Bolu kukus original, bacang ayam, kue lumpur, Aqua mineral 220 ml, box putih + tatakan + tissue.",
+    "portion": "1 box per orang",
+    "packageItems": [
+      "Bolu kukus original (coklat, pandan, strawberry)",
+      "Bacang ayam isi daging ayam kecap",
+      "Kue lumpur topping kismis",
+      "Aqua mineral 220 ml",
+      "Box putih + tatakan + tissue"
+    ]
+  },
+  {
+    "slug": "paket-snack-box-3",
+    "name": "Paket Snack Box 3",
+    "category": "Snack Box",
+    "description": "Paket siap pakai: putu ayu taburan kelapa, kroket rogut kentang isi sayuran, lumpia goreng Semarang isi rebung, Aqua mineral cup, plus box putih dengan tatakan dan tissue.",
+    "price": 12000,
+    "minOrder": 10,
+    "image": "/snack-box/paket-3.jpg",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Pengajian"
+    ],
+    "tags": [
+      "Paket",
+      "Snack Box"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Putu ayu, kroket rogut, lumpia goreng, Aqua mineral cup, box putih + tatakan + tissue.",
+    "portion": "1 box per orang",
+    "packageItems": [
+      "Putu ayu taburan kelapa parut",
+      "Kroket rogut kentang isi sayuran",
+      "Lumpia goreng asli Semarang isi rebung",
+      "Aqua mineral cup",
+      "Box putih + tatakan + tissue"
+    ]
+  },
+  {
+    "slug": "paket-snack-box-4",
+    "name": "Paket Snack Box 4",
+    "category": "Snack Box",
+    "description": "Paket siap pakai: bolu kukus gula aren, lemper bakar jumbo isi ayam suwir, lumpia goreng Semarang isi rebung, S-Tee kotak 200 ml, plus box putih dengan tatakan dan tissue.",
+    "price": 16500,
+    "minOrder": 10,
+    "image": "/snack-box/paket-4.jpg",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Pengajian"
+    ],
+    "tags": [
+      "Paket",
+      "Snack Box"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Bolu kukus gula aren, lemper bakar jumbo, lumpia goreng, S-Tee kotak 200 ml, box putih + tatakan + tissue.",
+    "portion": "1 box per orang",
+    "packageItems": [
+      "Bolu kukus gula aren",
+      "Lemper bakar jumbo isi ayam suwir",
+      "Lumpia goreng asli Semarang isi rebung",
+      "S-Tee teh kotak 200 ml",
+      "Box putih + tatakan + tissue"
+    ]
+  },
+  {
+    "slug": "paket-snack-box-5",
+    "name": "Paket Snack Box 5",
+    "category": "Snack Box",
+    "description": "Paket siap pakai: sosis solo isi ayam, pastel jumbo isi sayuran dan telur, pie buah mika, susu Ultramilk 250 ml (strawberry/coklat/plain), plus box putih dengan tatakan dan tissue.",
+    "price": 20500,
+    "minOrder": 10,
+    "image": "/snack-box/paket-5.jpg",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Ulang Tahun"
+    ],
+    "tags": [
+      "Paket",
+      "Snack Box"
+    ],
+    "bestSeller": true,
+    "readySoon": true,
+    "ingredients": "Sosis solo isi ayam, pastel jumbo, pie buah mika, Ultramilk 250 ml, box putih + tatakan + tissue.",
+    "portion": "1 box per orang",
+    "packageItems": [
+      "Sosis solo isi ayam gurih dengan cabai",
+      "Pastel jumbo isi sayuran dan telur",
+      "Pie buah mika",
+      "Susu Ultramilk 250 ml (strawberry/coklat/plain)",
+      "Box putih + tatakan + tissue"
+    ]
+  },
+  {
+    "slug": "paket-snack-box-6",
+    "name": "Paket Snack Box 6",
+    "category": "Snack Box",
+    "description": "Paket siap pakai: kue angku isi kacang hijau, wajik ketan gula aren, ketan serundeng mika, air mineral cup, plus box putih dengan tatakan dan tissue.",
+    "price": 13500,
+    "minOrder": 10,
+    "image": "/snack-box/paket-6.jpg",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Pengajian"
+    ],
+    "tags": [
+      "Paket",
+      "Snack Box"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Kue angku, wajik ketan, ketan serundeng, air mineral cup, box putih + tatakan + tissue.",
+    "portion": "1 box per orang",
+    "packageItems": [
+      "Kue angku isi kacang hijau manis",
+      "Wajik ketan gula aren",
+      "Ketan serundeng mika",
+      "Air mineral cup (Aqua/Vit/Club)",
+      "Box putih + tatakan + tissue"
+    ]
+  },
+  {
+    "slug": "paket-snack-box-7",
+    "name": "Paket Snack Box 7",
+    "category": "Snack Box",
+    "description": "Paket siap pakai: nona manis pandan, risoles beef mayonnaise, semar mendem ketan isi ayam suwir, air mineral cup, plus box putih dengan tatakan dan tissue.",
+    "price": 14500,
+    "minOrder": 10,
+    "image": "/snack-box/paket-7.jpg",
+    "occasions": [
+      "Rapat Kantor",
+      "Arisan",
+      "Pengajian"
+    ],
+    "tags": [
+      "Paket",
+      "Snack Box"
+    ],
+    "bestSeller": false,
+    "readySoon": true,
+    "ingredients": "Nona manis pandan, risoles beef mayonnaise, semar mendem, air mineral cup, box putih + tatakan + tissue.",
+    "portion": "1 box per orang",
+    "packageItems": [
+      "Nona manis pandan",
+      "Risoles beef mayonnaise",
+      "Semar mendem ketan isi ayam suwir",
+      "Air mineral cup (Aqua/Vit/Club)",
+      "Box putih + tatakan + tissue"
+    ]
   },
   {
     "slug": "sosis-solo",
@@ -1259,10 +1490,10 @@
   },
   {
     "slug": "talam-pandan",
-    "name": "Talam Pandan",
+    "name": "Talam Ubi Pandan",
     "category": "Kue Basah",
-    "description": "Dua lapis: pandan di bawah, santan gurih di atas. Potongannya kecil dan rapi.",
-    "price": 5000,
+    "description": "Talam ubi dengan lapisan pandan. Potongan kecil dan rapi.",
+    "price": 2000,
     "minOrder": 20,
     "image": "/makanan/talam-pandan.webp",
     "occasions": [
@@ -1275,7 +1506,7 @@
     ],
     "bestSeller": false,
     "readySoon": true,
-    "ingredients": "Tepung beras, santan, pandan, gula.",
+    "ingredients": "Ubi, tepung beras, santan, pandan, gula.",
     "portion": "1 pcs per porsi"
   },
   {
@@ -1301,7 +1532,7 @@
   },
   {
     "slug": "wajik",
-    "name": "Wajik",
+    "name": "Kue Wajik",
     "category": "Kue Basah",
     "description": "Ketan yang dimasak lama dengan gula merah sampai legit. Dibungkus daun dan tahan lebih lama dari kue basah lain.",
     "price": 3000,
@@ -1325,7 +1556,7 @@
     "name": "Wingko Babat",
     "category": "Kue Basah",
     "description": "Kelapa parut dan ketan dipanggang sampai pinggirannya kecokelatan. Kenyal dan gurih.",
-    "price": 5000,
+    "price": 3000,
     "minOrder": 20,
     "image": "/makanan/wingko-babat.webp",
     "occasions": [

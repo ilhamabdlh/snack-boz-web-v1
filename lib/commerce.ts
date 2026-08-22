@@ -6,7 +6,7 @@ export const ADDRESSES_STORAGE_KEY = "snackboz-addresses-v1";
 /** Minimum total pcs for product items (can mix across products). */
 export const MIXED_PRODUCT_MIN_QTY = 20;
 /** Minimum boxes for custom snack-box orders. */
-export const SNACK_BOX_MIN_QTY = 20;
+export const SNACK_BOX_MIN_QTY = 10;
 export const BOX_PRICE_WITH_WATER = 3500;
 export const BOX_PRICE_WITHOUT_WATER = 3000;
 
@@ -78,9 +78,10 @@ export const PAYMENT_OPTIONS = ["Transfer Bank", "QRIS"] as const;
 
 /** @deprecated Gunakan buildShippingOptions dari lib/shipping.ts */
 export const SHIPPING_OPTIONS = [
-  { id: "gosend-motor", label: "Gojek/Grab Instant Motor", fee: 13000 },
-  { id: "gosend-mobil", label: "Gojek/Grab Instant Mobil", fee: 26000 },
+  { id: "gosend-motor", label: "Gojek/Grab Instant Motor", fee: 18500 },
+  { id: "gosend-mobil", label: "Gojek/Grab Instant Mobil", fee: 28500 },
   { id: "pickup", label: "Ambil di dapur", fee: 0 },
+  { id: "self-delivery", label: "Gunakan pengiriman sendiri", fee: 0 },
 ] as const;
 
 export const COUPONS: Record<string, { type: "percent" | "fixed"; value: number; label: string }> = {

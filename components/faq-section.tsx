@@ -7,11 +7,11 @@ export function FaqSection() {
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="section-kicker">Pertanyaan umum</p>
           <h2 id="faq-heading" className="section-title mt-1">
-            Jawaban singkat sebelum Anda pesan
+            yang biasanya ditanyakan sebelum pesan
           </h2>
           <p className="section-lead">
-            Minimal order, jadwal H-1, area antar, snack box, dan cara bayar —
-            dirangkum di sini.
+            Kesegaran kue, minimal order, jadwal H-1, area antar, snack box, harga,
+            dan cara bayar — dirangkum di sini.
           </p>
         </div>
         <div className="divide-y divide-[rgba(27,67,50,0.1)]">

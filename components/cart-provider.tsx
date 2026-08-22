@@ -16,6 +16,7 @@ import {
   COUPONS,
   createCartItemId,
   safeParseJson,
+  SNACK_BOX_MIN_QTY,
   type CartItem,
   type CartState,
 } from "@/lib/commerce";
@@ -34,6 +35,8 @@ type AddProductInput = {
 };
 
 type AddSnackBoxInput = {
+  slug?: string;
+  name?: string;
   boxSize: string;
   unitPrice: number;
   qty: number;
@@ -137,8 +140,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addSnackBox = useCallback((input: AddSnackBoxInput) => {
-    const slug = `custom-${input.boxSize.toLowerCase().replace(/\s+/g, "-")}`;
+    const slug =
+      input.slug ?? `custom-${input.boxSize.toLowerCase().replace(/\s+/g, "-")}`;
     const id = createCartItemId("snack-box", slug, input.boxSize);
+    const displayName = input.name ?? `Snack Box ${input.boxSize}`;
     setState((prev) => {
       const existing = prev.items.find((item) => item.id === id);
       if (existing) {
@@ -150,6 +155,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
                   ...item,
                   qty: item.qty + input.qty,
                   unitPrice: input.unitPrice,
+                  name: displayName,
                   note: input.note ?? item.note,
                   meta: {
                     boxSize: input.boxSize,
@@ -166,11 +172,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         id,
         kind: "snack-box",
         slug,
-        name: `Snack Box ${input.boxSize}`,
+        name: displayName,
         image: input.image,
         unitPrice: input.unitPrice,
-        qty: Math.max(20, input.qty),
-        minOrder: 20,
+        qty: Math.max(SNACK_BOX_MIN_QTY, input.qty),
+        minOrder: SNACK_BOX_MIN_QTY,
         note: input.note,
         meta: {
           boxSize: input.boxSize,

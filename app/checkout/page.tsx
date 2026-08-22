@@ -133,7 +133,7 @@ export default function CheckoutPage() {
 
     setSubmitting(true);
     const shippingLabel =
-      shipping.id === "pickup"
+      shipping.id === "pickup" || shipping.id === "self-delivery"
         ? shipping.label
         : `${shipping.label}${
             shipping.distanceKm != null ? ` (~${shipping.distanceKm} km)` : ""
@@ -346,7 +346,9 @@ export default function CheckoutPage() {
                       />
                       <span>
                         {method.label}
-                        {method.distanceKm != null && method.id !== "pickup" ? (
+                        {method.distanceKm != null &&
+                        method.id !== "pickup" &&
+                        method.id !== "self-delivery" ? (
                           <span className="mt-0.5 block text-[0.7rem] font-normal text-[var(--muted)]">
                             ~{method.distanceKm} km dari Pasar Senen Jaya
                           </span>

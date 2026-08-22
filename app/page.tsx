@@ -37,25 +37,6 @@ const heroFeatured = [
 
 const heroOccasions = ["Arisan", "Pengajian", "Rapat Kantor"];
 
-const trustPoints = [
-  {
-    title: "Digoreng dan dikukus di hari antar",
-    body: "Bukan stok kemarin. Risoles dan pastel baru turun dari wajan beberapa jam sebelum dikirim, jadi masih renyah waktu sampai.",
-  },
-  {
-    title: "Satu pesanan boleh campur banyak menu",
-    body: "Minimal 20 pcs, tapi tidak harus satu jenis. Mau 5 lemper, 5 risoles, 10 onde-onde dalam satu order juga boleh.",
-  },
-  {
-    title: "Jam antar mengikuti jam acara",
-    body: "Rapat pagi, arisan sore, pengajian malam. Sebutkan jamnya waktu pesan, nanti jadwal masak dan berangkatnya kami sesuaikan.",
-  },
-  {
-    title: "Harganya kelihatan sejak awal",
-    body: "Mulai Rp 5.000 per pcs. Biaya box dan ongkos antar dihitung terpisah, dan sudah muncul semua sebelum Anda bayar.",
-  },
-];
-
 export default function HomePage() {
   const snackBoxExampleItems = products
     .filter((p) => p.category === "Kue Basah")
@@ -85,7 +66,7 @@ export default function HomePage() {
           <div className="mb-6 grid gap-3 sm:mb-9 lg:grid-cols-[1fr_auto] lg:items-end lg:pr-24">
             <div className="max-w-lg">
               <p className="section-kicker">Pilih dari acaranya</p>
-              <h2 className="section-title mt-1">Bingung mau pesan apa? Coba tentuin dari acaranya dulu aja:</h2>
+              <h2 className="section-title mt-1">Bingung mau pesan apa? Coba tentuin dari acaranya dulu aja gengs:</h2>
               <p className="section-lead">
                 Arisan biasanya campur manis dan gurih. Rapat cari yang simple dan ga
                 berantakan di meja. Hari raya butuh yang memorable, jadi kamu bisa coba menu-menu ini sesuai acaranya.
@@ -192,31 +173,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust */}
-      <section className="container-shell section-pad">
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <p className="section-kicker">Cara kami kerja</p>
-            <h2 className="section-title mt-1">Empat hal yang biasanya ditanyakan sebelum pesan</h2>
-          </div>
-          <ul className="space-y-0">
-            {trustPoints.map((point) => (
-              <li
-                key={point.title}
-                className="border-b border-[rgba(27,67,50,0.1)] py-5 first:pt-0 last:border-0 sm:py-6"
-              >
-                <h3 className="font-display text-lg font-bold text-[var(--palm)] sm:text-xl">
-                  {point.title}
-                </h3>
-                <p className="mt-1.5 max-w-[48ch] text-pretty text-sm leading-6 text-[var(--muted)]">
-                  {point.body}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       <FaqSection />
 
       {/* Final CTA */}
@@ -225,7 +181,7 @@ export default function HomePage() {
           <div className="grid items-center gap-5 md:grid-cols-[1fr_auto] md:gap-6">
             <div>
               <h2 className="font-display text-balance text-xl font-bold sm:text-2xl md:text-3xl">
-                Acaranya besok pagi? Tanyain dulu aja ke kami.
+                Acaranya besok pagi? Tanyain stoknya dulu aja ke kami.
               </h2>
               <p className="mt-2 text-sm text-white/75">
                 kasih tau mau pesan snack box, kue tampah atau kue lainnya, kami akan siapkan stok nya untuk kamu.

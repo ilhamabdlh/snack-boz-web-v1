@@ -4,7 +4,7 @@ import { faqs } from "@/lib/faq";
 import type { Product } from "@/lib/data";
 
 export const SITE_URL = BRAND.siteUrl;
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/poster/poster1.webp`;
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.png`;
 
 export const LOCAL_BUSINESS = {
   streetAddress: "Pasar Senen Jaya",
@@ -73,7 +73,8 @@ export function organizationSchema() {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: BRAND.name,
-    alternateName: ["The Snack Boz", "Snack Boz", BRAND.shortName],
+    legalName: BRAND.legalName,
+    alternateName: [BRAND.legalName, "The Snack Boz", "Snack Boz", BRAND.shortName],
     url: SITE_URL,
     logo: absoluteUrl("/brand/snack-boz-logo.png"),
     image: DEFAULT_OG_IMAGE,
@@ -97,6 +98,8 @@ export function localBusinessSchema() {
     "@type": "Bakery",
     "@id": `${SITE_URL}/#localbusiness`,
     name: BRAND.name,
+    legalName: BRAND.legalName,
+    alternateName: [BRAND.legalName, "The Snack Boz", "Snack Boz", BRAND.shortName],
     description: `${BRAND.tagline}. Kue basah, snack box, kue tampah, dan makanan berat untuk acara di ${BRAND.deliveryArea}. ${BRAND.orderLead}.`,
     url: SITE_URL,
     telephone: `+${BRAND.whatsappFallback}`,
@@ -148,6 +151,7 @@ export function websiteSchema() {
     "@id": `${SITE_URL}/#website`,
     url: SITE_URL,
     name: BRAND.name,
+    alternateName: [BRAND.legalName, BRAND.shortName],
     inLanguage: "id-ID",
     publisher: { "@id": `${SITE_URL}/#organization` },
     potentialAction: {
@@ -158,10 +162,10 @@ export function websiteSchema() {
   };
 }
 
-export function faqPageSchema() {
+export function faqPageSchema(id = `${SITE_URL}/#faq`) {
   return {
     "@type": "FAQPage",
-    "@id": `${SITE_URL}/#faq`,
+    "@id": id,
     mainEntity: faqs.map((item) => ({
       "@type": "Question",
       name: item.question,

@@ -64,7 +64,13 @@ export default async function ProductDetailPage({
       />
       <section className="container-shell grid gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <div className="lg:sticky lg:top-20 lg:self-start">
-          <div className="relative aspect-[5/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--rice)] shadow-[var(--shadow-sm)] lg:aspect-[4/5]">
+          <div
+            className={
+              product.category === "Snack Box"
+                ? "relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--rice)] shadow-[var(--shadow-sm)]"
+                : "relative aspect-[5/4] overflow-hidden rounded-[var(--radius-lg)] bg-[var(--rice)] shadow-[var(--shadow-sm)] lg:aspect-[4/5]"
+            }
+          >
             <Image
               src={product.image}
               alt={product.name}
@@ -105,6 +111,17 @@ export default async function ProductDetailPage({
             {product.name}
           </h1>
           <p className="mt-3 text-base leading-7 text-[var(--muted)]">{product.description}</p>
+          {product.packageItems?.length ? (
+            <ul className="mt-4 grid gap-2 rounded-[var(--radius)] border border-[var(--line)] bg-[var(--warm-white)] p-4">
+              <li className="text-sm font-semibold text-[var(--palm)]">Isi per box</li>
+              {product.packageItems.map((item) => (
+                <li key={item} className="flex gap-2 text-sm leading-6 text-[var(--muted)]">
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--green)]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <div className="mt-5">
             {product.variants?.length ? (
               <>

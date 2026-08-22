@@ -7,13 +7,13 @@ import Link from "next/link";
 import { useCart } from "@/components/cart-provider";
 import { useToast } from "@/components/toast-provider";
 import { Button } from "@/components/ui/button";
-import { MIXED_PRODUCT_MIN_QTY } from "@/lib/commerce";
+import { MIXED_PRODUCT_MIN_QTY, SNACK_BOX_MIN_QTY } from "@/lib/commerce";
 import { Product } from "@/lib/data";
 import { cn, rupiah } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export function ProductPurchasePanel({ product }: { product: Product }) {
-  const { addProduct } = useCart();
+  const { addProduct, addSnackBox } = useCart();
   const { toast } = useToast();
   const router = useRouter();
   const variants = product.variants ?? [];
@@ -21,24 +21,25 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
   const defaultVariant =
     variants.find((item) => item.id === "sedang") ?? variants[0] ?? null;
 
-  const isTrayProduct = product.category === "Kue Tampah" || hasVariants;
+  const isTrayProduct = product.category === "Kue Tampah";
   const isHeavyMeal = product.category === "Makanan Berat";
-  const exemptFromMixedMin = isTrayProduct || isHeavyMeal;
+  const isPresetSnackBox = product.category === "Snack Box";
+  const exemptFromMixedMin = isTrayProduct || isHeavyMeal || isPresetSnackBox;
   const minOrder = product.minOrder || 1;
-  const floorQty = isHeavyMeal ? minOrder : 1;
+  const floorQty = isHeavyMeal || isPresetSnackBox ? minOrder : 1;
 
   const [qty, setQty] = useState(floorQty);
   const [added, setAdded] = useState(false);
   const [variantId, setVariantId] = useState(defaultVariant?.id ?? "");
 
   useEffect(() => {
-    setQty(isHeavyMeal ? product.minOrder || 1 : 1);
+    setQty(isHeavyMeal || isPresetSnackBox ? product.minOrder || 1 : 1);
     setAdded(false);
     setVariantId(
       (product.variants?.find((item) => item.id === "sedang") ?? product.variants?.[0])
         ?.id ?? "",
     );
-  }, [product.slug, product.variants, product.minOrder, isHeavyMeal]);
+  }, [product.slug, product.variants, product.minOrder, isHeavyMeal, isPresetSnackBox]);
 
   const selectedVariant = useMemo(
     () => variants.find((item) => item.id === variantId) ?? defaultVariant,
@@ -55,11 +56,33 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
 
   function addToCart(goCheckout = false) {
     if (hasVariants && !selectedVariant) {
-      toast("Pilih ukuran tampah dulu.");
+      toast("Pilih varian dulu.");
       return;
     }
 
     const variantName = selectedVariant?.name;
+
+    if (isPresetSnackBox) {
+      addSnackBox({
+        slug: product.slug,
+        name: product.name,
+        boxSize: product.name.replace(/^Paket Snack Box /i, "Paket "),
+        unitPrice,
+        qty: Math.max(minOrder, qty),
+        image: product.image,
+        snacks: (product.packageItems ?? []).map((name) => ({ name, qty: 1 })),
+        withWater: true,
+      });
+      toast(`${product.name} berhasil ditambahkan ke keranjang`);
+      if (goCheckout) {
+        router.push("/checkout");
+        return;
+      }
+      setAdded(true);
+      window.setTimeout(() => setAdded(false), 1800);
+      return;
+    }
+
     addProduct({
       slug: product.slug,
       name: product.name,
@@ -86,7 +109,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
     <div className="mt-5 grid gap-3 rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
       {hasVariants ? (
         <div>
-          <div className="text-sm font-semibold text-[var(--palm)]">Pilih ukuran</div>
+          <div className="text-sm font-semibold text-[var(--palm)]">Pilih varian</div>
           <div className="mt-2 grid gap-2 sm:grid-cols-3">
             {variants.map((variant) => {
               const active = variant.id === selectedVariant?.id;
@@ -164,6 +187,11 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
               Minimal {minOrder} box per menu. {portionLabel}. Subtotal{" "}
               <strong>{rupiah(lineTotal)}</strong>.
             </>
+          ) : isPresetSnackBox ? (
+            <>
+              Minimal {SNACK_BOX_MIN_QTY} box per pesanan. Sudah termasuk isi paket
+              lengkap per box. Subtotal <strong>{rupiah(lineTotal)}</strong>.
+            </>
           ) : (
             <>
               Minimal {MIXED_PRODUCT_MIN_QTY} pcs per pesanan dan boleh dicampur dengan
@@ -178,6 +206,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
           <div className="text-xs text-[var(--muted)]">Harga satuan</div>
           <div className="text-xl font-bold tabular-nums text-[var(--palm)]">
             {rupiah(unitPrice)}
+            {isPresetSnackBox ? <span className="text-sm font-medium"> / box</span> : null}
           </div>
         </div>
         <div className="text-right">

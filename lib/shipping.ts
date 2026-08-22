@@ -34,20 +34,20 @@ export const DELIVERY_TIME_SLOTS = [
 
 /**
  * Estimasi tarif Instant Jabodetabek (mirip struktur tarif Gojek/Grab Instant).
- * Motor: min Rp 13.000, ~Rp 2.815/km
- * Mobil: min Rp 26.000, ~Rp 5.500/km
+ * Motor: min Rp 18.500, ~Rp 2.815/km
+ * Mobil: min Rp 28.500, ~Rp 5.500/km
  */
 export const GOSEND_RATES = {
   motor: {
     id: "gosend-motor" as const,
     label: "Gojek/Grab Instant Motor",
-    minFee: 13_000,
+    minFee: 18_500,
     perKm: 2_815,
   },
   car: {
     id: "gosend-mobil" as const,
     label: "Gojek/Grab Instant Mobil",
-    minFee: 26_000,
+    minFee: 28_500,
     perKm: 5_500,
   },
 } as const;
@@ -55,7 +55,8 @@ export const GOSEND_RATES = {
 export type ShippingMethodId =
   | "gosend-motor"
   | "gosend-mobil"
-  | "pickup";
+  | "pickup"
+  | "self-delivery";
 
 export type ShippingOption = {
   id: ShippingMethodId;
@@ -89,13 +90,20 @@ export function estimateRoadDistanceKm(
   return Math.round(haversine * 1.35 * 10) / 10;
 }
 
-export function buildShippingOptions(distanceKm: number | null): ShippingOption[] {
-  const pickup: ShippingOption = {
+const FREE_SHIPPING_OPTIONS: ShippingOption[] = [
+  {
     id: "pickup",
     label: "Ambil di dapur (Pasar Senen Jaya)",
     fee: 0,
-  };
+  },
+  {
+    id: "self-delivery",
+    label: "Gunakan pengiriman sendiri",
+    fee: 0,
+  },
+];
 
+export function buildShippingOptions(distanceKm: number | null): ShippingOption[] {
   if (distanceKm == null || Number.isNaN(distanceKm)) {
     return [
       {
@@ -108,7 +116,7 @@ export function buildShippingOptions(distanceKm: number | null): ShippingOption[
         label: GOSEND_RATES.car.label,
         fee: GOSEND_RATES.car.minFee,
       },
-      pickup,
+      ...FREE_SHIPPING_OPTIONS,
     ];
   }
 
@@ -125,6 +133,6 @@ export function buildShippingOptions(distanceKm: number | null): ShippingOption[
       fee: calcGoSendFee("car", distanceKm),
       distanceKm,
     },
-    pickup,
+    ...FREE_SHIPPING_OPTIONS,
   ];
 }

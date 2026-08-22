@@ -33,8 +33,7 @@ const sample: CartItem[] = [
     image: "/makanan/x.jpg",
     unitPrice: 32000,
     qty: 30,
-    minOrder: 20,
-    meta: { boxSize: "Premium", snacks: [{ name: "Risoles", qty: 1 }] },
+    minOrder: 10,
   },
 ];
 

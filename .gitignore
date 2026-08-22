@@ -42,3 +42,7 @@ remove.py
 .vercel
 *.log
 coverage/
+
+# WhatsApp Baileys (session + antrian notifikasi)
+.wa-auth/
+.wa-queue/

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Check, Plus, Timer } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
 import { useToast } from "@/components/toast-provider";
@@ -23,23 +23,50 @@ export function ProductCard({
   className?: string;
   style?: React.CSSProperties;
 }) {
-  const { addProduct } = useCart();
+  const { addProduct, addSnackBox } = useCart();
   const { toast } = useToast();
   const [justAdded, setJustAdded] = useState(false);
-  const hasVariants = Boolean(product.variants?.length);
-  const defaultVariant =
-    product.variants?.find((item) => item.id === "sedang") ?? product.variants?.[0];
-  const displayPrice = defaultVariant?.price ?? product.price;
-  const isTray = product.category === "Kue Tampah" || hasVariants;
+  const variants = product.variants ?? [];
+  const hasVariants = variants.length > 0;
+  const cheapestVariant = useMemo(() => {
+    if (!variants.length) return undefined;
+    return variants.reduce((lowest, item) =>
+      item.price < lowest.price ? item : lowest,
+    );
+  }, [variants]);
+  const [variantId, setVariantId] = useState(cheapestVariant?.id ?? "");
+  const selectedVariant =
+    variants.find((item) => item.id === variantId) ?? cheapestVariant;
+  const startingPrice = cheapestVariant?.price ?? product.price;
+  const displayPrice = selectedVariant?.price ?? product.price;
+  const isTray = product.category === "Kue Tampah";
   const isHeavyMeal = product.category === "Makanan Berat";
-  const exemptFromMixedMin = isTray || isHeavyMeal;
+  const isPresetSnackBox = product.category === "Snack Box";
+  const exemptFromMixedMin = isTray || isHeavyMeal || isPresetSnackBox;
   const minOrder = product.minOrder || 1;
-  const addQty = isHeavyMeal ? minOrder : 1;
+  const addQty = isHeavyMeal || isPresetSnackBox ? minOrder : 1;
 
   function handleAdd(event: React.MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    if (hasVariants && !defaultVariant) return;
+    if (hasVariants && !selectedVariant) return;
+
+    if (isPresetSnackBox) {
+      addSnackBox({
+        slug: product.slug,
+        name: product.name,
+        boxSize: product.name.replace(/^Paket Snack Box /i, "Paket "),
+        unitPrice: displayPrice,
+        qty: addQty,
+        image: product.image,
+        snacks: (product.packageItems ?? []).map((name) => ({ name, qty: 1 })),
+        withWater: true,
+      });
+      toast(`${product.name} berhasil ditambahkan ke keranjang`);
+      setJustAdded(true);
+      window.setTimeout(() => setJustAdded(false), 1600);
+      return;
+    }
 
     addProduct({
       slug: product.slug,
@@ -48,12 +75,12 @@ export function ProductCard({
       unitPrice: displayPrice,
       qty: addQty,
       minOrder,
-      variantId: defaultVariant?.id,
-      variantName: defaultVariant?.name,
+      variantId: selectedVariant?.id,
+      variantName: selectedVariant?.name,
       exemptFromMixedMin,
     });
     toast(
-      `${product.name}${defaultVariant ? ` ${defaultVariant.name}` : ""} berhasil ditambahkan ke keranjang`,
+      `${product.name}${selectedVariant ? ` ${selectedVariant.name}` : ""} berhasil ditambahkan ke keranjang`,
     );
     setJustAdded(true);
     window.setTimeout(() => setJustAdded(false), 1600);
@@ -74,7 +101,9 @@ export function ProductCard({
           "relative block overflow-hidden bg-[var(--rice)]",
           featured
             ? "aspect-[5/4] lg:aspect-auto lg:w-[56%] lg:min-h-[280px]"
-            : "aspect-[5/4]",
+            : isPresetSnackBox
+              ? "aspect-[4/5]"
+              : "aspect-[5/4]",
         )}
       >
         <Image
@@ -89,7 +118,8 @@ export function ProductCard({
           quality={70}
           className={cn(
             productImageObjectClass(product.slug, product.category),
-            "transition-transform duration-500 ease-out group-hover:scale-[1.03]",
+            !isPresetSnackBox &&
+              "transition-transform duration-500 ease-out group-hover:scale-[1.03]",
           )}
         />
         {product.bestSeller ? (
@@ -126,24 +156,31 @@ export function ProductCard({
           ) : null}
         </div>
 
-        <div
-          className={cn(
-            "mt-2.5 flex items-end justify-between gap-2 sm:mt-4 sm:gap-3",
-            featured && "lg:mt-6",
-          )}
-        >
-          <div className="min-w-0">
-            <div className="text-[0.8125rem] font-semibold tabular-nums text-[var(--green)] sm:text-sm">
-              {hasVariants ? `Mulai ${rupiah(displayPrice)}` : rupiah(displayPrice)}
-            </div>
+        <div className={cn("mt-2.5 sm:mt-4", featured && "lg:mt-6")}>
+          <div className="text-[0.8125rem] font-semibold tabular-nums text-[var(--green)] sm:text-sm">
+            {hasVariants ? `Mulai ${rupiah(startingPrice)}` : rupiah(displayPrice)}
+          </div>
+
+          {hasVariants ? (
+            <label className="mt-1.5 block">
+              <span className="sr-only">Pilih ukuran {product.name}</span>
+              <select
+                value={variantId}
+                onChange={(event) => setVariantId(event.target.value)}
+                onClick={(event) => event.stopPropagation()}
+                className="h-8 w-full rounded-[var(--radius-sm)] border border-[rgba(27,67,50,0.14)] bg-white px-2 text-[0.7rem] text-[var(--palm)] outline-none transition-colors hover:border-[var(--green)] focus:border-[var(--green)] sm:h-9 sm:text-xs"
+              >
+                {variants.map((variant) => (
+                  <option key={variant.id} value={variant.id}>
+                    {variant.name} · {rupiah(variant.price)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : (
             <div className="mt-0.5 flex items-center gap-1 text-[0.65rem] text-[var(--muted)] sm:mt-1 sm:text-xs">
               <Timer className="hidden size-3.5 opacity-70 sm:block" />
-              {isTray ? (
-                <>
-                  <span className="sm:hidden">3 ukuran</span>
-                  <span className="hidden sm:inline">Kecil · Sedang · Besar</span>
-                </>
-              ) : isHeavyMeal ? (
+              {isHeavyMeal || isPresetSnackBox ? (
                 <>
                   <span className="sm:hidden">Min. {minOrder}</span>
                   <span className="hidden sm:inline">Min. {minOrder} box</span>
@@ -157,34 +194,28 @@ export function ProductCard({
                 </>
               )}
             </div>
-          </div>
-          {hasVariants ? (
-            <Link
-              href={`/products/${product.slug}`}
-              className="inline-flex h-8 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--green)] px-2.5 text-xs font-semibold text-[var(--white)] transition-[background-color,transform] duration-200 hover:bg-[var(--green-mid)] active:scale-[0.98] sm:h-9 sm:px-3.5 sm:text-sm"
-            >
-              Pilih
-            </Link>
-          ) : (
-          <button
-            type="button"
-            onClick={handleAdd}
-            aria-label={`Tambah ${product.name} ke keranjang`}
-            className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-[var(--radius-sm)] bg-[var(--green)] px-2.5 text-xs font-semibold text-[var(--white)] transition-[background-color,transform] duration-200 hover:bg-[var(--green-mid)] hover:text-[var(--white)] active:scale-[0.98] sm:h-9 sm:gap-1.5 sm:px-3.5 sm:text-sm"
-          >
-            {justAdded ? (
-              <>
-                <Check className="size-3.5" />
-                <span className="hidden sm:inline">Masuk</span>
-              </>
-            ) : (
-              <>
-                <Plus className="size-3.5" />
-                <span className="hidden sm:inline">Tambah</span>
-              </>
-            )}
-          </button>
           )}
+
+          <div className="mt-2 flex justify-end">
+            <button
+              type="button"
+              onClick={handleAdd}
+              aria-label={`Tambah ${product.name} ke keranjang`}
+              className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-[var(--radius-sm)] bg-[var(--green)] px-2.5 text-xs font-semibold text-[var(--white)] transition-[background-color,transform] duration-200 hover:bg-[var(--green-mid)] hover:text-[var(--white)] active:scale-[0.98] sm:h-9 sm:gap-1.5 sm:px-3.5 sm:text-sm"
+            >
+              {justAdded ? (
+                <>
+                  <Check className="size-3.5" />
+                  <span className="hidden sm:inline">Masuk</span>
+                </>
+              ) : (
+                <>
+                  <Plus className="size-3.5" />
+                  <span className="hidden sm:inline">Tambah</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </article>
