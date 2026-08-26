@@ -291,7 +291,7 @@ export default function SnackBoxPage() {
               Ketuk untuk memilih atau melepas. Satu snack terpilih berarti satu isi
               di dalam setiap box.
             </p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-3 grid grid-cols-2 gap-2.5 sm:gap-3 xl:grid-cols-3">
               {snackItems.map((item) => {
                 const selected = selectedSlugs.includes(item.slug);
                 return (
@@ -301,7 +301,7 @@ export default function SnackBoxPage() {
                     onClick={() => toggleSnack(item.slug)}
                     aria-pressed={selected}
                     className={cn(
-                      "rounded-[var(--radius)] border p-3 text-left transition-colors",
+                      "rounded-[var(--radius)] border p-2 text-left transition-colors sm:p-3",
                       selected
                         ? "border-[var(--pandan)] bg-white shadow-[var(--shadow-sm)]"
                         : "border-[var(--line)] bg-[var(--warm-white)] hover:border-[rgba(27,67,50,0.25)]",
@@ -317,17 +317,21 @@ export default function SnackBoxPage() {
                         className="object-cover"
                       />
                       {selected ? (
-                        <span className="absolute right-2 top-2 grid size-7 place-items-center rounded-full bg-[var(--green)] text-[var(--white)]">
-                          <Check className="size-3.5" aria-hidden />
+                        <span className="absolute right-1.5 top-1.5 grid size-6 place-items-center rounded-full bg-[var(--green)] text-[var(--white)] sm:right-2 sm:top-2 sm:size-7">
+                          <Check className="size-3 sm:size-3.5" aria-hidden />
                         </span>
                       ) : null}
                     </div>
-                    <div className="mt-2 font-semibold text-[var(--palm)]">{item.name}</div>
-                    <div className="mt-0.5 flex items-center justify-between gap-2">
-                      <span className="text-sm text-[var(--muted)]">{rupiah(item.price)}</span>
+                    <div className="mt-1.5 text-[0.8125rem] font-semibold leading-snug text-[var(--palm)] sm:mt-2 sm:text-base">
+                      {item.name}
+                    </div>
+                    <div className="mt-0.5 flex items-center justify-between gap-1.5">
+                      <span className="text-xs text-[var(--muted)] sm:text-sm">
+                        {rupiah(item.price)}
+                      </span>
                       <span
                         className={cn(
-                          "text-xs font-semibold",
+                          "text-[0.65rem] font-semibold sm:text-xs",
                           selected ? "text-[var(--green)]" : "text-[var(--muted)]",
                         )}
                       >

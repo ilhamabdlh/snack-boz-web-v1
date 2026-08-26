@@ -178,33 +178,6 @@ export default async function ProductsPage({
               </FilterChip>
             ))}
           </div>
-
-          <div className="mt-3 border-t border-[rgba(27,67,50,0.06)] pt-3 lg:hidden">
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
-              Acara
-            </p>
-            <div className="mt-2 flex gap-2 overflow-x-auto pb-0.5 hide-scrollbar">
-              <FilterChip
-                href={productsHref({ category: selectedCategory, q: params.q })}
-                active={!selectedOccasion}
-              >
-                Semua
-              </FilterChip>
-              {occasions.map((occasion) => (
-                <FilterChip
-                  key={occasion}
-                  href={productsHref({
-                    category: selectedCategory,
-                    occasion,
-                    q: params.q,
-                  })}
-                  active={selectedOccasion === occasion}
-                >
-                  {occasion}
-                </FilterChip>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[220px_1fr]">

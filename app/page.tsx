@@ -60,8 +60,8 @@ export default function HomePage() {
         <PosterCarousel posters={posters} />
       </section>
 
-      {/* Acara */}
-      <section className="texture-paper section-pad">
+      {/* Acara — disembunyikan di mobile */}
+      <section className="texture-paper section-pad hidden md:block">
         <div className="container-shell relative">
           <div className="mb-6 grid gap-3 sm:mb-9 lg:grid-cols-[1fr_auto] lg:items-end lg:pr-24">
             <div className="max-w-lg">
@@ -89,12 +89,12 @@ export default function HomePage() {
 
       {/* Favorit */}
       <section className="container-shell section-pad">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-3 sm:mb-9 sm:gap-4">
+        <div className="mb-6 flex flex-col items-center gap-3 text-center sm:mb-9 md:flex-row md:items-end md:justify-between md:text-left">
           <div>
             <p className="section-kicker">Favorit pelanggan</p>
             <h2 className="section-title mt-1">Kue-kue yang sering dipesan konsumen:</h2>
           </div>
-          <Button asChild variant="outline" size="sm">
+          <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
             <Link href="/products">Lihat semua</Link>
           </Button>
         </div>
@@ -103,6 +103,12 @@ export default function HomePage() {
           {bestSellers.slice(0, 8).map((product) => (
             <ProductCard key={product.slug} product={product} compact />
           ))}
+        </div>
+
+        <div className="mt-6 flex justify-center md:hidden">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/products">Lihat semua</Link>
+          </Button>
         </div>
       </section>
 
@@ -176,10 +182,10 @@ export default function HomePage() {
       <FaqSection />
 
       {/* Final CTA */}
-      <section className="container-shell pb-12 sm:pb-16">
-        <div className="overflow-hidden rounded-[var(--radius-lg)] bg-[var(--green)] px-5 py-7 text-white shadow-[var(--shadow-lg)] sm:rounded-[var(--radius-xl)] sm:px-7 sm:py-8 md:px-10 md:py-10">
+      <section className="container-shell py-12 sm:pb-16 sm:pt-0 md:pt-0">
+        <div className="overflow-hidden rounded-[var(--radius-lg)] bg-[var(--green)] px-5 py-10 text-center text-white shadow-[var(--shadow-lg)] sm:rounded-[var(--radius-xl)] sm:px-7 sm:py-8 sm:text-left md:px-10 md:py-10">
           <div className="grid items-center gap-5 md:grid-cols-[1fr_auto] md:gap-6">
-            <div>
+            <div className="mx-auto max-w-[36ch] sm:mx-0 sm:max-w-none">
               <h2 className="font-display text-balance text-xl font-bold sm:text-2xl md:text-3xl">
                 Acaranya besok pagi? Tanyain stoknya dulu aja ke kami.
               </h2>
@@ -187,7 +193,7 @@ export default function HomePage() {
                 kasih tau mau pesan snack box, kue tampah atau kue lainnya, kami akan siapkan stok nya untuk kamu.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
+            <div className="mx-auto grid w-full max-w-sm grid-cols-1 gap-2 sm:mx-0 sm:max-w-none sm:flex sm:flex-wrap">
               <Button asChild size="lg" variant="accent" className="w-full sm:w-auto">
                 <Link href="/products">Lihat menu</Link>
               </Button>

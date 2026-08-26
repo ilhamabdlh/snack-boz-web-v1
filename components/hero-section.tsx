@@ -140,13 +140,13 @@ export function HeroSection({ occasions }: HeroSectionProps) {
 
       <div className="container-shell relative py-8 sm:py-10 lg:py-16">
         <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 xl:gap-14">
-          <div className="relative z-[var(--z-raised)] order-1 max-w-xl lg:col-start-1 lg:row-start-1">
-            <div className="inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-white px-3.5 py-1.5 text-xs font-medium text-[var(--green)] shadow-[var(--shadow-sm)]">
+          <div className="relative z-[var(--z-raised)] order-2 mx-auto w-full max-w-xl text-center md:mx-0 md:text-left lg:order-1 lg:col-start-1 lg:row-start-1">
+            <div className="hidden items-center gap-2 rounded-[var(--radius-sm)] bg-white px-3.5 py-1.5 text-xs font-medium text-[var(--green)] shadow-[var(--shadow-sm)] md:inline-flex">
               <ChefHat className="size-3.5 shrink-0" />
               Dapur kue basah · antar Jabodetabek
             </div>
 
-            <h1 className="font-display mt-4 text-balance text-[1.85rem] font-bold leading-[1.12] text-[var(--green)] sm:mt-5 sm:text-[2.4rem] lg:text-[3rem] lg:leading-[1.1]">
+            <h1 className="font-display mt-0 text-balance text-[1.85rem] font-bold leading-[1.12] text-[var(--green)] md:mt-4 sm:text-[2.4rem] lg:mt-5 lg:text-[3rem] lg:leading-[1.1]">
               Kue Tradisional Indonesia terlengkap di{" "}
               <span className="relative inline-block">
                 <span className="hero-spark-lines" aria-hidden>
@@ -156,15 +156,16 @@ export function HeroSection({ occasions }: HeroSectionProps) {
                 </span>
                 <span className="hero-highlight">Jakarta</span>
               </span>
-              , selalu fresh dan lezat.
+              <span className="md:hidden"> selalu fresh dan lezat.</span>
+              <span className="hidden md:inline">, selalu fresh dan lezat.</span>
             </h1>
 
-            <p className="mt-3 max-w-[38ch] text-pretty text-sm leading-6 text-[var(--muted)] sm:mt-4 sm:text-[0.95rem] sm:leading-7">
+            <p className="mx-auto mt-3 max-w-[38ch] text-pretty text-sm leading-6 text-[var(--muted)] sm:mt-4 sm:text-[0.95rem] sm:leading-7 md:mx-0">
               Lebih dari 50 pilihan kue tradisional: lemper, risoles, pastel, nagasari, sampai
               kue tampah pun ada. kita buat kue tiap hari, jadi dijamin fresh dan lezat. Mulai Rp 2.000 per pcs
             </p>
 
-            <div className="mt-5 flex flex-wrap items-center gap-2.5 sm:mt-6 sm:gap-3">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:mt-6 sm:gap-3 md:justify-start">
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <a
                   href={getWhatsAppUrl(
@@ -186,7 +187,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
               </Link>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2 sm:mt-7">
+            <div className="mt-5 flex flex-wrap justify-center gap-2 sm:mt-7 md:justify-start">
               {occasions.map((item) => {
                 const Icon = OCCASION_ICONS[item as keyof typeof OCCASION_ICONS] ?? Briefcase;
                 return (
@@ -200,7 +201,7 @@ export function HeroSection({ occasions }: HeroSectionProps) {
           </div>
 
           <div
-            className="relative z-[var(--z-raised)] order-2 mx-auto w-full max-w-[560px] lg:col-start-2 lg:row-span-2 lg:row-start-1"
+            className="relative z-[var(--z-raised)] order-1 mx-auto w-full max-w-[560px] lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={onTouchStart}
@@ -329,14 +330,14 @@ export function HeroSection({ occasions }: HeroSectionProps) {
                 <Calendar className="size-3.5 opacity-70" />
                 Min. <span className="tabular-nums font-bold">20</span> pcs, boleh campur
               </span>
-              <span className="inline-flex items-center gap-1.5 font-medium">
+              <span className="hidden items-center gap-1.5 font-medium md:inline-flex">
                 <Truck className="size-3.5 opacity-70" />
                 Pemesanan H-1
               </span>
             </div>
           </div>
 
-          <ReviewRotator className="order-3 mt-2 sm:mt-0 lg:col-start-1 lg:row-start-2 lg:mt-8" />
+          <ReviewRotator className="order-3 mt-2 hidden sm:mt-0 md:block lg:col-start-1 lg:row-start-2 lg:mt-8" />
         </div>
       </div>
     </section>

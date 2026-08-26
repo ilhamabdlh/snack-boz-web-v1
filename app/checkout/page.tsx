@@ -103,7 +103,7 @@ export default function CheckoutPage() {
     setDistanceKm(place.distanceKm);
   }
 
-  function placeOrder() {
+  async function placeOrder() {
     setError("");
     if (!items.length) {
       setError("Keranjangnya masih kosong. Pilih menunya dulu, ya.");
@@ -159,6 +159,18 @@ export default function CheckoutPage() {
     saveProfile(profile);
     upsertAddressFromProfile(profile);
     saveOrder(order);
+
+    try {
+      await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(order),
+        keepalive: true,
+      });
+    } catch {
+      // Penyimpanan server tidak boleh menggagalkan checkout lokal.
+    }
+
     clearCart();
     router.push(`/invoice/${encodeURIComponent(order.id)}`);
   }

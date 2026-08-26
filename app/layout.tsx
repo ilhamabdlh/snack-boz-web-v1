@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/app-providers";
 import { JsonLd } from "@/components/json-ld";
+import { VisitTracker } from "@/components/visit-tracker";
 import { BRAND } from "@/lib/brand";
 import {
   DEFAULT_OG_IMAGE,
@@ -96,7 +97,10 @@ export default function RootLayout({
             websiteSchema(),
           ])}
         />
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <VisitTracker />
+          {children}
+        </AppProviders>
       </body>
     </html>
   );
