@@ -7,7 +7,8 @@ export type BelanjaLink = {
   href: string;
   external: boolean;
   tone: "shopee" | "tokopedia" | "whatsapp" | "instagram" | "website";
-  group: "marketplace" | "direct";
+  /** primary = atas, secondary = bawah (setelah divider) */
+  group: "primary" | "secondary";
 };
 
 function envUrl(key: string, fallback: string) {
@@ -31,13 +32,23 @@ export const STORE_LINKS = {
 export function getBelanjaLinks(): BelanjaLink[] {
   return [
     {
+      id: "whatsapp",
+      title: "WhatsApp",
+      description:
+        "Order lebih fleksibel, request khusus, atau sekadar tanya-tanya dulu",
+      href: STORE_LINKS.whatsapp,
+      external: true,
+      tone: "whatsapp",
+      group: "primary",
+    },
+    {
       id: "website",
       title: "Website resmi",
       description: "Lihat menu lengkap & pesan snack box langsung di sini",
       href: STORE_LINKS.website,
       external: true,
       tone: "website",
-      group: "marketplace",
+      group: "primary",
     },
     {
       id: "shopee",
@@ -46,7 +57,7 @@ export function getBelanjaLinks(): BelanjaLink[] {
       href: STORE_LINKS.shopee,
       external: true,
       tone: "shopee",
-      group: "marketplace",
+      group: "primary",
     },
     {
       id: "tokopedia",
@@ -55,7 +66,7 @@ export function getBelanjaLinks(): BelanjaLink[] {
       href: STORE_LINKS.tokopedia,
       external: true,
       tone: "tokopedia",
-      group: "marketplace",
+      group: "secondary",
     },
     {
       id: "instagram",
@@ -64,17 +75,7 @@ export function getBelanjaLinks(): BelanjaLink[] {
       href: STORE_LINKS.instagram,
       external: true,
       tone: "instagram",
-      group: "direct",
-    },
-    {
-      id: "whatsapp",
-      title: "WhatsApp",
-      description:
-        "Order lebih fleksibel, request khusus, atau sekadar tanya-tanya dulu",
-      href: STORE_LINKS.whatsapp,
-      external: true,
-      tone: "whatsapp",
-      group: "direct",
+      group: "secondary",
     },
   ];
 }

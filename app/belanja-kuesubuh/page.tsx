@@ -42,8 +42,8 @@ const TONE_CLASS: Record<BelanjaLink["tone"], string> = {
 
 export default function BelanjaKueSubuhPage() {
   const links = getBelanjaLinks();
-  const marketplace = links.filter((link) => link.group === "marketplace");
-  const direct = links.filter((link) => link.group === "direct");
+  const primary = links.filter((link) => link.group === "primary");
+  const secondary = links.filter((link) => link.group === "secondary");
 
   return (
     <main className="belanja-hub relative min-h-dvh overflow-hidden">
@@ -85,7 +85,7 @@ export default function BelanjaKueSubuhPage() {
         </header>
 
         <nav className="mt-8 flex flex-1 flex-col gap-3" aria-label="Link belanja">
-          {marketplace.map((link, index) => (
+          {primary.map((link, index) => (
             <HubLink key={link.id} link={link} index={index} />
           ))}
 
@@ -102,11 +102,11 @@ export default function BelanjaKueSubuhPage() {
             <span />
           </div>
 
-          {direct.map((link, index) => (
+          {secondary.map((link, index) => (
             <HubLink
               key={link.id}
               link={link}
-              index={marketplace.length + index}
+              index={primary.length + index}
             />
           ))}
         </nav>
