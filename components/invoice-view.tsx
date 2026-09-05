@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { Download, Loader2, MessageCircle, Printer } from "lucide-react";
 import QRCode from "qrcode";
@@ -83,27 +83,32 @@ export function InvoiceView({ order }: InvoiceViewProps) {
 
   return (
     <PageShell>
-      <section className="container-shell py-8 print:py-0">
-        <div className="mb-5 flex flex-wrap items-center justify-between gap-3 print:hidden">
-          <div>
+      <section className="container-shell py-6 sm:py-8 print:py-0">
+        <div className="mb-4 flex flex-col gap-3 print:hidden sm:mb-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
             <p className="section-kicker">Invoice</p>
-            <h1 className="font-display mt-1 text-2xl font-bold text-[var(--palm)] sm:text-3xl">
+            <h1 className="font-display mt-1 text-xl font-bold text-[var(--palm)] sm:text-3xl">
               Pesanan berhasil dibuat
             </h1>
-            <p className="mt-1 text-sm text-[var(--muted)]">
+            <p className="mt-1 text-sm leading-5 text-[var(--muted)]">
               Silakan selesaikan pembayaran sesuai metode yang dipilih.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Button type="button" variant="outline" onClick={() => window.print()}>
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-end">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full sm:w-auto"
+              onClick={() => window.print()}
+            >
               <Printer className="size-4" /> Cetak / PDF
             </Button>
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="w-full sm:w-auto">
               <a href={getWhatsAppUrl(waText)} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="size-4" /> Kirim ke WA
               </a>
             </Button>
-            <Button asChild>
+            <Button asChild className="col-span-2 w-full sm:col-span-1 sm:w-auto">
               <Link href="/account">Lihat riwayat</Link>
             </Button>
           </div>
@@ -111,61 +116,89 @@ export function InvoiceView({ order }: InvoiceViewProps) {
 
         <article
           id="invoice-sheet"
-          className="mx-auto max-w-3xl rounded-[var(--radius)] border border-[var(--line)] bg-white p-5 text-[var(--black)] shadow-[var(--shadow-sm)] sm:p-8 print:max-w-none print:rounded-none print:border-0 print:p-0 print:shadow-none"
+          className="mx-auto max-w-3xl overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-white px-4 py-5 text-[var(--black)] shadow-[var(--shadow-sm)] sm:p-8 print:max-w-none print:overflow-visible print:rounded-none print:border-0 print:p-0 print:shadow-none"
         >
-          <header className="flex items-start justify-between gap-4 border-b border-black pb-4">
-            <h2 className="text-3xl font-black tracking-tight sm:text-4xl">INVOICE</h2>
-            <div className="text-right">
-              <div className="text-lg font-black tracking-wide sm:text-xl">
-                {INVOICE_BRAND.name}
-              </div>
-              <div className="text-xs text-[var(--muted)] sm:text-sm">
-                {INVOICE_BRAND.tagline}
+          <header className="border-b border-black pb-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+              <h2 className="text-[1.75rem] font-black leading-none tracking-tight sm:text-4xl">
+                INVOICE
+              </h2>
+              <div className="sm:max-w-[18rem] sm:text-right">
+                <div className="text-[0.95rem] font-black leading-tight tracking-wide sm:text-xl">
+                  {INVOICE_BRAND.name}
+                </div>
+                <div className="mt-1 text-xs leading-4 text-[var(--muted)] sm:text-sm sm:leading-5">
+                  {INVOICE_BRAND.tagline}
+                </div>
               </div>
             </div>
           </header>
 
-          <div className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
-            <div className="space-y-2">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
-                  Kepada
-                </div>
-                <div className="mt-0.5 text-base font-semibold">{order.profile.name}</div>
-                {order.profile.phone ? (
-                  <div className="text-[var(--muted)]">{order.profile.phone}</div>
-                ) : null}
+          <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-3.5 text-sm sm:mt-6 sm:grid-cols-2">
+            <MetaBlock label="Kepada">
+              <div className="break-words text-base font-semibold leading-snug">
+                {order.profile.name}
               </div>
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
-                  No Invoice
-                </div>
-                <div className="mt-0.5 font-semibold">{order.id}</div>
+              {order.profile.phone ? (
+                <div className="mt-0.5 text-[var(--muted)]">{order.profile.phone}</div>
+              ) : null}
+            </MetaBlock>
+            <MetaBlock label="No Invoice" className="sm:text-right">
+              <div className="font-semibold tracking-wide">{order.id}</div>
+            </MetaBlock>
+            <MetaBlock label="Tanggal">
+              <div className="font-semibold">{formatInvoiceDate(order.createdAt)}</div>
+            </MetaBlock>
+            <MetaBlock label="Tgl Pengiriman" className="sm:text-right">
+              <div className="font-semibold">
+                {formatInvoiceDateFromYmd(order.deliveryDate)}
+                {order.deliveryTime ? ` · ${order.deliveryTime}` : ""}
               </div>
-            </div>
-            <div className="space-y-2 sm:text-right">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
-                  Tanggal
-                </div>
-                <div className="mt-0.5 font-semibold">
-                  {formatInvoiceDate(order.createdAt)}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
-                  Tgl Pengiriman
-                </div>
-                <div className="mt-0.5 font-semibold">
-                  {formatInvoiceDateFromYmd(order.deliveryDate)}
-                  {order.deliveryTime ? ` · ${order.deliveryTime}` : ""}
-                </div>
-              </div>
-            </div>
+            </MetaBlock>
           </div>
 
-          <div className="mt-6 overflow-x-auto">
-            <table className="w-full min-w-[520px] border-collapse text-sm">
+          {/* Mobile: stacked item rows (no horizontal scroll) */}
+          <div className="mt-6 sm:hidden">
+            <div className="flex items-center justify-between rounded-[8px] bg-[#efefef] px-3 py-2.5 text-xs font-semibold uppercase tracking-wide">
+              <span>Keterangan</span>
+              <span>Total</span>
+            </div>
+            <ul className="divide-y divide-[var(--line)]">
+              {order.items.map((item) => {
+                const unit = item.kind === "snack-box" ? "BOX" : "PCS";
+                return (
+                  <li key={item.id} className="py-3.5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0 flex-1">
+                        <div className="font-semibold leading-snug">{item.name}</div>
+                        <div className="mt-1 text-xs text-[var(--muted)]">
+                          {rupiah(item.unitPrice)} × {item.qty} {unit}
+                        </div>
+                      </div>
+                      <div className="shrink-0 text-right text-sm font-semibold tabular-nums">
+                        {rupiah(item.unitPrice * item.qty)}
+                      </div>
+                    </div>
+                    {item.kind === "snack-box" && item.meta?.snacks?.length ? (
+                      <p className="mt-2 text-[11px] leading-4 text-[var(--muted)]">
+                        Isi:{" "}
+                        {item.meta.snacks.map((s) => `${s.name} ${s.qty}x`).join(", ")}
+                      </p>
+                    ) : null}
+                    {item.note ? (
+                      <p className="mt-1.5 text-[11px] leading-4 text-[var(--muted)]">
+                        Catatan: {item.note}
+                      </p>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Desktop / print: full table */}
+          <div className="mt-6 hidden sm:block">
+            <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="bg-[#efefef] text-left">
                   <th className="px-3 py-2.5 font-semibold">Keterangan</th>
@@ -180,7 +213,7 @@ export function InvoiceView({ order }: InvoiceViewProps) {
                     <td className="px-3 py-3 align-top">
                       <div className="font-medium">{item.name}</div>
                       {item.kind === "snack-box" && item.meta?.snacks?.length ? (
-                        <div className="mt-0.5 text-xs text-[var(--muted)]">
+                        <div className="mt-0.5 text-xs leading-4 text-[var(--muted)]">
                           Isi:{" "}
                           {item.meta.snacks.map((s) => `${s.name} ${s.qty}x`).join(", ")}
                         </div>
@@ -191,13 +224,13 @@ export function InvoiceView({ order }: InvoiceViewProps) {
                         </div>
                       ) : null}
                     </td>
-                    <td className="px-3 py-3 align-top whitespace-nowrap">
+                    <td className="px-3 py-3 align-top whitespace-nowrap tabular-nums">
                       {rupiah(item.unitPrice)}
                     </td>
                     <td className="px-3 py-3 align-top whitespace-nowrap">
                       {item.qty} {item.kind === "snack-box" ? "BOX" : "PCS"}
                     </td>
-                    <td className="px-3 py-3 align-top text-right font-medium whitespace-nowrap">
+                    <td className="px-3 py-3 align-top text-right font-medium whitespace-nowrap tabular-nums">
                       {rupiah(item.unitPrice * item.qty)}
                     </td>
                   </tr>
@@ -206,16 +239,16 @@ export function InvoiceView({ order }: InvoiceViewProps) {
             </table>
           </div>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-[1.1fr_0.9fr]">
-            <div>
+          <div className="mt-6 grid gap-6 sm:grid-cols-[1.1fr_0.9fr] sm:items-start">
+            <div className="min-w-0">
               <div className="text-sm font-bold uppercase tracking-wide">Pembayaran</div>
-              <div className="mt-2 text-sm">
-                <div className="text-[var(--muted)]">Metode: {order.paymentMethod}</div>
-                <div className="mt-1 text-[var(--muted)]">Pengiriman: {order.shippingMethod}</div>
+              <div className="mt-2 space-y-1 text-sm leading-5 text-[var(--muted)]">
+                <div>Metode: {order.paymentMethod}</div>
+                <div>Pengiriman: {order.shippingMethod}</div>
               </div>
 
               {isTransfer ? (
-                <div className="mt-3 space-y-3 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-3 text-sm">
+                <div className="mt-3 space-y-3 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-3.5 text-sm">
                   {BANK_ACCOUNTS.map((account) => (
                     <div key={`${account.bank}-${account.accountNumber}`}>
                       <div>
@@ -234,25 +267,27 @@ export function InvoiceView({ order }: InvoiceViewProps) {
               ) : null}
 
               {isQris ? (
-                <div className="mt-3 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-3">
-                  <p className="text-sm font-semibold">Scan QRIS sesuai total</p>
-                  <div className="mt-3 flex flex-col items-center gap-2">
+                <div className="mt-3 rounded-[var(--radius-sm)] bg-[var(--ivory)] px-3.5 py-4">
+                  <p className="text-center text-sm font-semibold sm:text-left">
+                    Scan QRIS sesuai total
+                  </p>
+                  <div className="mt-3 flex flex-col items-center gap-3">
                     {qrisLoading ? (
-                      <div className="flex size-[200px] items-center justify-center">
+                      <div className="flex size-[180px] items-center justify-center sm:size-[200px]">
                         <Loader2 className="size-6 animate-spin text-[var(--muted)]" />
                       </div>
                     ) : qrisUrl ? (
                       <img
                         src={qrisUrl}
                         alt={`QRIS ${order.id}`}
-                        className="size-[200px] rounded-[10px] bg-white p-2"
+                        className="size-[180px] rounded-[10px] bg-white p-2 sm:size-[200px]"
                       />
                     ) : (
                       <p className="text-sm text-red-700">Gagal membuat QRIS.</p>
                     )}
                     <div className="text-center">
                       <div className="text-xs text-[var(--muted)]">Total dibayar</div>
-                      <div className="text-lg font-bold text-[var(--green)]">
+                      <div className="mt-0.5 text-xl font-bold tabular-nums text-[var(--green)]">
                         {rupiah(order.total)}
                       </div>
                     </div>
@@ -260,7 +295,7 @@ export function InvoiceView({ order }: InvoiceViewProps) {
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="print:hidden"
+                      className="w-full max-w-[220px] print:hidden"
                       disabled={!qrisUrl}
                       onClick={downloadQris}
                     >
@@ -271,50 +306,68 @@ export function InvoiceView({ order }: InvoiceViewProps) {
               ) : null}
             </div>
 
-            <div className="space-y-2 text-sm sm:text-right">
+            <div className="space-y-2.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[#fafafa] px-3.5 py-3.5 text-sm sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-right">
               <div className="flex justify-between gap-4 sm:justify-end">
                 <span className="text-[var(--muted)]">Subtotal</span>
-                <strong>{rupiah(order.subtotal)}</strong>
+                <strong className="tabular-nums">{rupiah(order.subtotal)}</strong>
               </div>
               {order.discount > 0 ? (
                 <div className="flex justify-between gap-4 text-[var(--green)] sm:justify-end">
                   <span>Diskon {order.coupon}</span>
-                  <strong>-{rupiah(order.discount)}</strong>
+                  <strong className="tabular-nums">-{rupiah(order.discount)}</strong>
                 </div>
               ) : null}
               <div className="flex justify-between gap-4 sm:justify-end">
                 <span className="text-[var(--muted)]">Ongkir</span>
-                <strong>
+                <strong className="tabular-nums">
                   {order.shippingFee === 0 ? "Gratis" : rupiah(order.shippingFee)}
                 </strong>
               </div>
-              <div className="flex justify-between gap-4 border-t border-black pt-2 text-base sm:justify-end">
+              <div className="flex justify-between gap-4 border-t border-black pt-2.5 text-base sm:justify-end">
                 <span className="font-bold">Total</span>
-                <strong className="text-xl">{rupiah(order.total)}</strong>
+                <strong className="text-xl tabular-nums">{rupiah(order.total)}</strong>
               </div>
             </div>
           </div>
 
-          <footer className="mt-10 flex flex-wrap items-end justify-between gap-6 border-t border-[var(--line)] pt-6">
-            <p className="max-w-[16ch] text-sm font-bold leading-snug uppercase">
+          <footer className="mt-8 flex flex-col items-center gap-5 border-t border-[var(--line)] pt-6 text-center sm:mt-10 sm:flex-row sm:items-end sm:justify-between sm:gap-6 sm:text-left">
+            <p className="max-w-[18ch] text-sm font-bold leading-snug uppercase sm:max-w-[16ch]">
               {INVOICE_BRAND.thankYou}
             </p>
-            <div className="text-center">
-              <div className="mx-auto flex h-28 w-[15rem] items-center justify-center sm:h-32 sm:w-[17rem]">
+            <div className="flex flex-col items-center">
+              <div className="flex h-24 w-[13rem] items-center justify-center sm:h-32 sm:w-[17rem]">
                 <img
                   src={INVOICE_BRAND.signatureLogo}
                   alt="The Snack Boz"
                   className="h-full w-auto max-w-full object-contain"
                 />
               </div>
-              <div className="mt-2 font-display text-lg italic text-[var(--palm)]">
+              <div className="mt-1.5 font-display text-base italic text-[var(--palm)] sm:text-lg">
                 {INVOICE_BRAND.ownerName}
               </div>
-              <div className="text-xs text-[var(--muted)]">{INVOICE_BRAND.ownerName}</div>
             </div>
           </footer>
         </article>
       </section>
     </PageShell>
+  );
+}
+
+function MetaBlock({
+  label,
+  children,
+  className = "",
+}: {
+  label: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)]">
+        {label}
+      </div>
+      <div className="mt-1">{children}</div>
+    </div>
   );
 }

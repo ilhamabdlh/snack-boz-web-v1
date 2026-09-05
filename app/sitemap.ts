@@ -9,6 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/products"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
     { url: absoluteUrl("/snack-box"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    {
+      url: absoluteUrl("/belanja-kuesubuh"),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
   ];
 
   const occasionRoutes: MetadataRoute.Sitemap = occasions.map((occasion) => ({

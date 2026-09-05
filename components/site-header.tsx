@@ -5,11 +5,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Menu, MessageCircle, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
+import { MarketplaceLinks } from "@/components/marketplace-links";
 import { SiteBrand } from "@/components/site-brand";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SiteNavLink } from "@/components/site-nav-link";
 import { BRAND } from "@/lib/brand";
+import { STORE_LINKS } from "@/lib/belanja-links";
 import { categories, occasions } from "@/lib/data";
 import { formatWhatsAppDisplay, getWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -100,6 +102,7 @@ export function SiteHeader() {
           </form>
 
           <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
+            <MarketplaceLinks compact className="hidden sm:flex" />
             <Button asChild variant="outline" size="sm" className="hidden xl:inline-flex">
               <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="size-4" />
@@ -207,6 +210,36 @@ export function SiteHeader() {
                   {category}
                 </Link>
               ))}
+            </div>
+            <div className="mt-2 border-t border-[rgba(27,67,50,0.08)] pt-2">
+              <p className="px-3 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
+                Toko online
+              </p>
+              <a
+                href={STORE_LINKS.shopee}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-[var(--radius-sm)] px-3 py-2 text-sm"
+                onClick={() => setMenuOpen(false)}
+              >
+                Shopee
+              </a>
+              <a
+                href={STORE_LINKS.tokopedia}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-[var(--radius-sm)] px-3 py-2 text-sm"
+                onClick={() => setMenuOpen(false)}
+              >
+                Tokopedia
+              </a>
+              <Link
+                href="/belanja-kuesubuh"
+                className="block rounded-[var(--radius-sm)] px-3 py-2 text-sm"
+                onClick={() => setMenuOpen(false)}
+              >
+                Belanja Kue Subuh
+              </Link>
             </div>
             <a
               href={getWhatsAppUrl(`${BRAND.waGreeting}, saya mau tanya menunya.`)}

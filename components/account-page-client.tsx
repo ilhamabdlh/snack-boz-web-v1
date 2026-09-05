@@ -1,9 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MapPin, PackageCheck, RotateCcw, UserRound } from "lucide-react";
+import {
+  FileText,
+  MapPin,
+  PackageCheck,
+  RotateCcw,
+  ShoppingBag,
+  UserRound,
+} from "lucide-react";
 import { useCart } from "@/components/cart-provider";
 import { PageShell } from "@/components/page-shell";
 import { ProductCard } from "@/components/product-card";
@@ -18,7 +25,7 @@ import {
   saveAddresses,
   saveProfile,
 } from "@/lib/orders-storage";
-import { rupiah } from "@/lib/utils";
+import { cn, rupiah } from "@/lib/utils";
 
 type Tab = "orders" | "reorder" | "addresses" | "profile";
 
@@ -83,13 +90,13 @@ export function AccountPageClient() {
     router.push("/cart");
   }
 
-  function saveProfileForm(event: React.FormEvent) {
+  function saveProfileForm(event: FormEvent) {
     event.preventDefault();
     saveProfile(profile);
     setFlash("Profil disimpan di perangkat ini.");
   }
 
-  function addAddress(event: React.FormEvent<HTMLFormElement>) {
+  function addAddress(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const next: SavedAddress = {
@@ -182,66 +189,116 @@ export function AccountPageClient() {
             </div>
 
             {tab === "orders" || tab === "reorder" ? (
-              <section className="mt-8 rounded-[var(--radius)] border border-[var(--line)] bg-white p-4">
-                <div className="flex items-center justify-between gap-4">
-                  <h2 className="font-display text-xl font-bold text-[var(--palm)]">
-                    {tab === "reorder" ? "Pesan ulang" : "Riwayat pesanan"}
-                  </h2>
-                  <Button asChild variant="outline" size="sm">
-                    <Link href="/products">Pesan lagi</Link>
+              <section className="mt-8 rounded-[var(--radius)] border border-[var(--line)] bg-white p-4 sm:p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h2 className="font-display text-xl font-bold text-[var(--palm)]">
+                      {tab === "reorder" ? "Pesan ulang" : "Riwayat pesanan"}
+                    </h2>
+                    <p className="mt-1 text-sm text-[var(--muted)]">
+                      {orders.length === 0
+                        ? "Belum ada pesanan tersimpan."
+                        : `${orders.length} pesanan · ${activeOrders} masih aktif`}
+                    </p>
+                  </div>
+                  <Button asChild variant="outline" size="sm" className="shrink-0">
+                    <Link href="/products">
+                      <ShoppingBag className="size-3.5" />
+                      Menu
+                    </Link>
                   </Button>
                 </div>
-                <div className="mt-3 grid gap-2">
+
+                <div className="mt-4 grid gap-3">
                   {orders.length === 0 ? (
-                    <p className="text-sm text-[var(--muted)]">
-                      Belum ada pesanan. Riwayatnya muncul di sini setelah checkout
-                      Anda selesai.
-                    </p>
-                  ) : (
-                    orders.map((order) => (
-                      <div
-                        key={order.id}
-                        className="grid gap-2 rounded-[var(--radius-sm)] bg-[var(--ivory)] p-3 text-sm md:grid-cols-[1fr_1.2fr_1fr_auto] md:items-center"
-                      >
-                        <div>
-                          <strong className="text-[var(--palm)]">{order.id}</strong>
-                          <div className="text-xs text-[var(--muted)]">{order.status}</div>
-                        </div>
-                        <span>
-                          {order.items[0]?.name}
-                          {order.items.length > 1 ? ` +${order.items.length - 1} item` : ""}
-                        </span>
-                        <span className="text-[var(--muted)]">
-                          {new Date(order.createdAt).toLocaleDateString("id-ID", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })}
-                        </span>
-                        <div className="flex flex-wrap gap-2 md:justify-end">
-                          <Button asChild size="sm" variant="outline">
-                            <Link href={`/invoice/${encodeURIComponent(order.id)}`}>
-                              Lihat invoice
-                            </Link>
-                          </Button>
-                          <Button
-                            type="button"
-                            size="sm"
-                            variant="outline"
-                            onClick={() => reorder(order)}
-                          >
-                            Pesan lagi — {rupiah(order.total)}
-                          </Button>
-                        </div>
+                    <div className="rounded-[var(--radius-sm)] border border-dashed border-[var(--line)] bg-[var(--ivory)] px-4 py-8 text-center">
+                      <div className="mx-auto grid size-11 place-items-center rounded-full bg-white text-[var(--green)] shadow-[var(--shadow-sm)]">
+                        <PackageCheck className="size-5" />
                       </div>
-                    ))
+                      <p className="mt-3 text-sm font-semibold text-[var(--palm)]">
+                        Belum ada riwayat
+                      </p>
+                      <p className="mt-1 text-sm leading-5 text-[var(--muted)]">
+                        Setelah checkout selesai, pesanan Anda muncul di sini.
+                      </p>
+                      <Button asChild size="sm" className="mt-4">
+                        <Link href="/products">Mulai pesan</Link>
+                      </Button>
+                    </div>
+                  ) : (
+                    orders.map((order) => {
+                      const first = order.items[0];
+                      const extraCount = Math.max(order.items.length - 1, 0);
+                      const dateLabel = new Date(order.createdAt).toLocaleDateString(
+                        "id-ID",
+                        {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        },
+                      );
+                      const itemQty = order.items.reduce((sum, item) => sum + item.qty, 0);
+
+                      return (
+                        <article
+                          key={order.id}
+                          className="overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--ivory)] transition-[border-color,box-shadow] duration-200 hover:border-[rgba(27,67,50,0.22)] hover:shadow-[var(--shadow-sm)]"
+                        >
+                          <div className="p-3.5 sm:p-4">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <StatusBadge status={order.status} />
+                              <span className="text-xs text-[var(--muted)]">{dateLabel}</span>
+                            </div>
+
+                            <h3 className="mt-2 truncate text-sm font-bold tracking-wide text-[var(--palm)]">
+                              {order.id}
+                            </h3>
+
+                            <p className="mt-0.5 line-clamp-2 text-sm leading-5 text-[var(--cocoa)]">
+                              {first?.name ?? "Pesanan"}
+                              {extraCount > 0 ? ` +${extraCount} item lain` : ""}
+                            </p>
+
+                            <div className="mt-2.5 flex flex-wrap items-end justify-between gap-2">
+                              <div className="text-xs leading-4 text-[var(--muted)]">
+                                <span>
+                                  {itemQty} pcs · {order.paymentMethod}
+                                </span>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-[10px] font-semibold uppercase tracking-wide text-[var(--muted)]">
+                                  Total
+                                </div>
+                                <div className="font-display text-lg font-bold tabular-nums leading-none text-[var(--green)]">
+                                  {rupiah(order.total)}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-2 border-t border-[var(--line)] bg-white/70 px-3.5 py-3 sm:px-4">
+                            <Button asChild size="sm" variant="outline" className="w-full">
+                              <Link href={`/invoice/${encodeURIComponent(order.id)}`}>
+                                <FileText className="size-3.5" />
+                                Invoice
+                              </Link>
+                            </Button>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="primary"
+                              className="w-full"
+                              onClick={() => reorder(order)}
+                            >
+                              <RotateCcw className="size-3.5" />
+                              Pesan lagi
+                            </Button>
+                          </div>
+                        </article>
+                      );
+                    })
                   )}
                 </div>
-                {activeOrders > 0 ? (
-                  <p className="mt-3 text-xs text-[var(--muted)]">
-                    {activeOrders} pesanan masih diproses / siap dikirim.
-                  </p>
-                ) : null}
               </section>
             ) : null}
 
@@ -327,5 +384,20 @@ export function AccountPageClient() {
         </div>
       </section>
     </PageShell>
+  );
+}
+
+function StatusBadge({ status }: { status: Order["status"] }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold tracking-wide",
+        status === "Diproses" && "bg-[var(--yellow-soft)] text-[var(--cocoa)]",
+        status === "Siap dikirim" && "bg-[rgba(64,145,108,0.14)] text-[var(--green)]",
+        status === "Selesai" && "bg-[rgba(27,67,50,0.08)] text-[var(--muted)]",
+      )}
+    >
+      {status}
+    </span>
   );
 }
